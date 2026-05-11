@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx *)",
+      "Bash(mv \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\CLAUDE.md\" \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\..\\\\_CLAUDE.md.bak\")",
+      "Bash(mv \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\.claude\" \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\..\\\\_claude.bak\")",
+      "Bash(jobs)"
+    ]
+  }
+}
