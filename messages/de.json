@@ -1,0 +1,369 @@
+{
+  "common": {
+    "appName": "EasyHost",
+    "comingSoon": "Coming soon",
+    "joinWaitlist": "Join the waitlist",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "emailPlaceholder": "Enter your email"
+  },
+  "nav": {
+    "howItWorks": "How it works",
+    "features": "Features",
+    "pricing": "Pricing",
+    "resources": "Resources",
+    "language": "Language"
+  },
+  "landing": {
+    "hero": {
+      "eyebrow": "Built for Airbnb & boutique hosts",
+      "headline": "Turn minibar snacks into",
+      "headlineEmph": "passive income.",
+      "subheadline": "EasyHost lets your guests order snacks, drinks, and extras from a beautiful in-room menu. You set the prices. You keep the profit.",
+      "cta": "Join the waitlist",
+      "trust": "14-day free trial · No credit card required",
+      "scene": {
+        "property": "Sunset Villa",
+        "welcome": "Welcome.",
+        "subtitle": "Enjoy your stay.",
+        "menu": {
+          "i1": "Coca Cola",
+          "i1size": "0.33L",
+          "i2": "Local craft beer",
+          "i2size": "0.5L",
+          "i3": "Snack box",
+          "i3size": "Pistachios, olives, crisps",
+          "i4": "Late checkout",
+          "i4size": "Until 14:00"
+        },
+        "checkout": "Checkout · €12.50"
+      }
+    },
+    "trust": {
+      "title": "Trusted by modern hosts worldwide",
+      "items": {
+        "paysera": "Paysera",
+        "stripe": "Stripe",
+        "pci": "PCI DSS Compliant",
+        "gdpr": "GDPR Compliant",
+        "mobile": "Mobile optimized"
+      }
+    },
+    "problem": {
+      "eyebrow": "The opportunity",
+      "title": "Two ways to run",
+      "titleEmph": "your minibar.",
+      "subtitle": "One leaves money on the table. The other turns it into passive income.",
+      "old": {
+        "label": "The old way",
+        "headline1": "Snacks disappear.",
+        "headline2": "Cash is messy.",
+        "subtext": "Tracking is manual. Guests miss out. You lose revenue.",
+        "p1": "No real-time tracking",
+        "p2": "Cash handling is risky",
+        "p3": "No inventory alerts",
+        "p4": "Lost sales and unhappy guests"
+      },
+      "new": {
+        "label": "The EasyHost way",
+        "headline1": "Guests scan and order.",
+        "headline2": "You earn effortlessly.",
+        "subtext": "Real-time tracking. Cashless payments. Happier guests. More revenue.",
+        "p1": "Real-time inventory tracking",
+        "p2": "Cashless card payments",
+        "p3": "Low stock & inventory alerts",
+        "p4": "More sales, more revenue"
+      }
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "chip": "3 steps",
+      "title": "Live in under an hour.",
+      "titleEmph": "Earn while you sleep.",
+      "subtitle": "From empty fridge to first payout — three quiet steps. No card reader. No app for your guests. No middleman touching your money.",
+      "step1": {
+        "kicker": "01",
+        "label": "Setup",
+        "duration": "≈ 10 minutes",
+        "title": "Stock your rental",
+        "body": "Add snacks, drinks, alcohol or any service you want to offer. Set your prices.",
+        "imageAlt": "A premium wood-trimmed minibar fridge stocked with bottles, juices and snacks"
+      },
+      "step2": {
+        "kicker": "02",
+        "label": "One time",
+        "duration": "Lasts forever",
+        "title": "Place the QR code",
+        "body": "Print and place the code where guests can see it. Fridge, nightstand, welcome book.",
+        "imageAlt": "An elegant tabletop QR code stand on a soft warm surface"
+      },
+      "step3": {
+        "kicker": "03",
+        "label": "Automatic",
+        "duration": "Same-day payouts",
+        "title": "Get paid automatically",
+        "body": "Guests scan, order and pay. Card payments land directly in your bank. We never touch the money.",
+        "imageAlt": "A smartphone on a stand showing a successful €2,643.50 payout to your account"
+      },
+      "footnote": "Average host earns",
+      "footnoteValue": "€180+ per property / month",
+      "footnoteHint": "from minibar orders alone"
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Everything you need to run a",
+      "titleEmph": "premium guest experience.",
+      "subtitle": "Powerful features designed for modern hosts.",
+      "items": {
+        "payments": {
+          "badge": "Most popular",
+          "title": "Card payments directly to your account",
+          "body": "No card reader needed. No awkward conversations. Six pre-cleared payment methods built in via Paysera.",
+          "learnMore": "Learn more",
+          "kpi": "Today's revenue",
+          "kpiValue": "€128.50"
+        },
+        "multiProperty": {
+          "title": "Multi-property management",
+          "body": "Manage all your properties from one elegant dashboard."
+        },
+        "analytics": {
+          "title": "Real-time analytics",
+          "body": "See what sells, what doesn't, and maximize revenue."
+        },
+        "inventory": {
+          "title": "Inventory alerts",
+          "body": "Get notified before you run out. Never lose a sale again."
+        },
+        "multilingual": {
+          "title": "Multilingual menu",
+          "body": "Welcome guests in their language. More comfort. More orders."
+        },
+        "branding": {
+          "title": "Custom branding",
+          "body": "Add your logo, colors, and your property's vibe."
+        },
+        "favorites": {
+          "title": "Guest favorites",
+          "body": "Let guests reorder favorites with one tap."
+        }
+      }
+    },
+    "dashboard": {
+      "eyebrow": "Built for hosts",
+      "title": "Your business,",
+      "titleEmph": "at a glance.",
+      "subtitle": "See everything in one place and make smarter decisions.",
+      "points": {
+        "p1": "Revenue & trends",
+        "p2": "Top selling items",
+        "p3": "Low stock alerts",
+        "p4": "Orders by property",
+        "p5": "Payout tracking"
+      },
+      "ui": {
+        "brand": "EasyHost",
+        "tab1": "Overview",
+        "tab2": "Orders",
+        "tab3": "Inventory",
+        "tab4": "Properties",
+        "tab5": "Payouts",
+        "title": "Overview",
+        "kpi1": "Today's revenue",
+        "kpi1Value": "€128.50",
+        "kpi1Delta": "+12% vs yesterday",
+        "kpi2": "This month",
+        "kpi2Value": "€2,540.00",
+        "kpi2Delta": "+24% vs last month",
+        "kpi3": "Orders today",
+        "kpi3Value": "156",
+        "kpi4": "Low stock items",
+        "kpi4Value": "8",
+        "chartLabel": "Revenue over time",
+        "chartRange": "Past month",
+        "topItems": "Top selling items",
+        "item1": "Local Craft Beer",
+        "item2": "Snack Box",
+        "item3": "Greek Bites",
+        "item4": "Wine Bottle",
+        "units": "units"
+      }
+    },
+    "guest": {
+      "eyebrow": "Guest experience",
+      "title": "A menu your guests will",
+      "titleEmph": "actually love using.",
+      "subtitle": "No app to download. No account to create. They just scan and order in their language."
+    },
+    "propertyTypes": {
+      "eyebrow": "For every kind of stay",
+      "title": "Built for every kind of",
+      "titleEmph": "hospitality.",
+      "subtitle": "Apartments, villas, hotels, hostels. If guests stay there, EasyHost works.",
+      "items": {
+        "apartment": "Apartments",
+        "villa": "Villas",
+        "boutique": "Boutique hotels",
+        "beach": "Beach stays",
+        "hostel": "Hostels",
+        "eco": "Eco stays",
+        "cottage": "Cottages",
+        "suite": "Suites"
+      }
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "One plan.",
+      "titleEmph": "Built to pay for itself.",
+      "subtitle": "Most hosts recover the monthly fee within their first few guest orders.",
+      "card": {
+        "name": "Per property",
+        "price": "€15",
+        "interval": "/ month",
+        "tagline": "Everything you need to turn your rental into a revenue machine.",
+        "feature1": "Unlimited menu items & categories",
+        "feature2": "Custom branding per property",
+        "feature3": "Card, bank transfer & cash payments",
+        "feature4": "Multilingual guest menu",
+        "feature5": "Real-time analytics & alerts",
+        "feature6": "Unlimited orders, zero transaction fees",
+        "trial": "14-day free trial",
+        "noCard": "No credit card required",
+        "earlyBird": "Early bird — first 100 hosts get 50% off for life.",
+        "cta": "Join the waitlist",
+        "roi": "Average host earns €180+ per property per month from minibar orders alone."
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Loved by hosts",
+      "title": "Trusted by",
+      "titleEmph": "boutique hosts.",
+      "subtitle": "Real revenue. Real reviews. Real businesses.",
+      "items": {
+        "t1": {
+          "quote": "EasyHost increased our minibar revenue by 40%. Guests love how easy it is.",
+          "name": "Julia H.",
+          "role": "5 villa rentals · Saranda",
+          "metric": "+40%",
+          "metricLabel": "revenue uplift"
+        },
+        "t2": {
+          "quote": "Between managing 4 apartments and 2 boutique suites, EasyHost is automatic.",
+          "name": "Marco D.",
+          "role": "Luxury apartments · Florence",
+          "metric": "€350",
+          "metricLabel": "per month per unit"
+        },
+        "t3": {
+          "quote": "The dashboard gives me insights I never had before. Total game-changer.",
+          "name": "Sarah L.",
+          "role": "Coastal boutique · Crete",
+          "metric": "+28%",
+          "metricLabel": "review score"
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Frequently asked",
+      "titleEmph": "questions.",
+      "items": {
+        "q1": {
+          "q": "Can I really set up multiple properties?",
+          "a": "Yes. Each property is €15/month and gets its own menu, branding, QR code, and analytics. Manage them all from one dashboard."
+        },
+        "q2": {
+          "q": "Can I change & update my menu?",
+          "a": "Anytime. Edit items, prices, photos, or stock levels from your dashboard. Changes go live instantly for your guests."
+        },
+        "q3": {
+          "q": "How do payments work?",
+          "a": "Guest payments go directly from guest to your Paysera account. EasyHost never touches the money. We only charge a flat €15/month per property."
+        },
+        "q4": {
+          "q": "Is it difficult to set up?",
+          "a": "Most hosts are live within an hour. Build your menu, generate your QR code, print it. That's it."
+        },
+        "q5": {
+          "q": "Can I translate multiple languages?",
+          "a": "Yes. Your menu auto-translates into English, Albanian, Italian, and German. Guests pick their language with a flag."
+        },
+        "q6": {
+          "q": "Which is a good fee or issue with an order?",
+          "a": "Zero transaction fees on guest orders. If you ever have an issue, our team replies within a business day."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Ready when you are",
+      "title": "Ready to turn your minibar",
+      "titleEmph": "into passive income?",
+      "subtitle": "Join the waitlist and be first to invite your guests to a better stay.",
+      "trust": "14-day free trial · No credit card required"
+    }
+  },
+  "waitlist": {
+    "submit": "Join the waitlist",
+    "success": "You're on the list. We'll be in touch.",
+    "alreadyOnList": "You're already on the list. Thanks for the enthusiasm.",
+    "invalidEmail": "That doesn't look like a valid email.",
+    "serverError": "Something went wrong. Please try again."
+  },
+  "pricing": {
+    "title": "Simple pricing for hospitality that pays for itself",
+    "subtitle": "One flat price per property. No transaction fees. No surprises.",
+    "includes": "What's included",
+    "questions": "Common questions",
+    "faq": {
+      "trial": {
+        "q": "Is there really a free trial?",
+        "a": "Yes. 14 days, no credit card required. Use everything, then decide."
+      },
+      "payments": {
+        "q": "Who handles guest payments?",
+        "a": "You do. Payments go directly from your guest to your Paysera account. EasyHost never touches the money. We only charge €15 per month per property."
+      },
+      "moreProperties": {
+        "q": "What if I have multiple properties?",
+        "a": "Each property is €15/month, with its own menu, branding, and QR code. Manage them all from one dashboard."
+      },
+      "cancel": {
+        "q": "Can I cancel anytime?",
+        "a": "Yes. Cancel from your dashboard in one click. You keep access until the end of the billing period."
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Three steps from setup to revenue",
+    "subtitle": "Get your first order in under an hour."
+  },
+  "footer": {
+    "tagline": "Get to know your rental business better. Beautifully.",
+    "subscribePlaceholder": "Enter your email",
+    "subscribeCta": "Subscribe",
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company",
+    "legal": "Legal",
+    "links": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "menu": "Menu",
+      "demo": "Demo",
+      "blog": "Blog",
+      "guides": "Guides",
+      "support": "Support",
+      "changelog": "Changelog",
+      "about": "About",
+      "careers": "Careers",
+      "contact": "Contact",
+      "press": "Press",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies",
+      "howItWorks": "How it works"
+    },
+    "rights": "All rights reserved.",
+    "madeIn": "Built with care in Tirana"
+  }
+}

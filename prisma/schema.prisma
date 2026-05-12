@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Organization {
+  id                 String    @id @default(cuid())
+  name               String
+  slug               String    @unique
+  logoUrl            String?
+  primaryColor       String    @default("#FF5A1F")
+  defaultLanguage    String    @default("en")
+  paddleCustomerId   String?   @unique
+  subscriptionStatus String    @default("trialing")
+  trialEndsAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  users      User[]
+  properties Property[]
+}
+
+model User {
+  id          String   @id @default(cuid())
+  clerkUserId String   @unique
+  email       String
+  name        String?
+  role        String   @default("owner")
+  language    String   @default("en")
+  orgId       String
+  createdAt   DateTime @default(now())
+
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+}
+
+model Property {
+  id        String  @id @default(cuid())
+  orgId     String
+  name      String
+  slug      String  @unique
+  type      String
+  address   String?
+  timezone  String  @default("Europe/Tirane")
+  currency  String  @default("EUR")
+
+  logoUrl        String?
+  accentColor    String?
+  heroImageUrl   String?
+  welcomeMessage Json?
+
+  payseraAccountId String?
+  paypalEmail      String?
+  iban             String?
+  acceptCash       Boolean @default(true)
+
+  paddleSubscriptionId String? @unique
+  subscriptionStatus   String  @default("trialing")
+
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  menus        Menu[]
+  orders       Order[]
+}
+
+model Menu {
+  id         String   @id @default(cuid())
+  propertyId String
+  name       Json
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  property Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  items    MenuItem[]
+}
+
+model MenuItem {
+  id                String   @id @default(cuid())
+  menuId            String
+  name              Json
+  description       Json?
+  category          String
+  imageUrl          String?
+  price             Decimal  @db.Decimal(10, 2)
+  currency          String   @default("EUR")
+  isAvailable       Boolean  @default(true)
+  stockQuantity     Int?
+  lowStockThreshold Int?
+  displayOrder      Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  menu       Menu        @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+}
+
+model Order {
+  id                   String    @id @default(cuid())
+  propertyId           String
+  guestSessionId       String
+  guestEmail           String?
+  guestName            String?
+  status               String    @default("pending")
+  paymentMethod        String?
+  totalAmount          Decimal   @db.Decimal(10, 2)
+  currency             String
+  payseraTransactionId String?
+  paidAt               DateTime?
+  language             String    @default("en")
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  property Property    @relation(fields: [propertyId], references: [id])
+  items    OrderItem[]
+}
+
+model OrderItem {
+  id               String  @id @default(cuid())
+  orderId          String
+  menuItemId       String
+  itemNameSnapshot Json
+  quantity         Int
+  unitPrice        Decimal @db.Decimal(10, 2)
+
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
+}
+
+model InventoryAlert {
+  id         String    @id @default(cuid())
+  propertyId String
+  menuItemId String
+  alertType  String
+  sentAt     DateTime  @default(now())
+  resolvedAt DateTime?
+}
+
+model WaitlistEntry {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  language  String?
+  source    String?
+  createdAt DateTime @default(now())
+}

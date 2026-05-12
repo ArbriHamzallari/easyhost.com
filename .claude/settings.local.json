@@ -4,7 +4,31 @@
       "Bash(npx *)",
       "Bash(mv \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\CLAUDE.md\" \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\..\\\\_CLAUDE.md.bak\")",
       "Bash(mv \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\.claude\" \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\..\\\\_claude.bak\")",
-      "Bash(jobs)"
+      "Bash(jobs)",
+      "Bash(dir C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app /b)",
+      "Bash(dir C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\app /b /s)",
+      "Bash(dir C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\utils /b /s)",
+      "Bash(mv \"C:\\\\Users\\\\arbri\\\\Desktop\\\\_CLAUDE.md.bak\" \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\CLAUDE.md\")",
+      "Bash(rm -rf \"C:\\\\Users\\\\arbri\\\\Desktop\\\\_claude.bak\")",
+      "Bash(rm -rf \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\utils\\\\supabase\")",
+      "Bash(rmdir \"C:\\\\Users\\\\arbri\\\\Desktop\\\\easyhost.app\\\\utils\")",
+      "Bash(npm uninstall *)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"yes , you can continue with the destructive command\" npx prisma migrate reset --force)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"yes , you can continue with the destructive command\" npx prisma migrate dev --name init)",
+      "Bash(npm install *)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install @prisma/extension-accelerate)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npx tsx scripts/verify-prisma.ts)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install next-intl)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install clsx tailwind-merge class-variance-authority lucide-react)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm run lint)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm run build)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install zod)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install @radix-ui/react-slot)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" npm install --save-dev cross-env)",
+      "Bash(rm -rf .next)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(cross-env NODE_OPTIONS=--use-system-ca tsx scripts/test-waitlist.ts)"
     ]
   }
 }
