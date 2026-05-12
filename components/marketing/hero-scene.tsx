@@ -22,7 +22,7 @@ export function HeroScene() {
   const sx = useSpring(mx, springConfig);
   const sy = useSpring(my, springConfig);
 
-  // Translate the image a few px, rotate a fraction of a degree — restrained.
+  // Translate the image a few px, rotate a fraction of a degree (restrained).
   const imgX = useTransform(sx, [-0.5, 0.5], [-10, 10]);
   const imgY = useTransform(sy, [-0.5, 0.5], [-8, 8]);
   const imgRotate = useTransform(sx, [-0.5, 0.5], [-0.6, 0.6]);

@@ -10,10 +10,10 @@ export async function MarketingNav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-6">
         <Link
           href="/"
-          aria-label="EasyHost — home"
+          aria-label="EasyHost home"
           className="transition-opacity hover:opacity-80"
         >
-          <Logo />
+          <Logo size={70} />
         </Link>
         <nav className="hidden items-center gap-9 md:flex">
           <Link

@@ -24,7 +24,7 @@ export function Features() {
       title: t("landing.features.items.multiProperty.title"),
       body: t("landing.features.items.multiProperty.body"),
       image: "/images/features/multi-property.png",
-      alt: "A miniature white apartment building with a warm orange home pin — multi-property management",
+      alt: "A miniature white apartment building with a warm orange home pin, multi-property management",
       glow: "rgba(28,25,23,0.12)",
     },
     {
@@ -32,7 +32,7 @@ export function Features() {
       title: t("landing.features.items.analytics.title"),
       body: t("landing.features.items.analytics.body"),
       image: "/images/features/analytics.png",
-      alt: "A 3D pie chart with warm orange slices — real-time analytics",
+      alt: "A 3D pie chart with warm orange slices, real-time analytics",
       glow: "rgba(225,106,74,0.22)",
     },
     {
@@ -40,7 +40,7 @@ export function Features() {
       title: t("landing.features.items.inventory.title"),
       body: t("landing.features.items.inventory.body"),
       image: "/images/features/inventory.png",
-      alt: "A polished bronze notification bell with orange ringing strokes — inventory alerts",
+      alt: "A polished bronze notification bell with orange ringing strokes, inventory alerts",
       glow: "rgba(225,106,74,0.20)",
     },
     {
@@ -48,7 +48,7 @@ export function Features() {
       title: t("landing.features.items.multilingual.title"),
       body: t("landing.features.items.multilingual.body"),
       image: "/images/features/multilingual.png",
-      alt: "A bronze globe with multilingual greeting bubbles — Hello, Bonjour, Hola, Hallo",
+      alt: "A bronze globe with multilingual greeting bubbles: Hello, Bonjour, Hola, Hallo",
       glow: "rgba(80,120,170,0.18)",
     },
     {
@@ -56,7 +56,7 @@ export function Features() {
       title: t("landing.features.items.branding.title"),
       body: t("landing.features.items.branding.body"),
       image: "/images/features/branding.png",
-      alt: "A wooden artist palette and brush beside a Sunset Villa logo card — custom branding",
+      alt: "A wooden artist palette and brush beside a Sunset Villa logo card, custom branding",
       glow: "rgba(196,140,80,0.20)",
     },
     {
@@ -64,7 +64,7 @@ export function Features() {
       title: t("landing.features.items.favorites.title"),
       body: t("landing.features.items.favorites.body"),
       image: "/images/features/favorites.png",
-      alt: "A glossy red 3D heart and a Guest Favorite badge with a bronze star — guest favorites",
+      alt: "A glossy red 3D heart and a Guest Favorite badge with a bronze star, guest favorites",
       glow: "rgba(225,80,80,0.22)",
     },
   ];
@@ -90,7 +90,7 @@ export function Features() {
       />
 
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-28 lg:py-32">
-        {/* Section heading — editorial, restrained, balanced */}
+        {/* Section heading - editorial, restrained, balanced */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export function Features() {
         </motion.div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-7">
-          {/* Featured payments card — visually dominant */}
+          {/* Featured payments card - visually dominant */}
           <PaymentsCard
             badge={t("landing.features.items.payments.badge")}
             title={t("landing.features.items.payments.title")}
@@ -124,7 +124,7 @@ export function Features() {
             kpiValue={t("landing.features.items.payments.kpiValue")}
           />
 
-          {/* Small cards — image-first, premium, layered */}
+          {/* Small cards - image-first, premium, layered */}
           <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7 lg:gap-7">
             {small.map((s, i) => (
               <FeatureCard key={s.key} item={s} index={i} />
@@ -218,7 +218,7 @@ function FeatureCard({ item, index }: { item: FeatureItem; index: number }) {
             }}
           />
 
-          {/* The illustration itself — generous, floating, premium */}
+          {/* The illustration itself - generous, floating, premium */}
           <motion.div
             initial={{ y: 6, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -263,7 +263,7 @@ function FeatureCard({ item, index }: { item: FeatureItem; index: number }) {
         </div>
       </div>
 
-      {/* Text content — editorial rhythm */}
+      {/* Text content - editorial rhythm */}
       <div className="relative flex flex-1 flex-col px-6 pb-7 pt-6 sm:px-7 sm:pb-8">
         <h3 className="font-display text-[20px] font-semibold leading-[1.2] tracking-[-0.02em] text-[var(--ink)] sm:text-[22px]">
           {item.title}
@@ -442,7 +442,7 @@ function PaymentsCard({
               <RevenueChart />
             </div>
 
-            {/* Mini stat row — adds richness, "real product" texture */}
+            {/* Mini stat row - adds richness, "real product" texture */}
             <div className="mt-6 grid grid-cols-3 gap-3">
               <MiniStat label="Orders" value="34" trend="+9%" />
               <MiniStat label="AOV" value="€3.78" trend="+4%" />
@@ -499,7 +499,7 @@ function MiniStat({
 }
 
 function RevenueChart() {
-  // Smooth, realistic ramp — 30 daily revenue values
+  // Smooth, realistic ramp - 30 daily revenue values
   const data = [
     18, 22, 19, 24, 21, 27, 23, 28, 32, 29, 35, 31, 38, 34, 40, 37, 44, 41, 47,
     52, 48, 56, 53, 60, 64, 58, 70, 74, 78, 82,

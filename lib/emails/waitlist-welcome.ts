@@ -15,50 +15,70 @@ type Copy = {
 
 const copy: Record<Locale, Copy> = {
   en: {
-    subject: "You're on the list — EasyHost is on the way",
+    subject: "You're on the list: EasyHost is on the way",
     preheader: "Thanks for joining the waitlist. Early members get 50% off for life.",
     greeting: "Welcome to EasyHost",
     body: "Thanks for joining the waitlist. You're now among the first hosts to know the moment we open the doors.",
     whatsNextTitle: "What happens next",
-    whatsNext: "We'll email you as soon as EasyHost is ready — likely a few weeks from now. No spam in between, promise.",
+    whatsNext:
+      "We'll email you as soon as EasyHost is ready, likely in a few weeks. No spam in between, promise.",
     perk: "Early waitlist members get 50% off their first year, locked in for life.",
     footer: "Built with care in Tirana, Albania.",
-    signoff: "— Arbri & the EasyHost team",
+    signoff: "Arbri & the EasyHost team",
   },
   al: {
-    subject: "Je në listë — EasyHost po vjen",
+    subject: "Je në listë: EasyHost po vjen",
     preheader: "Faleminderit që iu bashkove. Anëtarët e parë marrin 50% zbritje përgjithmonë.",
     greeting: "Mirë se erdhe në EasyHost",
     body: "Faleminderit që iu bashkove listës së pritjes. Tani je ndër pronarët e parë që do të mësojnë kur t'i hapim dyert.",
     whatsNextTitle: "Çfarë ndodh më pas",
-    whatsNext: "Do të të shkruajmë sapo EasyHost të jetë gati — me shumë gjasa pas disa javësh. Pa spam në mes, premtim.",
+    whatsNext:
+      "Do të të shkruajmë sapo EasyHost të jetë gati, me shumë gjasa pas disa javësh. Pa spam në mes, premtim.",
     perk: "Anëtarët e parë në listë marrin 50% zbritje për vitin e parë, përgjithmonë.",
     footer: "Ndërtuar me kujdes në Tiranë, Shqipëri.",
-    signoff: "— Arbri dhe ekipi i EasyHost",
+    signoff: "Arbri dhe ekipi i EasyHost",
   },
   it: {
-    subject: "Sei nella lista — EasyHost sta arrivando",
+    subject: "Sei nella lista: EasyHost sta arrivando",
     preheader: "Grazie per esserti iscritto. I primi iscritti ottengono il 50% di sconto per sempre.",
     greeting: "Benvenuto in EasyHost",
     body: "Grazie per esserti iscritto alla waitlist. Sei tra i primi host a sapere quando apriremo le porte.",
     whatsNextTitle: "Cosa succede ora",
-    whatsNext: "Ti scriveremo non appena EasyHost sarà pronto — probabilmente tra qualche settimana. Nessuno spam nel frattempo, promesso.",
+    whatsNext:
+      "Ti scriveremo non appena EasyHost sarà pronto, probabilmente tra qualche settimana. Nessuno spam nel frattempo, promesso.",
     perk: "I primi iscritti ricevono il 50% di sconto sul primo anno, per sempre.",
     footer: "Costruito con cura a Tirana, Albania.",
-    signoff: "— Arbri e il team EasyHost",
+    signoff: "Arbri e il team EasyHost",
   },
   de: {
-    subject: "Du bist auf der Liste — EasyHost ist auf dem Weg",
+    subject: "Du bist auf der Liste: EasyHost ist auf dem Weg",
     preheader: "Danke fürs Eintragen. Die ersten Mitglieder bekommen dauerhaft 50% Rabatt.",
     greeting: "Willkommen bei EasyHost",
     body: "Danke, dass du der Warteliste beigetreten bist. Du gehörst zu den ersten Hosts, die erfahren, wenn wir loslegen.",
     whatsNextTitle: "Wie es weitergeht",
-    whatsNext: "Wir melden uns, sobald EasyHost bereit ist — voraussichtlich in ein paar Wochen. Bis dahin kein Spam, versprochen.",
+    whatsNext:
+      "Wir melden uns, sobald EasyHost bereit ist, voraussichtlich in ein paar Wochen. Bis dahin kein Spam, versprochen.",
     perk: "Die ersten Wartelistenmitglieder erhalten dauerhaft 50% Rabatt auf das erste Jahr.",
     footer: "Mit Sorgfalt gebaut in Tirana, Albanien.",
-    signoff: "— Arbri und das EasyHost-Team",
+    signoff: "Arbri und das EasyHost-Team",
   },
 };
+
+function siteOrigin(): string {
+  return (
+    process.env.NEXT_PUBLIC_MARKETING_URL?.replace(/\/$/, "") ||
+    process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ||
+    "https://easyhost.pro"
+  );
+}
+
+function logoHeaderHtml(): string {
+  const origin = siteOrigin();
+  const src = `${origin}/images/easyhost-logo.png`;
+  return `<a href="${escapeHtml(origin)}" style="text-decoration:none;display:inline-block;">
+    <img src="${escapeHtml(src)}" alt="EasyHost" width="180" height="50" style="height:40px;width:auto;max-width:220px;display:block;border:0;" />
+  </a>`;
+}
 
 function renderHtml(c: Copy) {
   return `<!doctype html>
@@ -80,10 +100,7 @@ function renderHtml(c: Copy) {
           <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;background:#ffffff;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);overflow:hidden;">
             <tr>
               <td style="padding:32px 40px 8px;">
-                <div style="display:inline-flex;align-items:center;gap:8px;">
-                  <span style="display:inline-block;width:28px;height:28px;border-radius:8px;background:#FF5A1F;"></span>
-                  <span style="font-size:18px;font-weight:700;letter-spacing:-0.01em;color:#222222;">EasyHost</span>
-                </div>
+                ${logoHeaderHtml()}
               </td>
             </tr>
             <tr>
@@ -189,7 +206,7 @@ export async function sendWaitlistWelcomeEmail(args: {
   });
 
   if (error) {
-    throw new Error(`Resend error: ${error.name} — ${error.message}`);
+    throw new Error(`Resend error: ${error.name}: ${error.message}`);
   }
   return data;
 }

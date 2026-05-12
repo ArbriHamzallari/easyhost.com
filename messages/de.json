@@ -80,7 +80,7 @@
       "chip": "3 steps",
       "title": "Live in under an hour.",
       "titleEmph": "Earn while you sleep.",
-      "subtitle": "From empty fridge to first payout — three quiet steps. No card reader. No app for your guests. No middleman touching your money.",
+      "subtitle": "From empty fridge to first payout: three quiet steps. No card reader. No app for your guests. No middleman touching your money.",
       "step1": {
         "kicker": "01",
         "label": "Setup",
@@ -193,7 +193,8 @@
       "eyebrow": "Guest experience",
       "title": "A menu your guests will",
       "titleEmph": "actually love using.",
-      "subtitle": "No app to download. No account to create. They just scan and order in their language."
+      "subtitle": "No app to download. No account to create. They just scan and order in their language.",
+      "imageAlt": "Drei Smartphones auf einer warmen Holzoberfläche mit Gästemenu im Zimmer, Warenkorb und Checkout."
     },
     "propertyTypes": {
       "eyebrow": "For every kind of stay",
@@ -229,7 +230,7 @@
         "feature6": "Unlimited orders, zero transaction fees",
         "trial": "14-day free trial",
         "noCard": "No credit card required",
-        "earlyBird": "Early bird — first 100 hosts get 50% off for life.",
+        "earlyBird": "Early bird: first 100 hosts get 50% off for life.",
         "cta": "Join the waitlist",
         "roi": "Average host earns €180+ per property per month from minibar orders alone."
       }

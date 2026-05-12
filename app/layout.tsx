@@ -19,7 +19,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "EasyHost — Turn minibar snacks into passive income",
+  title: "EasyHost: Turn minibar snacks into passive income",
   description:
     "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit. Built for modern hosts.",
 };

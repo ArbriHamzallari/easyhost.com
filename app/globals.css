@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand — refined hospitality palette */
+  /* Brand: refined hospitality palette */
   --color-primary: #e16a4a;
   --color-primary-hover: #c95636;
   --color-primary-soft: #fbeee6;
   --color-primary-deep: #8c3a25;
 
-  /* Neutrals — warm, editorial */
+  /* Neutrals: warm, editorial */
   --color-background: #faf8f6;
   --color-canvas: #faf8f6;
   --color-surface: #f4efe9;
@@ -42,7 +42,7 @@
   --radius-image: 22px;
   --radius-pill: 999px;
 
-  /* Shadows — soft, premium */
+  /* Shadows: soft, premium */
   --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04),
     0 8px 24px -12px rgba(28, 25, 23, 0.08);
   --shadow-elevated: 0 1px 3px rgba(28, 25, 23, 0.06),

@@ -1,6 +1,9 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/ui/reveal";
-import { GuestPhone } from "./guest-phone";
+
+const MOCKUP_WIDTH = 1024;
+const MOCKUP_HEIGHT = 593;
 
 export async function Preview() {
   const t = await getTranslations();
@@ -43,21 +46,35 @@ export async function Preview() {
           </div>
         </Reveal>
 
-        <div className="relative mt-16 flex items-end justify-center gap-6 sm:gap-10">
-          <Reveal delay={80} className="hidden sm:block">
-            <div className="origin-bottom rotate-[-6deg] scale-[0.82] opacity-90">
-              <GuestPhone scale={1} showCheckout={false} />
-            </div>
-          </Reveal>
-          <Reveal delay={160}>
-            <div className="origin-bottom translate-y-[-12px] scale-[0.95]">
-              <GuestPhone scale={1} />
-            </div>
-          </Reveal>
-          <Reveal delay={240} className="hidden sm:block">
-            <div className="origin-bottom rotate-[6deg] scale-[0.82] opacity-90">
-              <GuestPhone scale={1} showCheckout={false} />
-            </div>
+        <div className="relative mt-14 sm:mt-16">
+          {/* Warm glow under the mockup, tied to primary */}
+          <div
+            aria-hidden
+            className="absolute -bottom-6 left-1/2 h-[min(40%,220px)] w-[min(92%,720px)] max-w-3xl -translate-x-1/2 rounded-full bg-[#FF5A1F]/[0.14] blur-3xl sm:h-[min(45%,260px)]"
+          />
+          <Reveal delay={100} className="relative">
+            <figure className="relative mx-auto max-w-5xl">
+              <div className="relative overflow-hidden rounded-[20px] bg-[#1c1917] shadow-[0_28px_80px_-18px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.08)] ring-1 ring-white/[0.09] sm:rounded-[24px] lg:rounded-[28px]">
+                <Image
+                  src="/images/guest-experience-mockup.png"
+                  alt={t("landing.guest.imageAlt")}
+                  width={MOCKUP_WIDTH}
+                  height={MOCKUP_HEIGHT}
+                  className="block h-auto w-full object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
+                  quality={90}
+                />
+                {/* Blend edges into the section: vignette + warm rim */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0_0_80px_rgba(12,10,9,0.35),inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-t from-[#221c18]/75 via-transparent to-transparent sm:h-[18%]"
+                />
+              </div>
+            </figure>
           </Reveal>
         </div>
       </div>

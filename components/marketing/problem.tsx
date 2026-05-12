@@ -149,7 +149,7 @@ function ComparePanel({
           : "0 1px 2px rgba(28,25,23,0.03), 0 28px 60px -28px rgba(28,25,23,0.22), inset 0 1px 0 rgba(255,255,255,0.45)",
       }}
     >
-      {/* Warm halo behind the new panel — gives it visible emotional edge */}
+      {/* Warm halo behind the new panel - gives it visible emotional edge */}
       {isNew && (
         <div
           aria-hidden
@@ -160,7 +160,7 @@ function ComparePanel({
           }}
         />
       )}
-      {/* Cooler haze on the old panel — subtle, drains warmth */}
+      {/* Cooler haze on the old panel - subtle, drains warmth */}
       {!isNew && (
         <div
           aria-hidden
@@ -222,7 +222,7 @@ function ComparePanel({
 
       {/* Image */}
       <div className="relative mt-7">
-        {/* ambient glow behind the image — stronger on the new panel */}
+        {/* ambient glow behind the image - stronger on the new panel */}
         <div
           aria-hidden
           className="pointer-events-none absolute -inset-x-6 -inset-y-4 -z-0 opacity-80 blur-2xl"
@@ -271,7 +271,7 @@ function ComparePanel({
             }}
           />
 
-          {/* Cinematic overlay — colder/darker on old, warmer rim on new */}
+          {/* Cinematic overlay - colder/darker on old, warmer rim on new */}
           {isNew ? (
             <>
               <div

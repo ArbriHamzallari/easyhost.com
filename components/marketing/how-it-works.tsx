@@ -58,7 +58,7 @@ export function HowItWorks() {
       id="how-it-works"
       className="relative isolate overflow-hidden"
     >
-      {/* Atmospheric background — warm hospitality, ambient lighting */}
+      {/* Atmospheric background - warm hospitality, ambient lighting */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-20"
@@ -91,7 +91,7 @@ export function HowItWorks() {
 
         {/* Step rail */}
         <div className="relative mt-20 sm:mt-24">
-          {/* Flowing gradient connector — only on lg */}
+          {/* Flowing gradient connector - only on lg */}
           <Connector />
 
           <div className="relative grid gap-10 sm:gap-12 lg:grid-cols-3 lg:gap-8 xl:gap-10">
@@ -172,7 +172,7 @@ function Dot() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Connector — animated flowing gradient line across the 3 cards     */
+/*  Connector - animated flowing gradient line across the 3 cards     */
 /* ------------------------------------------------------------------ */
 
 function Connector() {
@@ -250,7 +250,7 @@ interface StepCardProps {
 }
 
 function StepCard({ step, index }: StepCardProps) {
-  // Tone-specific styling — two warm hospitality variants (step 3 matches step 2)
+  // Tone-specific styling - two warm hospitality variants (step 3 matches step 2)
   const surface =
     step.tone === "warm"
       ? "linear-gradient(180deg, #FBF3EA 0%, #F4E8DA 100%)"

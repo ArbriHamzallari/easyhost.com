@@ -5,6 +5,7 @@ import { Prisma } from "../generated/prisma";
 import { prisma } from "./prisma";
 import { isLocale } from "@/i18n/config";
 import { sendWaitlistWelcomeEmail } from "./emails/waitlist-welcome";
+import { sendWaitlistNotifyEmail } from "./emails/waitlist-notify";
 
 const WaitlistInput = z.object({
   email: z.string().trim().toLowerCase().email("invalid_email"),
@@ -34,15 +35,28 @@ export async function joinWaitlist(input: {
       data: { email, language: safeLanguage, source },
     });
 
-    // Fire-and-forget welcome email. Never fail the user response on email errors.
-    void sendWaitlistWelcomeEmail({ to: email, language: safeLanguage }).catch(
-      (err: unknown) => {
+    // Await both emails so serverless doesn't terminate mid-send.
+    // allSettled means a Resend failure can't break the form response.
+    const totalCount = await prisma.waitlistEntry.count().catch(() => undefined);
+    const results = await Promise.allSettled([
+      sendWaitlistWelcomeEmail({ to: email, language: safeLanguage }),
+      sendWaitlistNotifyEmail({
+        email,
+        language: safeLanguage,
+        source,
+        totalCount,
+      }),
+    ]);
+    for (const [i, r] of results.entries()) {
+      if (r.status === "rejected") {
+        const label = i === 0 ? "welcome" : "notify";
+        const reason = r.reason;
         console.error(
-          "[waitlist] welcome email failed:",
-          err instanceof Error ? `${err.name}: ${err.message}` : err,
+          `[waitlist] ${label} email failed:`,
+          reason instanceof Error ? `${reason.name}: ${reason.message}` : reason,
         );
-      },
-    );
+      }
+    }
 
     return { ok: true, alreadyOnList: false };
   } catch (err) {
