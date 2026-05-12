@@ -49,7 +49,7 @@ export async function MarketingNav() {
             {t("common.signIn")}
           </Link>
           <Button asChild size="sm">
-            <Link href="#waitlist">{t("common.joinWaitlist")}</Link>
+            <Link href="/#waitlist">{t("common.joinWaitlist")}</Link>
           </Button>
         </div>
       </div>

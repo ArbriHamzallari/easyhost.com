@@ -88,7 +88,7 @@ export async function PricingCard() {
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button asChild size="lg" className="w-full sm:w-auto">
-                  <Link href="#waitlist">{t("landing.pricing.card.cta")}</Link>
+                  <Link href="/#waitlist">{t("landing.pricing.card.cta")}</Link>
                 </Button>
                 <div className="text-[13px] text-[var(--muted)]">
                   <span className="font-semibold text-[var(--ink)]">

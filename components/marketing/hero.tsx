@@ -6,7 +6,7 @@ export async function Hero() {
   const t = await getTranslations();
 
   return (
-    <section id="waitlist" className="relative overflow-hidden">
+    <section id="waitlist" className="relative overflow-hidden scroll-mt-24">
       {/* Refined ambient page-canvas backdrop */}
       <div
         aria-hidden
