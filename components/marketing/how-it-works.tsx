@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion, type Variants } from "motion/react";
 
-type Tone = "warm" | "cream" | "ink";
+type Tone = "warm" | "cream";
 
 interface Step {
   kicker: string;
@@ -49,7 +49,7 @@ export function HowItWorks() {
       body: t("landing.how.step3.body"),
       imageSrc: "/images/how-payout.png",
       imageAlt: t("landing.how.step3.imageAlt"),
-      tone: "ink",
+      tone: "warm",
     },
   ];
 
@@ -250,30 +250,23 @@ interface StepCardProps {
 }
 
 function StepCard({ step, index }: StepCardProps) {
-  const isInk = step.tone === "ink";
-
-  // Tone-specific styling so each card carries its own micro-atmosphere
+  // Tone-specific styling — two warm hospitality variants (step 3 matches step 2)
   const surface =
-    step.tone === "ink"
-      ? "linear-gradient(180deg, #1F1B17 0%, #15110E 100%)"
-      : step.tone === "warm"
-        ? "linear-gradient(180deg, #FBF3EA 0%, #F4E8DA 100%)"
-        : "linear-gradient(180deg, #FCFAF7 0%, #F5EFE6 100%)";
+    step.tone === "warm"
+      ? "linear-gradient(180deg, #FBF3EA 0%, #F4E8DA 100%)"
+      : "linear-gradient(180deg, #FCFAF7 0%, #F5EFE6 100%)";
 
   const shadow =
-    step.tone === "ink"
-      ? "0 1px 2px rgba(28,25,23,0.10), 0 32px 70px -28px rgba(28,25,23,0.55), inset 0 1px 0 rgba(255,255,255,0.06)"
-      : step.tone === "warm"
-        ? "0 1px 2px rgba(28,25,23,0.04), 0 32px 70px -28px rgba(140,58,37,0.28), inset 0 1px 0 rgba(255,255,255,0.7)"
-        : "0 1px 2px rgba(28,25,23,0.04), 0 32px 70px -28px rgba(28,25,23,0.22), inset 0 1px 0 rgba(255,255,255,0.75)";
+    step.tone === "warm"
+      ? "0 1px 2px rgba(28,25,23,0.04), 0 32px 70px -28px rgba(140,58,37,0.28), inset 0 1px 0 rgba(255,255,255,0.7)"
+      : "0 1px 2px rgba(28,25,23,0.04), 0 32px 70px -28px rgba(28,25,23,0.22), inset 0 1px 0 rgba(255,255,255,0.75)";
 
-  // Image inner surface tone
   const imageSurface =
-    step.tone === "ink"
-      ? "linear-gradient(180deg, #0E0C0A 0%, #050403 100%)"
-      : step.tone === "warm"
-        ? "linear-gradient(180deg, #F8EFE3 0%, #EFE2D0 100%)"
-        : "linear-gradient(180deg, #FAF5EE 0%, #F1E8DA 100%)";
+    step.tone === "warm"
+      ? "linear-gradient(180deg, #F8EFE3 0%, #EFE2D0 100%)"
+      : "linear-gradient(180deg, #FAF5EE 0%, #F1E8DA 100%)";
+
+  const haloIntensity = step.tone === "warm" ? 0.28 : 0.18;
 
   return (
     <motion.article
@@ -292,33 +285,16 @@ function StepCard({ step, index }: StepCardProps) {
         aria-hidden
         className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full blur-3xl"
         style={{
-          background:
-            step.tone === "ink"
-              ? "radial-gradient(closest-side, rgba(225,106,74,0.30), transparent 70%)"
-              : step.tone === "warm"
-                ? "radial-gradient(closest-side, rgba(225,106,74,0.28), transparent 70%)"
-                : "radial-gradient(closest-side, rgba(225,106,74,0.18), transparent 70%)",
+          background: `radial-gradient(closest-side, rgba(225,106,74,${haloIntensity}), transparent 70%)`,
           opacity: 0.85,
         }}
       />
 
       {/* Top row: glassmorphic step badge + meta */}
       <div className="relative flex items-center justify-between">
-        <StepBadge kicker={step.kicker} dark={isInk} />
-        <div
-          className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] backdrop-blur ${
-            isInk
-              ? "bg-white/10 text-white/80 ring-1 ring-white/15"
-              : "bg-white/75 text-[var(--ink)] ring-1 ring-[var(--border)]"
-          }`}
-        >
-          <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              isInk
-                ? "bg-[var(--primary)] shadow-[0_0_10px_rgba(225,106,74,0.8)]"
-                : "bg-[var(--primary)] shadow-[0_0_8px_rgba(225,106,74,0.6)]"
-            }`}
-          />
+        <StepBadge kicker={step.kicker} />
+        <div className="flex items-center gap-2 rounded-full bg-white/75 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--ink)] ring-1 ring-[var(--border)] backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_rgba(225,106,74,0.6)]" />
           {step.label}
         </div>
       </div>
@@ -330,27 +306,20 @@ function StepCard({ step, index }: StepCardProps) {
           aria-hidden
           className="pointer-events-none absolute -inset-x-4 -inset-y-3 -z-0 opacity-90 blur-3xl"
           style={{
-            background:
-              step.tone === "ink"
-                ? "radial-gradient(60% 70% at 50% 60%, rgba(225,106,74,0.35), transparent 70%)"
-                : step.tone === "warm"
-                  ? "radial-gradient(60% 70% at 50% 55%, rgba(225,106,74,0.28), transparent 70%)"
-                  : "radial-gradient(60% 70% at 50% 55%, rgba(28,25,23,0.16), transparent 70%)",
+            background: `radial-gradient(60% 70% at 50% 55%, rgba(225,106,74,${
+              step.tone === "warm" ? 0.28 : 0.16
+            }), transparent 70%)`,
           }}
         />
 
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 160, damping: 22 }}
-          className={`relative aspect-[4/3] w-full overflow-hidden rounded-[22px] ring-1 ${
-            step.tone === "ink" ? "ring-white/10" : "ring-[var(--ink)]/[0.06]"
-          }`}
+          className="relative aspect-[4/3] w-full overflow-hidden rounded-[22px] ring-1 ring-[var(--ink)]/[0.06]"
           style={{
             background: imageSurface,
             boxShadow:
-              step.tone === "ink"
-                ? "0 10px 20px -10px rgba(0,0,0,0.6), 0 28px 60px -24px rgba(140,58,37,0.4)"
-                : "0 10px 20px -10px rgba(28,25,23,0.18), 0 28px 60px -24px rgba(140,58,37,0.32)",
+              "0 10px 20px -10px rgba(28,25,23,0.18), 0 28px 60px -24px rgba(140,58,37,0.32)",
           }}
         >
           <motion.div
@@ -366,7 +335,7 @@ function StepCard({ step, index }: StepCardProps) {
               fill
               quality={90}
               sizes="(max-width: 1024px) 92vw, 380px"
-              className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+              className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
               priority={index === 0}
             />
           </motion.div>
@@ -377,9 +346,7 @@ function StepCard({ step, index }: StepCardProps) {
             className="pointer-events-none absolute inset-0 rounded-[22px]"
             style={{
               boxShadow:
-                step.tone === "ink"
-                  ? "inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -1px 0 rgba(0,0,0,0.5)"
-                  : "inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.08)",
+                "inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.08)",
             }}
           />
 
@@ -389,9 +356,7 @@ function StepCard({ step, index }: StepCardProps) {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                step.tone === "ink"
-                  ? "radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%)"
-                  : "radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 60%, rgba(28,25,23,0.18) 100%)",
+                "radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 60%, rgba(28,25,23,0.18) 100%)",
             }}
           />
 
@@ -410,35 +375,17 @@ function StepCard({ step, index }: StepCardProps) {
 
       {/* Title + body */}
       <div className="relative mt-7 flex flex-1 flex-col">
-        <h3
-          className={`font-display text-[26px] font-semibold leading-[1.12] tracking-[-0.02em] sm:text-[28px] ${
-            isInk ? "text-white" : "text-[var(--ink)]"
-          }`}
-        >
+        <h3 className="font-display text-[26px] font-semibold leading-[1.12] tracking-[-0.02em] text-[var(--ink)] sm:text-[28px]">
           {step.title}
         </h3>
-        <p
-          className={`mt-3 text-[15.5px] leading-[1.6] ${
-            isInk ? "text-white/70" : "text-[var(--muted)]"
-          }`}
-        >
+        <p className="mt-3 text-[15.5px] leading-[1.6] text-[var(--muted)]">
           {step.body}
         </p>
 
         {/* Duration footer */}
         <div className="mt-6 flex items-center gap-3 pt-5">
-          <div
-            className={`h-px flex-1 ${
-              isInk
-                ? "bg-gradient-to-r from-transparent via-white/15 to-transparent"
-                : "bg-gradient-to-r from-transparent via-[var(--border)] to-transparent"
-            }`}
-          />
-          <span
-            className={`text-[12px] font-medium uppercase tracking-[0.18em] ${
-              isInk ? "text-white/55" : "text-[var(--muted)]"
-            }`}
-          >
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--border)] to-transparent" />
+          <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
             {step.duration}
           </span>
         </div>
@@ -451,7 +398,7 @@ function StepCard({ step, index }: StepCardProps) {
 /*  Glassmorphic step number badge                                    */
 /* ------------------------------------------------------------------ */
 
-function StepBadge({ kicker, dark }: { kicker: string; dark: boolean }) {
+function StepBadge({ kicker }: { kicker: string }) {
   return (
     <div className="relative">
       {/* Glow halo */}
@@ -464,26 +411,13 @@ function StepBadge({ kicker, dark }: { kicker: string; dark: boolean }) {
         }}
       />
       <div
-        className={`relative flex h-14 w-14 items-center justify-center rounded-full font-display text-[18px] font-semibold backdrop-blur-md ${
-          dark
-            ? "bg-white/10 text-white ring-1 ring-white/20"
-            : "bg-white/80 text-[var(--ink)] ring-1 ring-[var(--border)]"
-        }`}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/80 font-display text-[18px] font-semibold tracking-[-0.02em] text-[var(--ink)] ring-1 ring-[var(--primary)]/20 backdrop-blur-md"
         style={{
-          boxShadow: dark
-            ? "0 8px 24px -10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.18)"
-            : "0 8px 24px -10px rgba(28,25,23,0.20), inset 0 1px 0 rgba(255,255,255,0.9)",
+          boxShadow:
+            "0 8px 24px -10px rgba(28,25,23,0.20), inset 0 1px 0 rgba(255,255,255,0.9)",
         }}
       >
-        {/* Inner orange dot accent */}
-        <span
-          aria-hidden
-          className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[var(--primary)] ring-2 ${
-            dark ? "ring-[#15110E]" : "ring-[#FBF7F2]"
-          }`}
-          style={{ boxShadow: "0 0 12px rgba(225,106,74,0.7)" }}
-        />
-        <span className="relative">{kicker}</span>
+        <span>{kicker}</span>
       </div>
     </div>
   );
