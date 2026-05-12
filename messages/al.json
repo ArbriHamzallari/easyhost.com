@@ -310,6 +310,17 @@
     "invalidEmail": "That doesn't look like a valid email.",
     "serverError": "Something went wrong. Please try again."
   },
+  "welcome": {
+    "badge": "Je në listë",
+    "title": "Mirë se erdhe në EasyHost.",
+    "subtitle": "Llogaria jote është gati dhe je në listën e pritjes.",
+    "bodyNew": "Faleminderit që u regjistrove. Do të të shkruajmë në {email} sapo EasyHost të jetë gati — dhe atëherë, identifikohu me të njëjtat kredenciale për të konfiguruar pronën e parë.",
+    "bodyExisting": "Je tashmë në listë me {email}. Kur të hapim dyert, identifikohu këtu me të njëjtat kredenciale — llogaria të pret.",
+    "credentialsTitle": "Të njëjtat kredenciale, pa migrim",
+    "credentialsBody": "Email-i dhe fjalëkalimi që sapo krijove janë ato që do të përdorësh për t'u identifikuar kur të hapim. Asgjë për të bërë deri atëherë.",
+    "cta": "Kthehu te easyhost.pro",
+    "signOut": "Dil"
+  },
   "pricing": {
     "title": "Simple pricing for hospitality that pays for itself",
     "subtitle": "One flat price per property. No transaction fees. No surprises.",

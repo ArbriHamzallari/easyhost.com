@@ -310,6 +310,17 @@
     "invalidEmail": "That doesn't look like a valid email.",
     "serverError": "Something went wrong. Please try again."
   },
+  "welcome": {
+    "badge": "Du bist dabei",
+    "title": "Willkommen bei EasyHost.",
+    "subtitle": "Dein Konto ist bereit und du stehst auf der Warteliste.",
+    "bodyNew": "Danke fürs Anmelden. Wir schreiben dir an {email}, sobald EasyHost online ist — und dann meldest du dich mit denselben Zugangsdaten an, um deine erste Unterkunft einzurichten.",
+    "bodyExisting": "Du stehst bereits mit {email} auf der Warteliste. Wenn wir starten, melde dich hier mit denselben Zugangsdaten an — dein Konto wartet schon.",
+    "credentialsTitle": "Gleiche Zugangsdaten, keine Migration",
+    "credentialsBody": "Die E-Mail und das Passwort, die du gerade erstellt hast, verwendest du auch zum Login beim Start. Bis dahin musst du nichts tun.",
+    "cta": "Zurück zu easyhost.pro",
+    "signOut": "Abmelden"
+  },
   "pricing": {
     "title": "Simple pricing for hospitality that pays for itself",
     "subtitle": "One flat price per property. No transaction fees. No surprises.",
