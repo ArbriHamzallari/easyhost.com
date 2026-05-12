@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Prisma } from "../generated/prisma";
 import { prisma } from "./prisma";
 import { isLocale } from "@/i18n/config";
+import { sendWaitlistWelcomeEmail } from "./emails/waitlist-welcome";
 
 const WaitlistInput = z.object({
   email: z.string().trim().toLowerCase().email("invalid_email"),
@@ -32,6 +33,17 @@ export async function joinWaitlist(input: {
     await prisma.waitlistEntry.create({
       data: { email, language: safeLanguage, source },
     });
+
+    // Fire-and-forget welcome email. Never fail the user response on email errors.
+    void sendWaitlistWelcomeEmail({ to: email, language: safeLanguage }).catch(
+      (err: unknown) => {
+        console.error(
+          "[waitlist] welcome email failed:",
+          err instanceof Error ? `${err.name}: ${err.message}` : err,
+        );
+      },
+    );
+
     return { ok: true, alreadyOnList: false };
   } catch (err) {
     if (
