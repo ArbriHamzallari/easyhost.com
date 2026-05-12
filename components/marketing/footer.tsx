@@ -46,8 +46,8 @@ export async function MarketingFooter() {
 
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--canvas)]">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] lg:gap-12">
           {/* Brand block */}
           <div>
             <Logo size={24} />

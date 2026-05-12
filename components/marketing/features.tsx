@@ -102,13 +102,13 @@ export function Features() {
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
             {t("landing.features.eyebrow")}
           </div>
-          <h2 className="mt-5 font-display text-[40px] font-medium leading-[1.04] tracking-[-0.025em] text-[var(--ink)] sm:text-[52px]">
+          <h2 className="mt-5 font-display text-[30px] font-medium leading-[1.04] tracking-[-0.025em] text-[var(--ink)] sm:text-[40px] lg:text-[52px]">
             {t("landing.features.title")}{" "}
             <span className="serif-emph text-[var(--primary)]">
               {t("landing.features.titleEmph")}
             </span>
           </h2>
-          <p className="mt-5 max-w-xl text-[17px] leading-[1.6] text-[var(--muted)]">
+          <p className="mt-4 max-w-xl text-[15px] leading-[1.6] text-[var(--muted)] sm:mt-5 sm:text-[17px]">
             {t("landing.features.subtitle")}
           </p>
         </motion.div>
@@ -302,7 +302,7 @@ function PaymentsCard({
       viewport={{ once: true, margin: "-80px" }}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col overflow-hidden rounded-[32px] p-7 sm:p-9 lg:col-span-5 lg:sticky lg:top-24"
+      className="group relative flex flex-col overflow-hidden rounded-[24px] p-5 sm:rounded-[32px] sm:p-7 lg:col-span-5 lg:sticky lg:p-9 lg:top-24"
       style={{
         background:
           "linear-gradient(165deg, #FFF3E8 0%, #FBE7D5 50%, #F5D9C2 100%)",
@@ -340,7 +340,7 @@ function PaymentsCard({
       </div>
 
       {/* Headline */}
-      <h3 className="relative mt-6 font-display text-[30px] font-semibold leading-[1.06] tracking-[-0.025em] text-[var(--ink)] sm:text-[36px]">
+      <h3 className="relative mt-5 font-display text-[24px] font-semibold leading-[1.06] tracking-[-0.025em] text-[var(--ink)] sm:mt-6 sm:text-[30px] lg:text-[36px]">
         {title}
       </h3>
       <p className="relative mt-4 max-w-md text-[15.5px] leading-[1.6] text-[var(--ink)]/70">
@@ -407,7 +407,7 @@ function PaymentsCard({
                   </span>
                   {kpi}
                 </div>
-                <div className="mt-1.5 font-display text-[40px] font-semibold leading-[1] tracking-[-0.025em] text-[var(--ink)] sm:text-[44px]">
+                <div className="mt-1.5 font-display text-[32px] font-semibold leading-[1] tracking-[-0.025em] text-[var(--ink)] sm:text-[40px] lg:text-[44px]">
                   {kpiValue}
                 </div>
               </div>

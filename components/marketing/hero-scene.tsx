@@ -169,7 +169,7 @@ export function HeroScene() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.65 }}
         style={{ x: cardX, y: cardY }}
-        className="absolute -bottom-7 left-3 z-30 w-[228px] origin-bottom-left rotate-[-3deg] rounded-2xl border border-[var(--border)] bg-white/95 p-4 shadow-[0_4px_10px_rgba(28,25,23,0.06),0_24px_60px_-24px_rgba(28,25,23,0.35)] backdrop-blur sm:left-6"
+        className="absolute -bottom-7 left-3 z-30 w-[min(228px,72vw)] origin-bottom-left rotate-[-3deg] rounded-2xl border border-[var(--border)] bg-white/95 p-3 shadow-[0_4px_10px_rgba(28,25,23,0.06),0_24px_60px_-24px_rgba(28,25,23,0.35)] backdrop-blur sm:left-6 sm:w-[228px] sm:p-4"
       >
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">

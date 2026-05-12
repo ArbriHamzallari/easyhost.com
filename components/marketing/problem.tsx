@@ -52,7 +52,7 @@ export function Problem() {
           <div className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--primary)]">
             {t("landing.problem.eyebrow")}
           </div>
-          <h2 className="mt-3 font-display text-[40px] font-medium leading-[1.05] text-[var(--ink)] sm:text-[48px]">
+          <h2 className="mt-3 font-display text-[30px] font-medium leading-[1.05] text-[var(--ink)] sm:text-[40px] lg:text-[48px]">
             {t("landing.problem.title")}{" "}
             <span className="serif-emph text-[var(--primary)]">
               {t("landing.problem.titleEmph")}

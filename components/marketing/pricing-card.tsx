@@ -23,7 +23,7 @@ export async function PricingCard() {
             <div className="text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--primary)]">
               {t("landing.pricing.eyebrow")}
             </div>
-            <h2 className="mt-3 font-display text-[40px] font-medium leading-[1.05] text-[var(--ink)] sm:text-[52px]">
+            <h2 className="mt-3 font-display text-[30px] font-medium leading-[1.05] text-[var(--ink)] sm:text-[40px] lg:text-[52px]">
               {t("landing.pricing.title")}{" "}
               <span className="serif-emph text-[var(--primary)]">
                 {t("landing.pricing.titleEmph")}
@@ -36,7 +36,7 @@ export async function PricingCard() {
         </Reveal>
 
         <Reveal delay={100} className="mx-auto mt-14 max-w-xl">
-          <article className="relative overflow-hidden rounded-[24px] border border-[var(--border)] bg-white p-8 shadow-[var(--shadow-elevated)] sm:p-10">
+          <article className="relative overflow-hidden rounded-[20px] border border-[var(--border)] bg-white p-5 shadow-[var(--shadow-elevated)] sm:rounded-[24px] sm:p-8 lg:p-10">
             {/* Soft accent halo */}
             <div
               aria-hidden
@@ -62,8 +62,8 @@ export async function PricingCard() {
                 </span>
               </div>
 
-              <div className="mt-7 flex items-baseline gap-2">
-                <span className="font-display text-[68px] font-semibold leading-none tracking-tight text-[var(--ink)]">
+              <div className="mt-6 flex items-baseline gap-2">
+                <span className="font-display text-[52px] font-semibold leading-none tracking-tight text-[var(--ink)] sm:text-[68px]">
                   {t("landing.pricing.card.price")}
                 </span>
                 <span className="text-[16px] text-[var(--muted)]">

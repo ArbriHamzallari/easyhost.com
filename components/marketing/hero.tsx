@@ -26,7 +26,7 @@ export async function Hero() {
         }}
       />
 
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-28 pt-16 sm:pb-32 sm:pt-20 lg:grid-cols-[45fr_55fr] lg:gap-14 lg:pb-36 lg:pt-24">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-20 pt-12 sm:gap-12 sm:px-6 sm:pb-28 sm:pt-16 lg:grid-cols-[45fr_55fr] lg:gap-14 lg:pb-36 lg:pt-24">
         {/* Left: copy (45%) */}
         <div className="relative">
           <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-white/70 px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--muted)] shadow-sm backdrop-blur">
@@ -34,7 +34,7 @@ export async function Hero() {
             {t("landing.hero.eyebrow")}
           </div>
 
-          <h1 className="mt-6 font-display text-[44px] font-medium leading-[0.98] tracking-[-0.025em] text-[var(--ink)] sm:text-[56px] lg:text-[64px]">
+          <h1 className="mt-5 font-display text-[34px] font-medium leading-[1.02] tracking-[-0.025em] text-[var(--ink)] sm:mt-6 sm:text-[44px] sm:leading-[0.98] lg:text-[64px]">
             {t("landing.hero.headline")}
             <br />
             <span className="serif-emph text-[var(--primary)]">
@@ -42,7 +42,7 @@ export async function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-[17px] leading-[1.55] text-[var(--muted)]">
+          <p className="mt-4 max-w-xl text-[15px] leading-[1.55] text-[var(--muted)] sm:mt-6 sm:text-[17px]">
             {t("landing.hero.subheadline")}
           </p>
 
@@ -70,7 +70,7 @@ export async function Hero() {
         </div>
 
         {/* Right: cinematic photograph (55%, overflows slightly past the column on lg+) */}
-        <div className="relative lg:-mr-12 xl:-mr-20">
+        <div className="relative overflow-hidden lg:overflow-visible lg:-mr-12 xl:-mr-20">
           <HeroScene />
         </div>
       </div>

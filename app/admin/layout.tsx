@@ -22,7 +22,7 @@ export default async function AdminLayout({
   return (
     <div className="min-h-screen bg-[var(--surface)]">
       <header className="border-b border-[var(--border)] bg-white">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6">
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold tracking-tight text-[var(--foreground)]">
               EasyHost
@@ -39,7 +39,7 @@ export default async function AdminLayout({
           </Link>
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
+      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">{children}</main>
     </div>
   );
 }
