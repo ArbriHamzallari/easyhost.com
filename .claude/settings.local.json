@@ -28,7 +28,9 @@
       "Bash(rm -rf .next)",
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
-      "Bash(cross-env NODE_OPTIONS=--use-system-ca tsx scripts/test-waitlist.ts)"
+      "Bash(cross-env NODE_OPTIONS=--use-system-ca tsx scripts/test-waitlist.ts)",
+      "Bash(powershell *)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\\(Resolve-Path 'app/icon.png'\\)\\); \"icon.png: $\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\))"
     ]
   }
 }
