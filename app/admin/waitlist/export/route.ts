@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { notFound, redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
-import { checkAdmin } from "@/lib/admin";
+import { prisma } from "@/backend/lib/prisma";
+import { checkAdmin } from "@/backend/lib/admin";
 
 export const dynamic = "force-dynamic";
 

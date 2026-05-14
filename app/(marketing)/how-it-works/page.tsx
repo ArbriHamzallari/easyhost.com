@@ -1,7 +1,20 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { HowItWorks } from "@/components/marketing/how-it-works";
-import { Preview } from "@/components/marketing/preview";
-import { FinalCta } from "@/components/marketing/final-cta";
+import { HowItWorks } from "@/frontend/components/marketing/how-it-works";
+
+export const metadata: Metadata = {
+  title: "How It Works — EasyHost",
+  description:
+    "Stock your rental, place the QR code, and get paid automatically. EasyHost turns your in-room minibar into a revenue stream in three simple steps.",
+  openGraph: {
+    title: "How It Works — EasyHost",
+    description:
+      "Three steps from setup to your first payout. No card reader, no app for guests, no middleman.",
+    url: "https://easyhost.pro/how-it-works",
+  },
+};
+import { Preview } from "@/frontend/components/marketing/preview";
+import { FinalCta } from "@/frontend/components/marketing/final-cta";
 
 export default async function HowItWorksPage() {
   const t = await getTranslations();

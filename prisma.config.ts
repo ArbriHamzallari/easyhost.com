@@ -1,9 +1,9 @@
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
+  schema: "backend/prisma/schema.prisma",
   migrations: {
-    path: "prisma/migrations",
-    seed: "tsx prisma/seed.ts",
+    path: "backend/prisma/migrations",
+    seed: "tsx backend/prisma/seed.ts",
   },
 });

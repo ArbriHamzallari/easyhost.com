@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal } from "@/frontend/components/ui/reveal";
 
 export async function Testimonials() {
   const t = await getTranslations();

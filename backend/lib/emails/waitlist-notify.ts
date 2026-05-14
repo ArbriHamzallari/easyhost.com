@@ -1,4 +1,4 @@
-import { resend, getFromAddress } from "@/lib/resend";
+import { resend, getFromAddress } from "@/backend/lib/resend";
 
 export async function sendWaitlistNotifyEmail(args: {
   email: string;

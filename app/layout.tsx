@@ -19,9 +19,26 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://easyhost.pro"),
   title: "EasyHost: Turn minibar snacks into passive income",
   description:
     "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit. Built for modern hosts.",
+  openGraph: {
+    title: "EasyHost: Turn minibar snacks into passive income",
+    description:
+      "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit.",
+    url: "https://easyhost.pro",
+    siteName: "EasyHost",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EasyHost: Turn minibar snacks into passive income",
+    description:
+      "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default async function RootLayout({

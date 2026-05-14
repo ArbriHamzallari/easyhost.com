@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal } from "@/frontend/components/ui/reveal";
 
 const MOCKUP_WIDTH = 1024;
 const MOCKUP_HEIGHT = 593;

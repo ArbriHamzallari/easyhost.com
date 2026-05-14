@@ -1,35 +1,37 @@
 # EasyHost — Project Brief for Claude Code
 
-> Save this file as `CLAUDE.md` in your project root. Claude Code automatically reads it as project context for every session.
+> This file is read automatically every session. Keep it current as the product evolves.
 
 ---
 
 ## 1. What We Are Building
 
-**EasyHost** is a multi-tenant SaaS platform that lets short-term rental hosts (Airbnb, boutique hotels, vacation rentals) offer a premium in-room minibar and add-on services experience to their guests through a beautifully designed digital menu.
+**EasyHost** is a multi-tenant SaaS platform that lets short-term rental hosts (Airbnb hosts, boutique hotels, vacation rental managers) offer a premium in-room minibar and add-on services experience to their guests through a beautifully designed digital menu.
 
-Each host signs up, creates branded menus for their properties, connects their own payment account, generates a unique QR code, and places it in their rental. Guests scan, browse, select what they consumed, and pay by card, bank transfer, or cash. Money flows directly from guest to host — we never touch it. We charge the host a flat monthly subscription per property.
+Each host signs up, answers a quick intent question, onboards their property step by step, builds a branded menu, connects their Stripe account, generates a unique QR code, and places it in their rental. Guests scan, browse, select what they consumed, and pay by Apple Pay, Google Pay, card, bank transfer, or cash. Money flows directly from guest to host — we never touch it. We charge the host a flat monthly subscription via Paddle.
+
+**Live at:** easyhost.pro (Vercel, connected to real domain)
 
 ### Core User Stories
 
 **Host:**
-- I sign up and onboard one or more properties in minutes
-- I build a custom menu (snacks, drinks, alcohol, services) with photos and prices
-- I connect my Paysera account so guest card payments land directly in my bank
-- I download a QR code, print it, place it in my rental
-- I see real-time orders, revenue, and inventory alerts
-- I get notified when an item is running low
+- I sign up, answer an intent question, and onboard my property step by step (Apple device style)
+- I build a custom menu — I type item names once in my language, guests see them in theirs automatically
+- I connect my Stripe account so guest card / Apple Pay / Google Pay payments land directly in my bank
+- I generate a QR code and place it in my rental
+- I see real-time orders, revenue, and inventory alerts in my dashboard
+- I get notified when orders arrive or stock runs low (web now; native push when the app ships)
 
 **Guest:**
 - I scan a QR code in my rental
-- I land on a beautifully branded menu (matches the property's vibe)
+- I land on a beautifully branded menu in my language (auto-detected, switchable)
 - I browse by category, add items to my cart
-- I pay by card (Paysera), bank transfer (SEPA), or mark as cash
+- I pay by Apple Pay, Google Pay, card (Stripe), bank transfer (IBAN), or cash
 - I get an email receipt
-- I never have to download an app or create an account
+- I never download an app or create an account
 
 **Platform Owner (you):**
-- I see all hosts, their subscription status, revenue
+- I see all hosts, subscription status, and revenue
 - I can suspend, refund, or comp accounts
 - I see platform analytics
 
@@ -37,169 +39,141 @@ Each host signs up, creates branded menus for their properties, connects their o
 
 ## 2. Business Model
 
-- **Pricing:** €15/month per property. Simple, predictable.
-- **Billing:** Paddle (merchant of record — handles VAT, works in Albania, sends webhooks for subscription state).
-- **Free trial:** 14 days, no credit card required.
-- **Payment flow:** Hosts connect their own Paysera/PayPal/IBAN. Guest payments go directly to hosts. EasyHost never touches guest payments — only charges hosts a separate subscription via Paddle. This avoids financial licensing complexity.
+| Plan | Price | Properties |
+|---|---|---|
+| Starter | €15/month | 1 property |
+| Pro | €29/month | up to 5 properties |
+
+- **Billing:** Paddle (merchant of record — handles VAT, works in Albania)
+- **Trial:** 7 days free, no credit card required. Starts at account creation. After 7 days, features lock (dashboard readable, but orders cannot be accepted and new QR codes cannot be generated) until a plan is activated.
+- **Early bird:** first 100 hosts get 50% off their plan for life (Paddle discount code)
+- **Payment flow:** Hosts connect Stripe Connect (or enter IBAN). Guest payments go directly to hosts. EasyHost never touches guest money.
 
 ---
 
-## 3. Tech Stack (Strict — do not substitute without asking)
+## 3. Tech Stack (do not substitute without asking)
 
 | Layer | Choice | Why |
 |---|---|---|
-| Framework | **Next.js 14 (App Router)** | One codebase for marketing, dashboard, guest menu |
+| Framework | **Next.js 16 (App Router)** | One codebase for marketing, dashboard, guest menu |
 | Language | **TypeScript** | Type safety across the stack |
-| Database | **PostgreSQL via Supabase** | Hosted Postgres + storage in one |
-| ORM | **Prisma** | Type-safe queries, great with Next.js |
-| Auth | **Clerk** | Multi-tenant org support out of the box |
-| Subscription Billing | **Paddle** | Merchant of record, works in Albania, full webhooks |
-| Guest Payments | **Paysera API** | Licensed in Albania, hosts connect via OAuth |
-| Email | **Resend** | Clean API, great DX |
+| Database | **PostgreSQL via Supabase** | Hosted Postgres + Realtime + storage |
+| ORM | **Prisma** | Type-safe queries |
+| Auth | **Clerk** | Multi-tenant org support |
+| Subscription Billing | **Paddle** | Merchant of record, works in Albania |
+| Guest Payments | **Stripe Connect** | Card, Apple Pay, Google Pay — direct payout to host |
+| Bank Transfer | **IBAN (manual)** | Host enters IBAN; guests get bank details at checkout |
+| Auto-Translation | **DeepL API** | Host types item name once; auto-translated to all 4 languages |
+| Email | **Resend** | Receipts, waitlist, notifications |
 | Image Storage | **Cloudinary** | Menu photos, logos, host branding |
-| QR Generation | **`qrcode` npm package** | Server-side, downloadable as PNG/SVG |
-| i18n | **next-intl** | Best App Router i18n library |
-| UI Components | **shadcn/ui + Tailwind CSS** | Customizable, owned, no lock-in |
-| Charts | **Recharts** | For analytics dashboard |
+| QR Generation | **`qrcode` npm** | Server-side PNG/SVG download |
+| Realtime | **Supabase Realtime** | Live order feed and stock alerts in host dashboard |
+| i18n | **next-intl** | App Router i18n, 4 languages |
+| UI Components | **shadcn/ui + Tailwind CSS** | Design system |
+| Charts | **Recharts** | Analytics dashboard |
 | Forms | **react-hook-form + zod** | Validation everywhere |
-| Deployment | **Vercel** | Native Next.js host |
+| Deployment | **Vercel** | easyhost.pro |
+| Future (mobile) | **React Native / Expo** | App Store — native push notifications for hosts |
 
 ---
 
 ## 4. Languages (i18n)
 
-Initial launch must support:
-- 🇬🇧 English (default)
-- 🇦🇱 Albanian (Shqip)
-- 🇮🇹 Italian
-- 🇩🇪 German
+Supported at launch: **English** (default), **Albanian** (sq), **Italian** (it), **German** (de)
 
-Architecture must allow easy addition of more languages later (French, Spanish, Greek, Turkish). All user-facing strings live in `/messages/{locale}.json`. No hardcoded copy in components.
+- All UI strings live in `/messages/{locale}.json` — never hardcoded in components
+- **Guest menu:** auto-detects browser language, switchable via flag dropdown (top right)
+- **Host dashboard:** uses the language set in the host's profile
+- **Menu item names/descriptions:** Host types in their chosen language → DeepL auto-translates to the other 3 and stores all in the same JSON field. Host can manually override any translation.
 
-The **guest menu** must auto-detect browser language and let the guest switch via a flag dropdown in the top right. The **host dashboard** uses the language the host set in their profile.
+Planned additions: French, Spanish, Greek, Turkish.
 
 ---
 
 ## 5. Design System
 
 ### Visual Direction
-
-EasyHost looks and feels like a refined cousin of Airbnb — warm, hospitable, premium, modern. Inspired by:
-- **Airbnb** for color, spacing, photography, and overall warmth
-- **KAZA Swap** (reference image 1) for typography hierarchy, rounded card composition, and friendly hero layouts
-- **3D playful icons** (reference image 2) for menu item categories and feature illustrations
-- **Line icons with orange accents** (reference image 3) for property types and onboarding
-
-The product must feel **handcrafted by a designer**, never "generic SaaS template" or "AI-generated on a Wednesday."
+EasyHost looks and feels like a refined cousin of Airbnb — warm, hospitable, premium, modern. Never "generic SaaS template" or "AI-generated on a Wednesday."
 
 ### Color Palette
 
 ```css
-/* Primary — warm orange (hospitable, Airbnb-adjacent) */
---primary: #FF5A1F;          /* Main accent, CTAs */
+--primary: #FF5A1F;
 --primary-hover: #E54A12;
---primary-soft: #FFE8DE;     /* Backgrounds, hover states */
-
-/* Neutrals */
+--primary-soft: #FFE8DE;
 --background: #FFFFFF;
---surface: #FAFAF7;          /* Cards, secondary surfaces (warm off-white) */
+--surface: #FAFAF7;
 --border: #EBEBEB;
---foreground: #222222;       /* Main text, near-black */
---muted: #717171;            /* Secondary text */
+--foreground: #222222;
+--muted: #717171;
 --muted-light: #B0B0B0;
-
-/* Semantic */
 --success: #008A05;
 --warning: #F5A623;
 --error: #C13515;
-
-/* Dark mode (host dashboard optional) */
 --background-dark: #1A1A1A;
 --surface-dark: #262626;
 ```
 
 ### Typography
-
-- **Font family:** Inter (free, modern, near-identical to Airbnb's Cereal)
-- **Display headings:** 700 weight, tight tracking (-0.02em)
+- **Font:** Inter
+- **Display:** 700 weight, -0.02em tracking
 - **Body:** 400 weight, 1.5 line-height
-- **Scale:**
-  - Hero: 56-72px (responsive)
-  - H1: 40px
-  - H2: 32px
-  - H3: 24px
-  - Body: 16px
-  - Small: 14px
-  - Caption: 12px
+- Scale: Hero 56–72px / H1 40px / H2 32px / H3 24px / Body 16px / Small 14px / Caption 12px
 
 ### Spacing & Layout
-
-- Base unit: 4px (Tailwind default)
-- Card border-radius: **12-16px** (warm, friendly)
-- Button border-radius: **8-12px**
-- Image border-radius: **16-24px** (Airbnb-like)
-- Soft shadows: `0 2px 8px rgba(0,0,0,0.04)` for cards, never harsh
+- Card radius: 12–16px
+- Button radius: 8–12px
+- Image radius: 16–24px
+- Shadow: `0 2px 8px rgba(0,0,0,0.04)`
 - Generous whitespace — let things breathe
 
 ### Component Patterns
-
-- **Cards:** White surface, soft shadow, 16px radius, lots of internal padding
-- **Buttons:** Primary = solid orange, Secondary = white with black border, Ghost = no border
-- **Icons:** Use Lucide React for UI, the 3D-style icons (reference image 2) for menu category headers, line icons (reference image 3) for property type selectors
-- **Inputs:** Light gray border, rounded 8px, focus state with orange ring
-- **Navigation:** Clean horizontal nav, no dropdowns until necessary
-
-### Photography & Imagery
-
-- Real, warm, lifestyle photography (no stock-looking shots)
-- Menu item photos: square, well-lit, consistent style
-- Hero imagery: cozy interiors, hosts smiling, guests enjoying
-- Plenty of breathing room around images
+- **Cards:** White surface, soft shadow, 16px radius, generous internal padding
+- **Buttons:** Primary = solid orange / Secondary = white + black border / Ghost = no border
+- **Icons:** Lucide React for UI; 3D-style icons for menu category headers; line icons for property type selectors
+- **Inputs:** Light gray border, 8px radius, orange focus ring
 
 ---
 
 ## 6. Multi-Tenant Architecture
 
-### Tenancy Model
-
-- An **Organization** is a customer (one host, one company, one chain). One Clerk account = one Organization.
-- An Organization can have **multiple Properties** (Airbnbs, hotels, suites).
-- Each Property has its own **menu**, **branding**, **payment connection**, and **QR code**.
-- Each Property has its own slug used in the guest URL: `app.easyhost.com/m/{property-slug}`.
-- **Subscription is billed per Property** — €15/month each.
+- An **Organization** = one customer (mapped to one Clerk org)
+- An Organization has a **subscription tier** (starter / pro) that controls property limits
+- Starter: max 1 property. Pro: max 5 properties.
+- Each **Property** has its own menu, branding, payment config, and QR code
+- Guest URL: `easyhost.pro/m/{property-slug}`
 
 ### URL Structure
 
 ```
-easyhost.com                          → Marketing site
-easyhost.com/pricing
-easyhost.com/how-it-works
-easyhost.com/waitlist
+easyhost.pro                             → Marketing site (LIVE)
+easyhost.pro/pricing
+easyhost.pro/how-it-works
+easyhost.pro/privacy
 
-app.easyhost.com                      → Host dashboard (auth required)
-app.easyhost.com/sign-in
-app.easyhost.com/sign-up
-app.easyhost.com/onboarding
-app.easyhost.com/dashboard
-app.easyhost.com/properties
-app.easyhost.com/properties/[id]
-app.easyhost.com/properties/[id]/menu
-app.easyhost.com/properties/[id]/qr
-app.easyhost.com/properties/[id]/analytics
-app.easyhost.com/properties/[id]/inventory
-app.easyhost.com/settings
-app.easyhost.com/settings/branding
-app.easyhost.com/settings/payments
-app.easyhost.com/settings/billing
+app.easyhost.pro                         → Host dashboard (auth required)
+app.easyhost.pro/sign-in
+app.easyhost.pro/sign-up
+app.easyhost.pro/onboarding              → Step-by-step wizard (post sign-up)
+app.easyhost.pro/dashboard               → Home: orders, revenue, alerts
+app.easyhost.pro/properties              → Property list
+app.easyhost.pro/properties/[id]
+app.easyhost.pro/properties/[id]/menu    → Menu builder
+app.easyhost.pro/properties/[id]/qr      → QR code download
+app.easyhost.pro/properties/[id]/analytics
+app.easyhost.pro/properties/[id]/inventory
+app.easyhost.pro/settings
+app.easyhost.pro/settings/billing        → Paddle subscription + plan management
 
-app.easyhost.com/m/[property-slug]    → GUEST MENU (no auth)
-app.easyhost.com/m/[slug]/cart
-app.easyhost.com/m/[slug]/checkout
-app.easyhost.com/m/[slug]/pay/paysera
-app.easyhost.com/m/[slug]/pay/cash
-app.easyhost.com/m/[slug]/success
+app.easyhost.pro/m/[property-slug]       → Guest menu (no auth)
+app.easyhost.pro/m/[slug]/cart
+app.easyhost.pro/m/[slug]/checkout
+app.easyhost.pro/m/[slug]/pay/stripe
+app.easyhost.pro/m/[slug]/pay/bank-transfer
+app.easyhost.pro/m/[slug]/pay/cash
+app.easyhost.pro/m/[slug]/success
 
-admin.easyhost.com                    → Platform admin (your eyes only)
+admin.easyhost.pro                       → Platform admin (your eyes only)
 ```
 
 ---
@@ -208,17 +182,21 @@ admin.easyhost.com                    → Platform admin (your eyes only)
 
 ```prisma
 model Organization {
-  id                String   @id @default(cuid())
-  name              String
-  slug              String   @unique
-  logoUrl           String?
-  primaryColor      String   @default("#FF5A1F")
-  defaultLanguage   String   @default("en")
-  paddleCustomerId  String?  @unique
-  subscriptionStatus String  @default("trialing") // trialing, active, past_due, cancelled
-  trialEndsAt       DateTime?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id                   String    @id @default(cuid())
+  name                 String
+  slug                 String    @unique
+  logoUrl              String?
+  primaryColor         String    @default("#FF5A1F")
+  defaultLanguage      String    @default("en")
+  intentType           String?   // airbnb_host, hotel_owner, vacation_rental_manager, other
+  // Paddle billing — at org level, not per property
+  paddleCustomerId     String?   @unique
+  paddleSubscriptionId String?   @unique
+  subscriptionStatus   String    @default("trialing") // trialing, active, past_due, cancelled
+  subscriptionTier     String    @default("starter")  // starter, pro
+  trialEndsAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
   users      User[]
   properties Property[]
@@ -237,108 +215,108 @@ model User {
 }
 
 model Property {
-  id                String   @id @default(cuid())
-  orgId             String
-  organization      Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
-  name              String
-  slug              String   @unique
-  type              String   // apartment, villa, cottage, suite, etc.
-  address           String?
-  timezone          String   @default("Europe/Tirane")
-  currency          String   @default("EUR")
+  id        String  @id @default(cuid())
+  orgId     String
+  name      String
+  slug      String  @unique
+  type      String  // apartment, villa, cottage, suite, hotel, hostel, beachfront, other
+  address   String?
+  timezone  String  @default("Europe/Tirane")
+  currency  String  @default("EUR")
 
-  // Branding (overrides org defaults)
-  logoUrl           String?
-  accentColor       String?
-  heroImageUrl      String?
-  welcomeMessage    Json?    // multilingual { en: "...", al: "...", it: "...", de: "..." }
+  // Branding (skippable during onboarding, required before QR generation)
+  logoUrl        String?
+  accentColor    String?
+  heroImageUrl   String?
+  welcomeMessage Json?   // multilingual { en, sq, it, de }
 
-  // Payment connections (host's own accounts)
-  payseraAccountId  String?
-  paypalEmail       String?
-  iban              String?
-  acceptCash        Boolean  @default(true)
+  // Payment connections (host's own accounts — at least one required for QR generation)
+  stripeAccountId          String?
+  stripeOnboardingComplete Boolean @default(false)
+  iban                     String?
+  acceptCash               Boolean @default(true)
 
-  // Subscription (per-property billing)
-  paddleSubscriptionId String? @unique
-  subscriptionStatus   String  @default("trialing")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  isActive          Boolean  @default(true)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  menus     Menu[]
-  orders    Order[]
+  organization Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  menus        Menu[]
+  orders       Order[]
 }
 
 model Menu {
   id         String   @id @default(cuid())
   propertyId String
-  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   name       Json     // multilingual
   isActive   Boolean  @default(true)
+  isDraft    Boolean  @default(true) // draft until: >= 1 item + payment method configured
   createdAt  DateTime @default(now())
 
-  items MenuItem[]
+  property Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  items    MenuItem[]
 }
 
 model MenuItem {
-  id                  String   @id @default(cuid())
-  menuId              String
-  menu                Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
-  name                Json     // multilingual { en: "Coca Cola", al: "Koka Kola", ... }
-  description         Json?    // multilingual
-  category            String   // beverages, snacks, alcohol, services
-  imageUrl            String?
-  price               Decimal  @db.Decimal(10, 2)
-  currency            String   @default("EUR")
-  isAvailable         Boolean  @default(true)
-  stockQuantity       Int?
-  lowStockThreshold   Int?
-  displayOrder        Int      @default(0)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                String   @id @default(cuid())
+  menuId            String
+  // name/description: host sets primary lang; DeepL fills the rest; host can override
+  name              Json     // { en, sq, it, de }
+  description       Json?    // { en, sq, it, de }
+  category          String   // beverages, snacks, alcohol, services (or custom)
+  imageUrl          String?
+  price             Decimal  @db.Decimal(10, 2)
+  currency          String   @default("EUR")
+  isAvailable       Boolean  @default(true)
+  stockQuantity     Int      // required — tracked for low-stock alerts
+  lowStockThreshold Int      @default(3)
+  displayOrder      Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
+  menu       Menu        @relation(fields: [menuId], references: [id], onDelete: Cascade)
   orderItems OrderItem[]
 }
 
 model Order {
-  id                  String   @id @default(cuid())
-  propertyId          String
-  property            Property @relation(fields: [propertyId], references: [id])
-  guestSessionId      String   // anonymous session token
-  guestEmail          String?
-  guestName           String?
-  status              String   @default("pending") // pending, paid, cash_pending, cancelled
-  paymentMethod       String?  // paysera, paypal, bank_transfer, cash
-  totalAmount         Decimal  @db.Decimal(10, 2)
-  currency            String
-  payseraTransactionId String?
-  paidAt              DateTime?
-  language            String   @default("en")
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                    String    @id @default(cuid())
+  propertyId            String
+  guestSessionId        String
+  guestEmail            String?
+  guestName             String?
+  status                String    @default("pending") // pending, paid, bank_transfer_pending, cash_pending, cancelled
+  paymentMethod         String?   // stripe, bank_transfer, cash
+  totalAmount           Decimal   @db.Decimal(10, 2)
+  currency              String
+  stripePaymentIntentId String?
+  receiptSentAt         DateTime?
+  paidAt                DateTime?
+  language              String    @default("en")
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
-  items OrderItem[]
+  property Property    @relation(fields: [propertyId], references: [id])
+  items    OrderItem[]
 }
 
 model OrderItem {
-  id          String   @id @default(cuid())
-  orderId     String
-  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  menuItemId  String
-  menuItem    MenuItem @relation(fields: [menuItemId], references: [id])
-  itemNameSnapshot Json   // snapshot at time of order
-  quantity    Int
-  unitPrice   Decimal  @db.Decimal(10, 2)
+  id               String  @id @default(cuid())
+  orderId          String
+  menuItemId       String
+  itemNameSnapshot Json    // snapshot at time of order (all languages)
+  quantity         Int
+  unitPrice        Decimal @db.Decimal(10, 2)
+
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
 }
 
 model InventoryAlert {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   propertyId String
   menuItemId String
-  alertType  String   // low_stock, out_of_stock
-  sentAt     DateTime @default(now())
+  alertType  String    // low_stock, out_of_stock
+  sentAt     DateTime  @default(now())
   resolvedAt DateTime?
 }
 
@@ -355,149 +333,208 @@ model WaitlistEntry {
 
 ## 8. Build Phases
 
-Work in this strict order. Do not skip ahead.
-
-### Phase 0 — Project Setup
-1. Initialize Next.js 14 with App Router, TypeScript, Tailwind, ESLint
-2. Set up Supabase project, get connection string
-3. Install Prisma, push initial schema
-4. Set up Clerk for auth
-5. Set up next-intl for i18n with 4 languages (English, Albanian, Italian, German)
-6. Configure shadcn/ui with the custom color palette
-7. Set up environment variables file (.env.example) — never commit .env
-
-### Phase 1 — Landing Page + Waitlist (BUILD FIRST)
-The marketing site goes live before the app. Capture emails from day one.
-
-Pages:
-1. `/` — Homepage with all sections (see Section 9 below)
-2. `/pricing` — Detailed pricing page
-3. `/how-it-works` — Three-step explainer
-4. Waitlist email capture saves to `WaitlistEntry` table
-
-Deploy to Vercel ASAP. Share the link, start marketing.
-
-### Phase 2 — Personal Single-Property MVP
-Hardcoded single property (yours). This proves the guest experience works end-to-end before going multi-tenant.
-
-1. Guest menu at `/m/[slug]` — browse, cart, checkout
-2. Paysera payment integration (test mode first, then live)
-3. Cash payment flow
-4. Email receipt to guest via Resend
-5. Simple host view to see orders for the one property
-
-### Phase 3 — Multi-Tenant SaaS
-1. Clerk auth + Organization signup
-2. Onboarding wizard (create first property, set branding, connect payment)
-3. Properties dashboard
-4. Menu builder (CRUD menu items with photos)
-5. QR code generation per property
-6. Branding settings (logo, accent color)
-7. Paddle subscription integration + webhooks
-8. 14-day free trial logic
-
-### Phase 4 — Growth Features
-1. Analytics dashboard (Recharts)
-2. Inventory management + low-stock alerts
-3. Multilingual menu builder (host can write item names in 4 langs)
-4. SMS notifications (Twilio, optional)
-5. Multi-property management UI
-6. Staff users (org members beyond owner)
-
-### Phase 5 — Polish & Scale
-1. Admin panel at admin.easyhost.com
-2. Referral program (hosts invite hosts)
-3. Blog/SEO content
-4. Mobile-optimized host dashboard
-5. PDF receipt downloads
-6. Export orders to CSV
+### DONE ✅
+- **Phase 0:** Next.js 16, Supabase/Prisma, Clerk, next-intl (4 langs), shadcn/ui, Tailwind, env setup
+- **Phase 1:** Full marketing site live at easyhost.pro — Hero, How it Works, Features, Pricing, Testimonials, FAQ, Footer. Waitlist saves to DB + sends welcome + admin notify emails. Admin waitlist view with CSV export.
 
 ---
 
-## 9. Landing Page Structure
+### Phase 1.5 — Marketing Polish (quick wins before Phase 2)
 
-The landing page is the highest priority. It must convert visitors into waitlist signups.
-
-### Sections (in order)
-
-1. **Sticky Nav** — Logo "EasyHost" left | How it works, Pricing, Languages center | "Join waitlist" CTA right
-2. **Hero**
-   - Headline: "Turn your Airbnb into a five-star experience."
-   - Subheadline: "EasyHost lets your guests order snacks, drinks, and extras from a beautiful in-room menu. You set the prices, you keep the profit."
-   - "Coming soon" badge
-   - Email capture: "Join the waitlist" → saves to DB
-   - Phone mockup showing the guest menu
-3. **The Problem** — "Snacks disappear. Cash gets awkward. You're leaving money on the table."
-4. **How it works** — 3 horizontal steps with icons:
-   - Stock your rental
-   - Place the QR code
-   - Get paid automatically
-5. **Features grid** — 6 cards with the 3D icons:
-   - 📱 Beautiful branded menu
-   - 💳 Card payments to your account
-   - 🏠 Multi-property management
-   - 📊 Real-time analytics
-   - 🌍 Multilingual for global guests
-   - 🔔 Inventory alerts
-6. **Guest experience preview** — Animated/static showcase of the menu in action
-7. **Built for every type of stay** — Grid using the property type line icons (Apartment, Villa, Cottage, Suite, Beachfront, Hostel, Pool, Ecotourism)
-8. **Pricing** — One card: €15/month per property, 14-day free trial, no card required. "Early bird: first 100 hosts get 50% off for life."
-9. **Final CTA** — Big waitlist signup
-10. **Footer** — Logo, links, language switcher, social, legal
+- [ ] Update all pricing copy to two-tier model (Starter €15 / Pro €29)
+- [ ] Fix any hardcoded `easyhost.com` references → `easyhost.pro`
+- [ ] SEO: `<title>`, `<meta description>`, `og:image` per page
+- [ ] `sitemap.xml` + `robots.txt`
+- [ ] Fix i18n routing (locale in URL path, not just cookie)
 
 ---
 
-## 10. Working Principles for Claude Code
+### Phase 2 — Host Onboarding (NEXT)
 
-### Always do this:
-- ✅ Run `npm run build` and `npm run lint` after meaningful changes
-- ✅ Use Server Components by default; Client Components only when needed (interactivity, hooks)
-- ✅ All user-facing strings go through next-intl, never hardcoded
-- ✅ Use Prisma's typed queries — never write raw SQL unless absolutely needed
-- ✅ Validate all form inputs with zod
-- ✅ Handle loading and error states for every async operation
-- ✅ Mobile-first responsive design — design for 375px width first, scale up
-- ✅ Accessibility: semantic HTML, alt text, focus states, keyboard nav
+**2a. Post sign-up intent screen**
+- Single question: "What best describes you?" with 4 options (Airbnb host / Hotel owner / Vacation rental manager / Other)
+- Saves to `Organization.intentType`
+- Drives personalization of tips and menu templates later
 
-### Never do this:
-- ❌ Don't hardcode strings — they all need translations
-- ❌ Don't expose secrets in client code or commit `.env`
-- ❌ Don't use `any` in TypeScript — use `unknown` and narrow
-- ❌ Don't ship without error handling
-- ❌ Don't add new dependencies without explaining why
-- ❌ Don't skip the design system — use the color tokens, typography scale, spacing
+**2b. Property wizard (one step at a time — Apple device style)**
+1. Property name
+2. Property type — icon grid (Apartment, Villa, Cottage, Suite, Hotel, Hostel, Beachfront, Other)
+3. Address (autocomplete) — timezone auto-detected from address
+4. Currency (default EUR)
+5. Branding — logo upload (Cloudinary), accent color picker, hero image. All skippable. Label: "Required to generate your QR code."
+6. Payment method — Connect Stripe (OAuth) OR enter IBAN OR skip. Label: "Required to go live."
+7. Summary screen — completion checklist with what's done and what's pending → "Go to dashboard"
 
-### Code organization
+**2c. Dashboard (home screen post-onboarding)**
+- Empty state with big CTA: "Build your first menu"
+- 7-day trial countdown banner
+- Completion checklist: branding / payment method / first menu item / QR generated
+- Real-time order feed (Supabase Realtime subscription)
+- Revenue summary: today / this week / this month
+- Low-stock alerts panel
+
+---
+
+### Phase 3 — Menu Builder
+
+- CRUD for menu items per property
+- Item fields: name (required, typed in host's language) / photo (optional, Cloudinary) / price (required) / stock count (required) / category / description (optional)
+- On save: DeepL auto-translates name + description to the other 3 languages, stores in JSON. Host can manually edit any translation.
+- Categories: Beverages / Snacks / Alcohol / Services / Custom
+- Drag-and-drop display order
+- Menu templates per property type ("Airbnb Starter Pack", "Hotel Minibar", etc.)
+- Tips panel alongside builder: contextual copy to guide hosts ("Add a photo — items with photos convert 30% better")
+- Menu stays in draft until: ≥1 item + payment method configured
+- QR code unlocked when menu is not draft (has items + payment method set)
+- QR download: PNG and SVG, branded with property accent color
+
+---
+
+### Phase 4 — Guest Menu Experience
+
+**`/m/[property-slug]`**
+- Branded with property logo, accent color, hero image
+- Auto-detect guest browser language → serve menu item names in that language
+- Language switcher: flag dropdown, top right
+- Browse by category, full-screen item detail view
+- Cart (local state, no login required)
+- Checkout: guest name + email (required for receipt)
+
+**Payment flow:**
+- Stripe connected → Stripe Elements (card + Apple Pay + Google Pay via Payment Request Button)
+- IBAN only → show bank details + amount; guest selects "I'll pay by bank transfer"
+- Cash → available if host has enabled it; guest selects "I'll pay in cash"
+
+**Post-payment:**
+- Order confirmation / success page
+- Email receipt to guest via Resend
+- Stock quantity decremented automatically
+- Real-time notification pushed to host dashboard (Supabase Realtime)
+
+---
+
+### Phase 5 — Paddle Billing
+
+- Two Paddle products: Starter (€15/month) and Pro (€29/month)
+- 7-day trial starts automatically at account creation — no card required
+- After trial expires: features lock. Host can view dashboard but cannot accept orders, generate QRs, or add properties until plan is active.
+- Property limit enforced: Starter → max 1, Pro → max 5. Attempting to exceed shows upgrade prompt.
+- Webhook handlers: `subscription.activated`, `subscription.updated`, `subscription.cancelled`, `subscription.payment_failed`
+- Billing settings page: current plan, properties used vs. allowed, upgrade/downgrade, cancel
+- Early-bird discount: first 100 hosts get 50% off for life (Paddle coupon code)
+
+---
+
+### Phase 6 — Notifications & Real-time
+
+**Web (build now):**
+- Supabase Realtime subscriptions in host dashboard
+- Toast + notification panel for: new order received, low stock alert, item out of stock
+- Email alerts for low stock / out of stock via Resend
+
+**App (future — design for it now):**
+- All dashboard data must come from clean API routes (not server-only logic) so a React Native / Expo app can consume the same endpoints
+- Push notification infrastructure to be added when app is built
+- Do not couple dashboard logic to the web rendering layer
+
+---
+
+### Phase 7 — Analytics & Inventory
+
+- Revenue charts (Recharts): daily / weekly / monthly
+- Top-selling items
+- Order history with filters (date, status, payment method)
+- Inventory management: stock levels per item, bulk update
+- Low-stock threshold settings per item
+- Automated email when item hits threshold
+
+---
+
+### Phase 8 — Admin & Scale
+
+- Admin panel at admin.easyhost.pro
+- All hosts, subscription status, revenue overview
+- Suspend / comp / refund accounts
+- Waitlist management (already built at /admin/waitlist)
+- Platform-wide analytics
+- Referral program (hosts invite hosts → discount)
+- CSV exports (orders, revenue)
+- Blog / SEO content
+
+---
+
+## 9. Payment Architecture Detail
+
+### Stripe Connect (primary)
+- Hosts connect via Stripe Connect OAuth (Standard account — host owns the Stripe account)
+- Guest payments: Stripe Payment Intent with `transfer_data.destination` = host's Stripe account ID
+- EasyHost takes no cut from guest payments; subscription revenue via Paddle is separate
+- Apple Pay + Google Pay: Stripe.js Payment Request Button — works automatically when Stripe is connected
+- Apple Pay domain verification for easyhost.pro: Stripe handles this automatically
+
+### IBAN / Bank Transfer (fallback)
+- Host enters IBAN in property settings
+- At checkout, guest sees: bank name, IBAN, amount, reference (order ID)
+- Guest selects "I'll pay by bank transfer" → order status = `bank_transfer_pending`
+- Host manually marks as received in dashboard → status → `paid`
+
+### Cash
+- Toggle per property (default: on)
+- Guest selects cash at checkout → order status = `cash_pending`
+- Host marks as received in dashboard
+
+---
+
+## 10. Working Principles
+
+### Always:
+- Server Components by default; Client Components only when interactivity or hooks are needed
+- All user-facing strings through next-intl — never hardcoded
+- Prisma typed queries — no raw SQL
+- Validate all inputs with zod at system boundaries
+- Handle loading and error states for every async operation
+- Mobile-first: design at 375px, scale up
+- Semantic HTML, alt text, focus states, keyboard navigation
+- Run `npm run build` and `npm run lint` after meaningful changes
+
+### Never:
+- Hardcode strings
+- Expose secrets in client code or commit `.env`
+- Use `any` in TypeScript — use `unknown` and narrow
+- Ship without error handling
+- Add dependencies without explaining why
+- Skip the design system (color tokens, typography scale, spacing)
+
+### Code Organization
 
 ```
 /app
-  /(marketing)              → Landing page (no auth)
-    /page.tsx
-    /pricing/page.tsx
-    /how-it-works/page.tsx
+  /(marketing)              → Landing page (DONE)
   /(dashboard)              → Host dashboard (auth required)
+    /onboarding
     /dashboard
-    /properties
+    /properties/[id]
     /settings
   /m/[slug]                 → Guest menu (no auth)
   /api
     /webhooks/paddle
-    /webhooks/paysera
-    /trpc                   (optional)
+    /webhooks/stripe
 /components
   /ui                       → shadcn primitives
-  /marketing                → Landing page components
+  /marketing                → Landing page (DONE)
   /dashboard                → Host dashboard components
   /guest                    → Guest menu components
 /lib
-  /db.ts                    → Prisma client
+  /prisma.ts
   /auth.ts                  → Clerk helpers
-  /paysera.ts               → Paysera API wrapper
+  /stripe.ts                → Stripe Connect helpers
   /paddle.ts                → Paddle API wrapper
+  /deepl.ts                 → DeepL translation wrapper
   /resend.ts                → Email sending
+  /realtime.ts              → Supabase Realtime helpers
 /messages
   /en.json
-  /al.json
+  /sq.json
   /it.json
   /de.json
 /prisma
@@ -506,12 +543,11 @@ The landing page is the highest priority. It must convert visitors into waitlist
   /images
 ```
 
-### When in doubt
-Ask me. Don't guess on:
-- Pricing changes
+### When in doubt, ask. Never guess on:
+- Pricing or plan limit changes
 - Payment flow changes
-- Database schema changes that require migration
-- New external services or dependencies
+- Schema migrations
+- New external services
 - Anything that touches money
 
 ---
@@ -519,9 +555,12 @@ Ask me. Don't guess on:
 ## 11. Environment Variables (.env.example)
 
 ```bash
-# Database
+# Database (Supabase)
 DATABASE_URL=
 DIRECT_URL=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
 # Clerk
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -534,16 +573,21 @@ PADDLE_API_KEY=
 PADDLE_WEBHOOK_SECRET=
 NEXT_PUBLIC_PADDLE_CLIENT_TOKEN=
 NEXT_PUBLIC_PADDLE_ENVIRONMENT=sandbox
+PADDLE_STARTER_PRICE_ID=
+PADDLE_PRO_PRICE_ID=
 
-# Paysera
-PAYSERA_PROJECT_ID=
-PAYSERA_SIGN_PASSWORD=
-PAYSERA_CLIENT_ID=
-PAYSERA_CLIENT_SECRET=
+# Stripe
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_CONNECT_CLIENT_ID=
+
+# DeepL
+DEEPL_API_KEY=
 
 # Resend
 RESEND_API_KEY=
-RESEND_FROM_EMAIL=hello@easyhost.com
+RESEND_FROM_EMAIL=hello@easyhost.pro
 
 # Cloudinary
 CLOUDINARY_CLOUD_NAME=
@@ -552,33 +596,20 @@ CLOUDINARY_API_SECRET=
 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
 
 # App
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXT_PUBLIC_MARKETING_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=https://app.easyhost.pro
+NEXT_PUBLIC_MARKETING_URL=https://easyhost.pro
+ADMIN_USER_IDS=
 ```
 
 ---
 
-## 12. First Task
+## 12. Session Start Protocol
 
-When I start a new session, your first job is:
-
-1. Confirm you've read this entire CLAUDE.md
-2. Run `git status` and `ls` to understand the current state of the project
-3. Ask me what we're working on today
-4. Suggest the smallest next step that gets us closer to shipping
-
-If the project is empty, start with **Phase 0 — Project Setup**, one step at a time, confirming with me before installing dependencies or making big architectural decisions.
+1. Confirm CLAUDE.md has been read
+2. Check current phase — what's done, what's next
+3. Ask what we're working on today
+4. Suggest the smallest next step toward shipping
 
 ---
 
-## 13. Tone & Communication
-
-- Be direct. Skip "Certainly!" and "I'd be happy to."
-- Show the plan before writing big chunks of code.
-- After making changes, summarize what changed and why in 2-3 lines.
-- Flag risks and tradeoffs honestly.
-- If I'm about to do something dumb, tell me.
-
----
-
-**Built with care in Tirana, Albania. 🇦🇱**
+**Built with care in Tirana, Albania.**

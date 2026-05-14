@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
-import { checkAdmin } from "@/lib/admin";
+import { checkAdmin } from "@/backend/lib/admin";
 
 export const dynamic = "force-dynamic";
 

@@ -7,7 +7,7 @@ import {
   Wallet,
   ChevronRight,
 } from "lucide-react";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal } from "@/frontend/components/ui/reveal";
 import { Logo } from "./logo";
 
 type Translator = Awaited<ReturnType<typeof getTranslations>>;
@@ -94,7 +94,7 @@ function DashboardMockup({ t }: { t: Translator }) {
           <span className="h-2.5 w-2.5 rounded-full bg-[#C99548]/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#6E8067]/70" />
           <div className="ml-3 hidden h-6 max-w-[260px] flex-1 items-center gap-2 rounded-md bg-white px-3 text-[11px] text-[var(--muted)] ring-1 ring-[var(--border)] sm:flex">
-            <span className="text-[10px]">app.easyhost.com/dashboard</span>
+            <span className="text-[10px]">app.easyhost.pro/dashboard</span>
           </div>
         </div>
 
@@ -204,7 +204,7 @@ function DashboardMockup({ t }: { t: Translator }) {
           +€128.50
         </div>
         <div className="mt-1 text-[11px] text-[var(--muted)]">
-          Paysera · Sunset Villa
+          Stripe · Sunset Villa
         </div>
       </div>
     </div>

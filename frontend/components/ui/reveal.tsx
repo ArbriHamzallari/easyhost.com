@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/frontend/lib/utils";
 
 interface RevealProps {
   children: ReactNode;

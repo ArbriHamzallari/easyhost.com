@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import { SignOutButton } from "@clerk/nextjs";
 import { getLocale, getTranslations } from "next-intl/server";
-import { joinWaitlist } from "@/lib/waitlist";
+import { joinWaitlist } from "@/backend/lib/waitlist";
 
 export const dynamic = "force-dynamic";
 

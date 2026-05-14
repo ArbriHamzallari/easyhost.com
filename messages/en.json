@@ -21,7 +21,7 @@
       "headlineEmph": "passive income.",
       "subheadline": "EasyHost lets your guests order snacks, drinks, and extras from a beautiful in-room menu. You set the prices. You keep the profit.",
       "cta": "Join the waitlist",
-      "trust": "14-day free trial · No credit card required",
+      "trust": "7-day free trial · No credit card required",
       "scene": {
         "property": "Sunset Villa",
         "welcome": "Welcome.",
@@ -42,10 +42,10 @@
     "trust": {
       "title": "Trusted by modern hosts worldwide",
       "items": {
-        "paysera": "Paysera",
         "stripe": "Stripe",
         "pci": "PCI DSS Compliant",
         "gdpr": "GDPR Compliant",
+        "applePay": "Apple Pay",
         "mobile": "Mobile optimized"
       }
     },
@@ -118,7 +118,7 @@
         "payments": {
           "badge": "Most popular",
           "title": "Card payments directly to your account",
-          "body": "No card reader needed. No awkward conversations. Six pre-cleared payment methods built in via Paysera.",
+          "body": "No card reader needed. No awkward conversations. Apple Pay, Google Pay, and card — powered by Stripe.",
           "learnMore": "Learn more",
           "kpi": "Today's revenue",
           "kpiValue": "€128.50"
@@ -214,25 +214,37 @@
     },
     "pricing": {
       "eyebrow": "Pricing",
-      "title": "One plan.",
+      "title": "Two plans.",
       "titleEmph": "Built to pay for itself.",
-      "subtitle": "Most hosts recover the monthly fee within their first few guest orders.",
-      "card": {
-        "name": "Per property",
+      "subtitle": "No transaction fees on guest orders. Ever.",
+      "starter": {
+        "name": "Starter",
+        "tagline": "Perfect for a single Airbnb or rental.",
         "price": "€15",
         "interval": "/ month",
-        "tagline": "Everything you need to turn your rental into a revenue machine.",
-        "feature1": "Unlimited menu items & categories",
-        "feature2": "Custom branding per property",
-        "feature3": "Card, bank transfer & cash payments",
-        "feature4": "Multilingual guest menu",
-        "feature5": "Real-time analytics & alerts",
-        "feature6": "Unlimited orders, zero transaction fees",
-        "trial": "14-day free trial",
+        "limit": "1 property included",
+        "cta": "Join the waitlist"
+      },
+      "pro": {
+        "name": "Pro",
+        "badge": "Best value",
+        "tagline": "For hosts managing multiple properties.",
+        "price": "€29",
+        "interval": "/ month",
+        "limit": "Up to 5 properties",
+        "cta": "Join the waitlist"
+      },
+      "shared": {
+        "trial": "7-day free trial",
         "noCard": "No credit card required",
         "earlyBird": "Early bird: first 100 hosts get 50% off for life.",
-        "cta": "Join the waitlist",
-        "roi": "Average host earns €180+ per property per month from minibar orders alone."
+        "roi": "Average host earns €180+ per property per month from minibar orders alone.",
+        "feature1": "Unlimited menu items & categories",
+        "feature2": "Custom branding per property",
+        "feature3": "Apple Pay, Google Pay & card via Stripe",
+        "feature4": "Multilingual menu (auto-translated)",
+        "feature5": "Real-time analytics & alerts",
+        "feature6": "Unlimited orders, zero transaction fees"
       }
     },
     "testimonials": {
@@ -270,8 +282,8 @@
       "titleEmph": "questions.",
       "items": {
         "q1": {
-          "q": "Can I really set up multiple properties?",
-          "a": "Yes. Each property is €15/month and gets its own menu, branding, QR code, and analytics. Manage them all from one dashboard."
+          "q": "Can I manage multiple properties?",
+          "a": "Yes. The Starter plan includes 1 property. The Pro plan covers up to 5 — each with its own menu, branding, QR code, and analytics."
         },
         "q2": {
           "q": "Can I change & update my menu?",
@@ -279,7 +291,7 @@
         },
         "q3": {
           "q": "How do payments work?",
-          "a": "Guest payments go directly from guest to your Paysera account. EasyHost never touches the money. We only charge a flat €15/month per property."
+          "a": "Guest payments go directly to your Stripe account. EasyHost never touches the money. We only charge your monthly subscription."
         },
         "q4": {
           "q": "Is it difficult to set up?",
@@ -290,7 +302,7 @@
           "a": "Yes. Your menu auto-translates into English, Albanian, Italian, and German. Guests pick their language with a flag."
         },
         "q6": {
-          "q": "Which is a good fee or issue with an order?",
+          "q": "Are there any transaction fees?",
           "a": "Zero transaction fees on guest orders. If you ever have an issue, our team replies within a business day."
         }
       }
@@ -300,7 +312,7 @@
       "title": "Ready to turn your minibar",
       "titleEmph": "into passive income?",
       "subtitle": "Join the waitlist and be first to invite your guests to a better stay.",
-      "trust": "14-day free trial · No credit card required"
+      "trust": "7-day free trial · No credit card required"
     }
   },
   "waitlist": {
@@ -323,21 +335,21 @@
   },
   "pricing": {
     "title": "Simple pricing for hospitality that pays for itself",
-    "subtitle": "One flat price per property. No transaction fees. No surprises.",
-    "includes": "What's included",
+    "subtitle": "Two plans, zero transaction fees. No surprises.",
+    "includes": "What's included in both plans",
     "questions": "Common questions",
     "faq": {
       "trial": {
         "q": "Is there really a free trial?",
-        "a": "Yes. 14 days, no credit card required. Use everything, then decide."
+        "a": "Yes. 7 days, no credit card required. Use everything, then decide."
       },
       "payments": {
         "q": "Who handles guest payments?",
-        "a": "You do. Payments go directly from your guest to your Paysera account. EasyHost never touches the money. We only charge €15 per month per property."
+        "a": "You do. Payments go directly from your guest to your Stripe account via Apple Pay, Google Pay, or card. EasyHost never touches the money — we only charge your monthly subscription."
       },
       "moreProperties": {
         "q": "What if I have multiple properties?",
-        "a": "Each property is €15/month, with its own menu, branding, and QR code. Manage them all from one dashboard."
+        "a": "The Starter plan covers 1 property at €15/month. The Pro plan covers up to 5 properties at €29/month — each with its own menu, branding, and QR code."
       },
       "cancel": {
         "q": "Can I cancel anytime?",

@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { Prisma } from "../generated/prisma";
+import { Prisma } from "../../generated/prisma";
 import { prisma } from "./prisma";
 import { isLocale } from "@/i18n/config";
 import { sendWaitlistWelcomeEmail } from "./emails/waitlist-welcome";

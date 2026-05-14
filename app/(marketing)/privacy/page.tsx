@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — EasyHost",
+  description: "How EasyHost collects, uses, and protects your data.",
+  openGraph: {
+    title: "Privacy Policy — EasyHost",
+    description: "How EasyHost collects, uses, and protects your data.",
+    url: "https://easyhost.pro/privacy",
+  },
+};
 
 export const dynamic = "force-static";
 

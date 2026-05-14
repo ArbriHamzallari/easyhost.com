@@ -1,5 +1,5 @@
 import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
-import { resend, getFromAddress } from "@/lib/resend";
+import { resend, getFromAddress } from "@/backend/lib/resend";
 
 type Copy = {
   subject: string;

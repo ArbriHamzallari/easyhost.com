@@ -1,18 +1,31 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Check } from "lucide-react";
-import { PricingCard } from "@/components/marketing/pricing-card";
-import { FinalCta } from "@/components/marketing/final-cta";
+import { PricingCard } from "@/frontend/components/marketing/pricing-card";
+import { FinalCta } from "@/frontend/components/marketing/final-cta";
+
+export const metadata: Metadata = {
+  title: "Pricing — EasyHost",
+  description:
+    "Starter at €15/month (1 property) or Pro at €29/month (up to 5 properties). 7-day free trial, no credit card required. Zero transaction fees on guest orders.",
+  openGraph: {
+    title: "Pricing — EasyHost",
+    description:
+      "Starter at €15/month or Pro at €29/month. 7-day free trial, no credit card required.",
+    url: "https://easyhost.pro/pricing",
+  },
+};
 
 export default async function PricingPage() {
   const t = await getTranslations();
 
   const includes = [
-    t("landing.pricing.card.feature1"),
-    t("landing.pricing.card.feature2"),
-    t("landing.pricing.card.feature3"),
-    t("landing.pricing.card.feature4"),
-    t("landing.pricing.card.feature5"),
-    t("landing.pricing.card.feature6"),
+    t("landing.pricing.shared.feature1"),
+    t("landing.pricing.shared.feature2"),
+    t("landing.pricing.shared.feature3"),
+    t("landing.pricing.shared.feature4"),
+    t("landing.pricing.shared.feature5"),
+    t("landing.pricing.shared.feature6"),
   ];
 
   const faqs = [

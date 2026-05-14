@@ -2,9 +2,9 @@
 
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { joinWaitlist } from "@/lib/waitlist";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { joinWaitlist } from "@/backend/lib/waitlist";
+import { Button } from "@/frontend/components/ui/button";
+import { Input } from "@/frontend/components/ui/input";
 
 type Status =
   | { kind: "idle" }
