@@ -3,14 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface MobileNavProps {
   links: { label: string; href: string }[];
   signIn: string;
   joinWaitlist: string;
+  currentLocale: string;
 }
 
-export function MobileNav({ links, signIn, joinWaitlist }: MobileNavProps) {
+export function MobileNav({ links, signIn, joinWaitlist, currentLocale }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
   // Lock body scroll when open
@@ -25,7 +27,7 @@ export function MobileNav({ links, signIn, joinWaitlist }: MobileNavProps) {
     };
   }, [open]);
 
-  // Close on route change / resize past md
+  // Close on resize past md
   useEffect(() => {
     function onResize() {
       if (window.innerWidth >= 768) setOpen(false);
@@ -56,12 +58,12 @@ export function MobileNav({ links, signIn, joinWaitlist }: MobileNavProps) {
           {/* Backdrop */}
           <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
 
-          {/* Panel — slides in from top */}
+          {/* Panel */}
           <div
             className="absolute inset-x-0 top-0 overflow-hidden rounded-b-2xl border-b border-[var(--border)] bg-white shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Mirror the nav height at the top so content starts below the sticky header */}
+            {/* Mirror the nav height */}
             <div className="h-16" />
 
             <nav className="flex flex-col px-6 pb-8 pt-2">
@@ -77,6 +79,9 @@ export function MobileNav({ links, signIn, joinWaitlist }: MobileNavProps) {
               ))}
 
               <div className="mt-6 flex flex-col gap-3">
+                {/* Language switcher — full width in drawer */}
+                <LanguageSwitcher currentLocale={currentLocale} variant="full" />
+
                 <Link
                   href="/sign-in"
                   onClick={() => setOpen(false)}

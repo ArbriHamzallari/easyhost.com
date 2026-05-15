@@ -49,8 +49,13 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
+  // Map internal locale keys to valid BCP 47 tags for the HTML lang attribute.
+  // Our Albanian locale is stored as "al" internally; BCP 47 uses "sq".
+  const BCP47: Record<string, string> = { al: "sq" };
+  const htmlLang = BCP47[locale] ?? locale;
+
   return (
-    <html lang={locale}>
+    <html lang={htmlLang}>
       <body
         className={`${inter.variable} ${fraunces.variable} font-sans antialiased`}
       >
