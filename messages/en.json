@@ -43,6 +43,7 @@
       "title": "Trusted by modern hosts worldwide",
       "items": {
         "stripe": "Stripe",
+        "paysera": "Paysera",
         "pci": "PCI DSS Compliant",
         "gdpr": "GDPR Compliant",
         "applePay": "Apple Pay",

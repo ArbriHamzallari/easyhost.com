@@ -39,7 +39,7 @@ export async function MarketingNav() {
         </nav>
 
         {/* Desktop CTA + mobile hamburger */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Link
             href="/sign-in"
             className="hidden text-[14px] font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)] md:inline-flex"
@@ -47,14 +47,14 @@ export async function MarketingNav() {
             {t("common.signIn")}
           </Link>
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link href="/#waitlist">{t("common.joinWaitlist")}</Link>
+            <Link href="/sign-up">{t("common.signUp")}</Link>
           </Button>
 
           {/* Mobile hamburger — passes translated strings down */}
           <MobileNav
             links={navLinks}
             signIn={t("common.signIn")}
-            joinWaitlist={t("common.joinWaitlist")}
+            signUp={t("common.signUp")}
           />
         </div>
       </div>
