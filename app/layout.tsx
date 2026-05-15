@@ -20,13 +20,13 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://easyhost.pro"),
-  title: "EasyHost: Turn minibar snacks into passive income",
+  title: "EasyHost — Everything in your rental, on demand.",
   description:
-    "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit. Built for modern hosts.",
+    "EasyHost gives guests a beautiful, Uber Eats-style experience for everything in their rental. You set the prices. Card payments go straight to your bank. Built for modern hosts.",
   openGraph: {
-    title: "EasyHost: Turn minibar snacks into passive income",
+    title: "EasyHost — Everything in your rental, on demand.",
     description:
-      "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit.",
+      "EasyHost gives guests a beautiful, Uber Eats-style experience for everything in their rental. You set the prices. Card payments go straight to your bank.",
     url: "https://easyhost.pro",
     siteName: "EasyHost",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EasyHost: Turn minibar snacks into passive income",
+    title: "EasyHost — Everything in your rental, on demand.",
     description:
-      "EasyHost lets your guests order snacks, drinks, and extras from a beautifully branded in-room menu. You set the prices. You keep the profit.",
+      "EasyHost gives guests a beautiful, Uber Eats-style experience for everything in their rental. You set the prices. Card payments go straight to your bank.",
     images: ["/opengraph-image"],
   },
 };

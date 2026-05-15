@@ -122,7 +122,7 @@ export function HeroScene() {
 
           <Image
             src="/images/hero-scene.png"
-            alt="A premium minibar tray, in-room phone menu, and QR welcome card in a warm sunset-lit hotel suite"
+            alt="A premium in-room drinks and snacks tray with a QR welcome card in a warm sunset-lit hotel suite"
             fill
             priority
             quality={90}
@@ -177,7 +177,7 @@ export function HeroScene() {
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--success)]" />
           </span>
           <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
-            New order · Sunset Villa
+            New request · Sunset Villa
           </span>
         </div>
         <div className="mt-2 flex items-center justify-between">

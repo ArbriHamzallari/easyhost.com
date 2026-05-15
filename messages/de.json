@@ -16,10 +16,11 @@
   },
   "landing": {
     "hero": {
-      "eyebrow": "Built for Airbnb & boutique hosts",
-      "headline": "Turn minibar snacks into",
-      "headlineEmph": "passive income.",
-      "subheadline": "EasyHost lets your guests order snacks, drinks, and extras from a beautiful in-room menu. You set the prices. You keep the profit.",
+      "eyebrow": "NEEDS_TRANSLATION: Built for every kind of host",
+      "headline": "NEEDS_TRANSLATION: Everything in your",
+      "headlineEmph": "NEEDS_TRANSLATION: , on demand.",
+      "tickerWords": "NEEDS_TRANSLATION: rental,hotel room,villa,suite,cottage,apartment,guesthouse",
+      "subheadline": "NEEDS_TRANSLATION: Guests scan your QR code, see what you have, tap what they want, and pay by card. You set the prices. You keep every cent.",
       "cta": "Join the waitlist",
       "trust": "7-day free trial · No credit card required",
       "scene": {
@@ -36,7 +37,7 @@
           "i4": "Late checkout",
           "i4size": "Until 14:00"
         },
-        "checkout": "Checkout · €12.50"
+        "checkout": "NEEDS_TRANSLATION: Review your stay · €12.50"
       }
     },
     "trust": {
@@ -52,8 +53,8 @@
     "problem": {
       "eyebrow": "The opportunity",
       "title": "Two ways to run",
-      "titleEmph": "your minibar.",
-      "subtitle": "One leaves money on the table. The other turns it into passive income.",
+      "titleEmph": "NEEDS_TRANSLATION: your rental.",
+      "subtitle": "NEEDS_TRANSLATION: One leaves money on the table. The other puts it there automatically.",
       "old": {
         "label": "The old way",
         "headline1": "Snacks disappear.",
@@ -67,7 +68,7 @@
       "new": {
         "label": "The EasyHost way",
         "headline1": "Guests scan and order.",
-        "headline2": "You earn effortlessly.",
+        "headline2": "NEEDS_TRANSLATION: You earn while you sleep.",
         "subtext": "Real-time tracking. Cashless payments. Happier guests. More revenue.",
         "p1": "Real-time inventory tracking",
         "p2": "Cashless card payments",
@@ -87,7 +88,7 @@
         "duration": "≈ 10 minutes",
         "title": "Stock your rental",
         "body": "Add snacks, drinks, alcohol or any service you want to offer. Set your prices.",
-        "imageAlt": "A premium wood-trimmed minibar fridge stocked with bottles, juices and snacks"
+        "imageAlt": "NEEDS_TRANSLATION: A premium wood-trimmed fridge stocked with drinks, snacks and extras for guests"
       },
       "step2": {
         "kicker": "02",
@@ -107,7 +108,7 @@
       },
       "footnote": "Average host earns",
       "footnoteValue": "€180+ per property / month",
-      "footnoteHint": "from minibar orders alone"
+      "footnoteHint": "NEEDS_TRANSLATION: from in-room orders alone"
     },
     "features": {
       "eyebrow": "Features",
@@ -136,7 +137,7 @@
           "body": "Get notified before you run out. Never lose a sale again."
         },
         "multilingual": {
-          "title": "Multilingual menu",
+          "title": "NEEDS_TRANSLATION: Multilingual experience",
           "body": "Welcome guests in their language. More comfort. More orders."
         },
         "branding": {
@@ -156,7 +157,7 @@
       "subtitle": "See everything in one place and make smarter decisions.",
       "points": {
         "p1": "Revenue & trends",
-        "p2": "Top selling items",
+        "p2": "NEEDS_TRANSLATION: Top selling products",
         "p3": "Low stock alerts",
         "p4": "Orders by property",
         "p5": "Payout tracking"
@@ -181,7 +182,7 @@
         "kpi4Value": "8",
         "chartLabel": "Revenue over time",
         "chartRange": "Past month",
-        "topItems": "Top selling items",
+        "topItems": "NEEDS_TRANSLATION: Top selling products",
         "item1": "Local Craft Beer",
         "item2": "Snack Box",
         "item3": "Greek Bites",
@@ -191,10 +192,10 @@
     },
     "guest": {
       "eyebrow": "Guest experience",
-      "title": "A menu your guests will",
+      "title": "NEEDS_TRANSLATION: An experience your guests will",
       "titleEmph": "actually love using.",
-      "subtitle": "No app to download. No account to create. They just scan and order in their language.",
-      "imageAlt": "Drei Smartphones auf einer warmen Holzoberfläche mit Gästemenu im Zimmer, Warenkorb und Checkout."
+      "subtitle": "NEEDS_TRANSLATION: No app to download. No account to create. They scan, see what's available, and pay by card — in their language.",
+      "imageAlt": "NEEDS_TRANSLATION: Three smartphones on a warm wooden surface showing the in-room guest experience, selection, and payment flow."
     },
     "propertyTypes": {
       "eyebrow": "For every kind of stay",
@@ -219,7 +220,7 @@
       "subtitle": "No transaction fees on guest orders. Ever.",
       "starter": {
         "name": "Starter",
-        "tagline": "Perfect for a single Airbnb or rental.",
+        "tagline": "NEEDS_TRANSLATION: Perfect for a single property or rental.",
         "price": "€15",
         "interval": "/ month",
         "limit": "1 property included",
@@ -238,11 +239,11 @@
         "trial": "7-day free trial",
         "noCard": "No credit card required",
         "earlyBird": "Early bird: first 100 hosts get 50% off for life.",
-        "roi": "Average host earns €180+ per property per month from minibar orders alone.",
-        "feature1": "Unlimited menu items & categories",
+        "roi": "NEEDS_TRANSLATION: Average host earns €180+ per property per month from in-room orders alone.",
+        "feature1": "NEEDS_TRANSLATION: Unlimited offerings & categories",
         "feature2": "Custom branding per property",
         "feature3": "Apple Pay, Google Pay & card via Stripe",
-        "feature4": "Multilingual menu (auto-translated)",
+        "feature4": "NEEDS_TRANSLATION: Multilingual guest experience (auto-translated)",
         "feature5": "Real-time analytics & alerts",
         "feature6": "Unlimited orders, zero transaction fees"
       }
@@ -254,7 +255,7 @@
       "subtitle": "Real revenue. Real reviews. Real businesses.",
       "items": {
         "t1": {
-          "quote": "EasyHost increased our minibar revenue by 40%. Guests love how easy it is.",
+          "quote": "NEEDS_TRANSLATION: EasyHost increased our in-room revenue by 40%. Guests love how easy it is.",
           "name": "Julia H.",
           "role": "5 villa rentals · Saranda",
           "metric": "+40%",
@@ -283,11 +284,11 @@
       "items": {
         "q1": {
           "q": "Can I manage multiple properties?",
-          "a": "Yes. The Starter plan includes 1 property. The Pro plan covers up to 5 — each with its own menu, branding, QR code, and analytics."
+          "a": "NEEDS_TRANSLATION: Yes. The Starter plan includes 1 property. The Pro plan covers up to 5 — each with its own offerings, branding, QR code, and analytics."
         },
         "q2": {
-          "q": "Can I change & update my menu?",
-          "a": "Anytime. Edit items, prices, photos, or stock levels from your dashboard. Changes go live instantly for your guests."
+          "q": "NEEDS_TRANSLATION: Can I update what I'm offering?",
+          "a": "NEEDS_TRANSLATION: Anytime. Edit what you offer, prices, photos, or stock levels from your dashboard. Changes go live instantly for your guests."
         },
         "q3": {
           "q": "How do payments work?",
@@ -295,11 +296,11 @@
         },
         "q4": {
           "q": "Is it difficult to set up?",
-          "a": "Most hosts are live within an hour. Build your menu, generate your QR code, print it. That's it."
+          "a": "NEEDS_TRANSLATION: Most hosts are live within an hour. Add what you offer, generate your QR code, print it. That's it."
         },
         "q5": {
           "q": "Can I translate multiple languages?",
-          "a": "Yes. Your menu auto-translates into English, Albanian, Italian, and German. Guests pick their language with a flag."
+          "a": "NEEDS_TRANSLATION: Yes. Your offerings auto-translate into English, Albanian, Italian, and German. Guests pick their language with a flag."
         },
         "q6": {
           "q": "Are there any transaction fees?",
@@ -309,8 +310,8 @@
     },
     "finalCta": {
       "eyebrow": "Ready when you are",
-      "title": "Ready to turn your minibar",
-      "titleEmph": "into passive income?",
+      "title": "NEEDS_TRANSLATION: Ready to turn your property",
+      "titleEmph": "NEEDS_TRANSLATION: into a revenue stream?",
       "subtitle": "Join the waitlist and be first to invite your guests to a better stay.",
       "trust": "7-day free trial · No credit card required"
     }
@@ -349,7 +350,7 @@
       },
       "moreProperties": {
         "q": "What if I have multiple properties?",
-        "a": "The Starter plan covers 1 property at €15/month. The Pro plan covers up to 5 properties at €29/month — each with its own menu, branding, and QR code."
+        "a": "NEEDS_TRANSLATION: The Starter plan covers 1 property at €15/month. The Pro plan covers up to 5 properties at €29/month — each with its own offerings, branding, and QR code."
       },
       "cancel": {
         "q": "Can I cancel anytime?",
@@ -362,7 +363,7 @@
     "subtitle": "Get your first order in under an hour."
   },
   "footer": {
-    "tagline": "Get to know your rental business better. Beautifully.",
+    "tagline": "NEEDS_TRANSLATION: Everything your guests need, on demand. Beautiful by default.",
     "subscribePlaceholder": "Enter your email",
     "subscribeCta": "Subscribe",
     "product": "Product",
@@ -372,7 +373,7 @@
     "links": {
       "features": "Features",
       "pricing": "Pricing",
-      "menu": "Menu",
+      "menu": "NEEDS_TRANSLATION: How it works",
       "demo": "Demo",
       "blog": "Blog",
       "guides": "Guides",

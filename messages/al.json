@@ -16,10 +16,11 @@
   },
   "landing": {
     "hero": {
-      "eyebrow": "Ndërtuar për shpërndarës Airbnb dhe hotelierë",
-      "headline": "Kthejini ushqimet e minibarit në",
-      "headlineEmph": "të ardhura pasive.",
-      "subheadline": "EasyHost u lejon mysafirëve tuaj të porosisin ushqime, pije dhe shërbime shtesë nga një meny elegante në dhomë. Ju vendosni çmimet. Ju mbani fitimin.",
+      "eyebrow": "NEEDS_TRANSLATION: Built for every kind of host",
+      "headline": "NEEDS_TRANSLATION: Everything in your",
+      "headlineEmph": "NEEDS_TRANSLATION: , on demand.",
+      "tickerWords": "NEEDS_TRANSLATION: rental,hotel room,villa,suite,cottage,apartment,guesthouse",
+      "subheadline": "NEEDS_TRANSLATION: Guests scan your QR code, see what you have, tap what they want, and pay by card. You set the prices. You keep every cent.",
       "cta": "Regjistrohu në listë",
       "trust": "7 ditë falas · Nuk kërkohet kartë krediti",
       "scene": {
@@ -36,7 +37,7 @@
           "i4": "Largim i vonë",
           "i4size": "Deri në 14:00"
         },
-        "checkout": "Paguaj · €12.50"
+        "checkout": "NEEDS_TRANSLATION: Review your stay · €12.50"
       }
     },
     "trust": {
@@ -52,8 +53,8 @@
     "problem": {
       "eyebrow": "Mundësia",
       "title": "Dy mënyra për të menaxhuar",
-      "titleEmph": "minibarrin tuaj.",
-      "subtitle": "Njëra humbet të ardhura. Tjetra i kthon ato në të ardhura pasive.",
+      "titleEmph": "NEEDS_TRANSLATION: your rental.",
+      "subtitle": "NEEDS_TRANSLATION: One leaves money on the table. The other puts it there automatically.",
       "old": {
         "label": "Mënyra e vjetër",
         "headline1": "Ushqimet zhduken.",
@@ -67,7 +68,7 @@
       "new": {
         "label": "Mënyra EasyHost",
         "headline1": "Mysafirët skanojnë dhe porosisin.",
-        "headline2": "Ju fitoni pa mundim.",
+        "headline2": "NEEDS_TRANSLATION: You earn while you sleep.",
         "subtext": "Gjurmim në kohë reale. Pagesa pa para kesh. Mysafirë më të lumtur. Më shumë të ardhura.",
         "p1": "Gjurmim i inventarit në kohë reale",
         "p2": "Pagesa me kartë pa para kesh",
@@ -87,7 +88,7 @@
         "duration": "≈ 10 minuta",
         "title": "Furnizoni pronën tuaj",
         "body": "Shtoni ushqime, pije, alkool ose çdo shërbim që dëshironi të ofroni. Vendosni çmimet tuaja.",
-        "imageAlt": "Frigorifer premium minibar i mbushur me shishe, lëngje dhe ushqime"
+        "imageAlt": "NEEDS_TRANSLATION: A premium wood-trimmed fridge stocked with drinks, snacks and extras for guests"
       },
       "step2": {
         "kicker": "02",
@@ -107,7 +108,7 @@
       },
       "footnote": "Shpërndarësi mesatar fiton",
       "footnoteValue": "€180+ për pronë / muaj",
-      "footnoteHint": "vetëm nga porositë e minibarit"
+      "footnoteHint": "NEEDS_TRANSLATION: from in-room orders alone"
     },
     "features": {
       "eyebrow": "Karakteristikat",
@@ -136,7 +137,7 @@
           "body": "Merrni njoftim para se të mbeteni pa stok. Mos humbisni kurrë më një shitje."
         },
         "multilingual": {
-          "title": "Menu shumëgjuhëshe",
+          "title": "NEEDS_TRANSLATION: Multilingual experience",
           "body": "Mirëpritni mysafirët në gjuhën e tyre. Më shumë rehatësi. Më shumë porosi."
         },
         "branding": {
@@ -156,7 +157,7 @@
       "subtitle": "Shikoni gjithçka në një vend dhe merrni vendime më të mençura.",
       "points": {
         "p1": "Të ardhura dhe tendenca",
-        "p2": "Produktet më të shitura",
+        "p2": "NEEDS_TRANSLATION: Top selling products",
         "p3": "Njoftime për stok të ulët",
         "p4": "Porosi sipas pronës",
         "p5": "Gjurmimi i pagesave"
@@ -181,7 +182,7 @@
         "kpi4Value": "8",
         "chartLabel": "Të ardhurat me kalimin e kohës",
         "chartRange": "Muaji i kaluar",
-        "topItems": "Artikujt më të shitur",
+        "topItems": "NEEDS_TRANSLATION: Top selling products",
         "item1": "Birrë artizanale lokale",
         "item2": "Kuti ushqimesh",
         "item3": "Meze greke",
@@ -191,10 +192,10 @@
     },
     "guest": {
       "eyebrow": "Eksperienca e mysafirit",
-      "title": "Një meny që mysafirët tuaj do",
+      "title": "NEEDS_TRANSLATION: An experience your guests will",
       "titleEmph": "ta duan vërtet.",
-      "subtitle": "Asnjë aplikacion për të shkarkuar. Asnjë llogari për të krijuar. Thjesht skanojnë dhe porosisin në gjuhën e tyre.",
-      "imageAlt": "Tre smartfonë mbi sipërfaqe druri të ngrohtë duke treguar menynë në dhomë, shportën dhe hapin e pagesës."
+      "subtitle": "NEEDS_TRANSLATION: No app to download. No account to create. They scan, see what's available, and pay by card — in their language.",
+      "imageAlt": "NEEDS_TRANSLATION: Three smartphones on a warm wooden surface showing the in-room guest experience, selection, and payment flow."
     },
     "propertyTypes": {
       "eyebrow": "Për çdo lloj qëndrimi",
@@ -219,7 +220,7 @@
       "subtitle": "Zero tarifa transaksioni për porositë e mysafirëve. Kurrë.",
       "starter": {
         "name": "Fillestar",
-        "tagline": "Perfekt për një Airbnb ose qira të vetme.",
+        "tagline": "NEEDS_TRANSLATION: Perfect for a single property or rental.",
         "price": "€15",
         "interval": "/ muaj",
         "limit": "1 pronë e përfshirë",
@@ -238,11 +239,11 @@
         "trial": "7 ditë falas",
         "noCard": "Nuk kërkohet kartë krediti",
         "earlyBird": "Hyrja e hershme: 100 shpërndarësit e parë marrin 50% zbritje për gjithë jetën.",
-        "roi": "Shpërndarësi mesatar fiton €180+ për pronë në muaj vetëm nga porositë e minibarit.",
-        "feature1": "Artikuj dhe kategori të pakufizuara menie",
+        "roi": "NEEDS_TRANSLATION: Average host earns €180+ per property per month from in-room orders alone.",
+        "feature1": "NEEDS_TRANSLATION: Unlimited offerings & categories",
         "feature2": "Identitet i personalizuar për çdo pronë",
         "feature3": "Apple Pay, Google Pay & kartë përmes Stripe",
-        "feature4": "Menu shumëgjuhëshe (e përkthyer automatikisht)",
+        "feature4": "NEEDS_TRANSLATION: Multilingual guest experience (auto-translated)",
         "feature5": "Analitika dhe njoftime në kohë reale",
         "feature6": "Porosi të pakufizuara, zero tarifa transaksioni"
       }
@@ -254,7 +255,7 @@
       "subtitle": "Të ardhura reale. Komente reale. Biznese reale.",
       "items": {
         "t1": {
-          "quote": "EasyHost rriti të ardhurat tona nga minimari me 40%. Mysafirëve u pëlqen sa e thjeshtë është.",
+          "quote": "NEEDS_TRANSLATION: EasyHost increased our in-room revenue by 40%. Guests love how easy it is.",
           "name": "Julia H.",
           "role": "5 qira villash · Sarandë",
           "metric": "+40%",
@@ -283,11 +284,11 @@
       "items": {
         "q1": {
           "q": "Mund të menaxhoj shumë prona?",
-          "a": "Po. Plani Fillestar përfshin 1 pronë. Plani Pro mbulon deri në 5 — secila me menynë, identitetin, kodin QR dhe analitikën e vet."
+          "a": "NEEDS_TRANSLATION: Yes. The Starter plan includes 1 property. The Pro plan covers up to 5 — each with its own offerings, branding, QR code, and analytics."
         },
         "q2": {
-          "q": "Mund ta ndryshoj dhe përditësoj menynë time?",
-          "a": "Kurrë herë. Redaktoni artikujt, çmimet, fotot ose nivelet e stokut nga paneli juaj. Ndryshimet hyjnë në fuqi menjëherë për mysafirët tuaj."
+          "q": "NEEDS_TRANSLATION: Can I update what I'm offering?",
+          "a": "NEEDS_TRANSLATION: Anytime. Edit what you offer, prices, photos, or stock levels from your dashboard. Changes go live instantly for your guests."
         },
         "q3": {
           "q": "Si funksionojnë pagesat?",
@@ -295,11 +296,11 @@
         },
         "q4": {
           "q": "A është e vështirë ta konfigurosh?",
-          "a": "Shumica e shpërndarësve janë gati brenda një ore. Ndërtoni menynë, gjeneroni kodin QR, printojeni. Kaq."
+          "a": "NEEDS_TRANSLATION: Most hosts are live within an hour. Add what you offer, generate your QR code, print it. That's it."
         },
         "q5": {
           "q": "Mund të ofroj meny në shumë gjuhë?",
-          "a": "Po. Menyja juaj përkthehet automatikisht në anglisht, shqip, italisht dhe gjermanisht. Mysafirët zgjedhin gjuhën e tyre me flamurin."
+          "a": "NEEDS_TRANSLATION: Yes. Your offerings auto-translate into English, Albanian, Italian, and German. Guests pick their language with a flag."
         },
         "q6": {
           "q": "Ka tarifa transaksioni?",
@@ -309,8 +310,8 @@
     },
     "finalCta": {
       "eyebrow": "Gati kur jeni ju",
-      "title": "Gati të ktheni minibarrin tuaj",
-      "titleEmph": "në të ardhura pasive?",
+      "title": "NEEDS_TRANSLATION: Ready to turn your property",
+      "titleEmph": "NEEDS_TRANSLATION: into a revenue stream?",
       "subtitle": "Regjistrohu në listë dhe ji i pari që fton mysafirët tuaj në një qëndrim më të mirë.",
       "trust": "7 ditë falas · Nuk kërkohet kartë krediti"
     }
@@ -349,7 +350,7 @@
       },
       "moreProperties": {
         "q": "Po të kem shumë prona?",
-        "a": "Plani Fillestar mbulon 1 pronë me €15/muaj. Plani Pro mbulon deri në 5 prona me €29/muaj — secila me menynë, identitetin dhe kodin QR të vet."
+        "a": "NEEDS_TRANSLATION: The Starter plan covers 1 property at €15/month. The Pro plan covers up to 5 properties at €29/month — each with its own offerings, branding, and QR code."
       },
       "cancel": {
         "q": "Mund të anuloj kurrë herë?",
@@ -362,7 +363,7 @@
     "subtitle": "Merrni porosinë tuaj të parë brenda një ore."
   },
   "footer": {
-    "tagline": "Njihuni më mirë me biznesin tuaj të qirasë. Bukur.",
+    "tagline": "NEEDS_TRANSLATION: Everything your guests need, on demand. Beautiful by default.",
     "subscribePlaceholder": "Shkruani emailin tuaj",
     "subscribeCta": "Abonohu",
     "product": "Produkti",
@@ -372,7 +373,7 @@
     "links": {
       "features": "Karakteristikat",
       "pricing": "Çmimet",
-      "menu": "Menu",
+      "menu": "NEEDS_TRANSLATION: How it works",
       "demo": "Demo",
       "blog": "Blog",
       "guides": "Udhëzues",

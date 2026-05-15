@@ -1,9 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import { WaitlistForm } from "./waitlist-form";
 import { HeroScene } from "./hero-scene";
+import { PropertyTicker } from "./property-ticker";
 
 export async function Hero() {
   const t = await getTranslations();
+
+  const tickerWords = t("landing.hero.tickerWords")
+    .split(",")
+    .map((w) => w.trim());
 
   return (
     <section id="waitlist" className="relative overflow-hidden scroll-mt-24">
@@ -34,12 +39,10 @@ export async function Hero() {
             {t("landing.hero.eyebrow")}
           </div>
 
-          <h1 className="mt-5 font-display text-[34px] font-medium leading-[1.02] tracking-[-0.025em] text-[var(--ink)] sm:mt-6 sm:text-[44px] sm:leading-[0.98] lg:text-[64px]">
-            {t("landing.hero.headline")}
-            <br />
-            <span className="serif-emph text-[var(--primary)]">
-              {t("landing.hero.headlineEmph")}
-            </span>
+          <h1 className="relative mt-5 font-display text-[34px] font-medium leading-[1.02] tracking-[-0.025em] text-[var(--ink)] sm:mt-6 sm:text-[44px] sm:leading-[0.98] lg:text-[64px]">
+            {t("landing.hero.headline")}{" "}
+            <PropertyTicker words={tickerWords} />
+            {t("landing.hero.headlineEmph")}
           </h1>
 
           <p className="mt-4 max-w-xl text-[15px] leading-[1.55] text-[var(--muted)] sm:mt-6 sm:text-[17px]">
