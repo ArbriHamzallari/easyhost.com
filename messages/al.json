@@ -2,7 +2,7 @@
   "common": {
     "appName": "EasyHost",
     "comingSoon": "Së shpejti",
-    "joinWaitlist": "Regjistrohu në listë",
+    "joinWaitlist": "Regjistrohu në listën e pritjes",
     "signIn": "Hyr",
     "signUp": "Regjistrohu",
     "emailPlaceholder": "Shkruani emailin tuaj"
@@ -16,15 +16,15 @@
   },
   "landing": {
     "hero": {
-      "eyebrow": "Built for every kind of host",
-      "headline": "Everything in your",
-      "headlineEmph": ", on demand.",
-      "tickerWords": "rental,hotel room,villa,suite,cottage,apartment,guesthouse",
-      "subheadline": "Guests scan your QR code, see what you have, tap what they want, and pay by card. You set the prices. You keep every cent.",
+      "eyebrow": "Ndërtuar për çdo host",
+      "headline": "Gjithçka në",
+      "headlineEmph": "në moment.",
+      "tickerWords": "airbnb,hotelin,dhomën,vilën,suitën,kabinën,apartmentin,guesthouse",
+      "subheadline": "Klientët skanojne kodin QR, shohin çfarë keni, klikojnë çfarë dëshirojne, dhe paguajnë me kartë. Ju vendosni çmimet. Ju përfitoni çdo cent.",
       "cta": "Regjistrohu në listë",
-      "trust": "7 ditë falas · Nuk kërkohet kartë krediti",
+      "trust": "7 ditë falas · Nuk ka nevojë për kartë krediti",
       "scene": {
-        "property": "Vila Perëndimi",
+        "property": "Sunset Villa",
         "welcome": "Mirë se vini.",
         "subtitle": "Shijojeni qëndrimin.",
         "menu": {
@@ -33,11 +33,11 @@
           "i2": "Birrë artizanale lokale",
           "i2size": "0.5L",
           "i3": "Kuti ushqimesh",
-          "i3size": "Shqeme, ullinj, patate të skuqura",
-          "i4": "Largim i vonë",
+          "i3size": "Pistak, fruta të thata, patatina",
+          "i4": "Check out i vonë",
           "i4size": "Deri në 14:00"
         },
-        "checkout": "Review your stay · €12.50"
+        "checkout": "Review qëndrimin tuaj · €12.50"
       }
     },
     "trust": {
@@ -53,25 +53,25 @@
     "problem": {
       "eyebrow": "Mundësia",
       "title": "Dy mënyra për të menaxhuar",
-      "titleEmph": "your rental.",
-      "subtitle": "One leaves money on the table. The other puts it there automatically.",
+      "titleEmph": "pronën tuaj.",
+      "subtitle": "Një i lë paratë në tavolinë. Tjetri paguan automatikisht.",
       "old": {
         "label": "Mënyra e vjetër",
         "headline1": "Ushqimet zhduken.",
-        "headline2": "Paratë kesh janë kaotike.",
-        "subtext": "Gjurmimi është manual. Mysafirët humbin rastin. Ju humbisni të ardhura.",
-        "p1": "Pa gjurmim në kohë reale",
-        "p2": "Trajtimi i parave kesh është i rrezikshëm",
-        "p3": "Pa njoftime stoku",
+        "headline2": "Paratë cash janë kaotike.",
+        "subtext": "Mirëmbajtja e inventarit është manuale. Mysafirët ngelen të pakënaqur. Ju humbisni të ardhura.",
+        "p1": "Inventar i vonuar",
+        "p2": "Përdorimi i parave cash është i rrezikshëm",
+        "p3": "Pa njoftime rreth sasisë të produkteve",
         "p4": "Shitje të humbura dhe mysafirë të pakënaqur"
       },
       "new": {
         "label": "Mënyra EasyHost",
         "headline1": "Mysafirët skanojnë dhe porosisin.",
-        "headline2": "You earn while you sleep.",
-        "subtext": "Gjurmim në kohë reale. Pagesa pa para kesh. Mysafirë më të lumtur. Më shumë të ardhura.",
+        "headline2": "Ju fitoni ndërkohë që flini.",
+        "subtext": "Mirëmbajtje në kohë reale. Pagesa cashless. Mysafirë më të lumtur. Më shumë të ardhura.",
         "p1": "Gjurmim i inventarit në kohë reale",
-        "p2": "Pagesa me kartë pa para kesh",
+        "p2": "Pagesa online",
         "p3": "Njoftime për stok të ulët dhe inventar",
         "p4": "Më shumë shitje, më shumë të ardhura"
       }
@@ -81,13 +81,13 @@
       "chip": "3 hapa",
       "title": "Gati në më pak se një orë.",
       "titleEmph": "Fitoni ndërkohë që flini.",
-      "subtitle": "Nga frigoriferi bosh deri në pagesën e parë: tre hapa të qetë. Asnjë lexues kartash. Asnjë aplikacion për mysafirët. Asnjë ndërmjetës që prek paratë tuaja.",
+      "subtitle": "Nga frigoriferi bosh deri në pagesën e parë: tre hapa të thjeshtë. Pa patur nevojë për POS. Asnjë aplikacion për mysafirët. Asnjë ndërmjetës që prek paratë tuaja.",
       "step1": {
         "kicker": "01",
         "label": "Konfigurim",
         "duration": "≈ 10 minuta",
-        "title": "Furnizoni pronën tuaj",
-        "body": "Shtoni ushqime, pije, alkool ose çdo shërbim që dëshironi të ofroni. Vendosni çmimet tuaja.",
+        "title": "Furnizohuni me produkte",
+        "body": "Shtoni ushqime, pije, alkol ose çdo shërbim që dëshironi të ofroni. Vendosni çmimet tuaja.",
         "imageAlt": "A premium wood-trimmed fridge stocked with drinks, snacks and extras for guests"
       },
       "step2": {
@@ -95,31 +95,31 @@
         "label": "Një herë",
         "duration": "Qëndron përgjithmonë",
         "title": "Vendosni kodin QR",
-        "body": "Printoni dhe vendosni kodin ku mysafirët mund ta shohin. Frigoriferi, tavolina natës, libri i mirëpritjes.",
+        "body": "Printoni dhe vendosni kodin ku mysafirët mund ta shohin. Mbi frigorifer, tavolinë, komodinë.",
         "imageAlt": "Mbajtës elegant i kodit QR në tryezë mbi sipërfaqe të butë dhe të ngrohtë"
       },
       "step3": {
         "kicker": "03",
         "label": "Automatik",
         "duration": "Pagesa brenda ditës",
-        "title": "Merrni pagesë automatikisht",
+        "title": "Merrni pagesa automatikisht",
         "body": "Mysafirët skanojnë, porosisin dhe paguajnë. Pagesat me kartë vijnë direkt në bankën tuaj. Ne nuk i prekim kurrë paratë.",
         "imageAlt": "Smartphone mbi mbajtës duke treguar pagesë të suksesshme prej €2,643.50 në llogari"
       },
       "footnote": "Shpërndarësi mesatar fiton",
       "footnoteValue": "€180+ për pronë / muaj",
-      "footnoteHint": "from in-room orders alone"
+      "footnoteHint": "vetëm nga porositë në dhomë"
     },
     "features": {
       "eyebrow": "Karakteristikat",
-      "title": "Gjithçka që ju nevojitet për të ofruar",
+      "title": "Gjithçka që ju nevojitet për të ofruar një",
       "titleEmph": "eksperiencë premium mysafirësh.",
       "subtitle": "Karakteristika të fuqishme të dizajnuara për shpërndarësit modernë.",
       "items": {
         "payments": {
-          "badge": "Më i popullarizuari",
+          "badge": "Më i kërkuari",
           "title": "Pagesa me kartë direkt në llogarinë tuaj",
-          "body": "Nuk nevojitet lexues kartash. Asnjë bisedë e sikletshme. Apple Pay, Google Pay dhe kartë — me Stripe.",
+          "body": "Nuk nevojitet lexues kartash(POS). Apple Pay, Google Pay dhe kartë (Stripe).",
           "learnMore": "Mëso më shumë",
           "kpi": "Të ardhurat e sotme",
           "kpiValue": "€128.50"
@@ -146,7 +146,7 @@
         },
         "favorites": {
           "title": "Të preferuarat e mysafirëve",
-          "body": "Lërini mysafirët të riporosisin të preferuarat me një trokitje."
+          "body": "Lërini mysafirët të riporosisin të preferuarat me një komandë."
         }
       }
     },
@@ -157,7 +157,7 @@
       "subtitle": "Shikoni gjithçka në një vend dhe merrni vendime më të mençura.",
       "points": {
         "p1": "Të ardhura dhe tendenca",
-        "p2": "Top selling products",
+        "p2": "Produktet më të shitura",
         "p3": "Njoftime për stok të ulët",
         "p4": "Porosi sipas pronës",
         "p5": "Gjurmimi i pagesave"
@@ -192,22 +192,22 @@
     },
     "guest": {
       "eyebrow": "Eksperienca e mysafirit",
-      "title": "An experience your guests will",
+      "title": "Një eksperiencë që mysafirët do",
       "titleEmph": "ta duan vërtet.",
-      "subtitle": "No app to download. No account to create. They scan, see what's available, and pay by card — in their language.",
-      "imageAlt": "Three smartphones on a warm wooden surface showing the in-room guest experience, selection, and payment flow."
+      "subtitle": "Pa aplikacion për të shkarkuar. Pa llogari për të krijuar. Skanojnë, shohin çfarë ka në dhomë, dhe paguajnë me kartë — në gjuhën e tyre.",
+      "imageAlt": "Tri telefonë smartphone në një suprafatë të thellë me një këmbë të ngrohtë, shfaqjen e eksperiencës së mysafirit, dhe pagesën."
     },
     "propertyTypes": {
       "eyebrow": "Për çdo lloj qëndrimi",
       "title": "Ndërtuar për çdo lloj",
       "titleEmph": "mikpritjeje.",
-      "subtitle": "Apartamente, villa, hotele, hostelje. Nëse mysafirët qëndrojnë atje, EasyHost funksionon.",
+      "subtitle": "Apartamente, villa, hotele, hostele. Nëse mysafirët qëndrojnë atje, EasyHost funksionon.",
       "items": {
         "apartment": "Apartamente",
         "villa": "Vila",
         "boutique": "Hotele butik",
         "beach": "Qëndrime bregdetare",
-        "hostel": "Hostelje",
+        "hostel": "Hostele",
         "eco": "Qëndrime eko",
         "cottage": "Shtëpi pushimi",
         "suite": "Suite"
@@ -216,11 +216,11 @@
     "pricing": {
       "eyebrow": "Çmimet",
       "title": "Dy plane.",
-      "titleEmph": "Ndërtuar të paguajnë për vete.",
+      "titleEmph": "Ndërtuar që ti 'nxjerri' lekët vetë.",
       "subtitle": "Zero tarifa transaksioni për porositë e mysafirëve. Kurrë.",
       "starter": {
         "name": "Fillestar",
-        "tagline": "Perfect for a single property or rental.",
+        "tagline": "Perfekte për një pronë ose një Airbnb.",
         "price": "€15",
         "interval": "/ muaj",
         "limit": "1 pronë e përfshirë",
@@ -239,11 +239,11 @@
         "trial": "7 ditë falas",
         "noCard": "Nuk kërkohet kartë krediti",
         "earlyBird": "Hyrja e hershme: 100 shpërndarësit e parë marrin 50% zbritje për gjithë jetën.",
-        "roi": "Average host earns €180+ per property per month from in-room orders alone.",
-        "feature1": "Unlimited offerings & categories",
+        "roi": "Hosti mesatar fiton €180+ për pronë / muaj nga porositë në dhomë vetëm.",
+        "feature1": "Oferta dhe produkte pa limit",
         "feature2": "Identitet i personalizuar për çdo pronë",
         "feature3": "Apple Pay, Google Pay & kartë përmes Stripe",
-        "feature4": "Multilingual guest experience (auto-translated)",
+        "feature4": "Opsion i shumëfishtë gjuhësh",
         "feature5": "Analitika dhe njoftime në kohë reale",
         "feature6": "Porosi të pakufizuara, zero tarifa transaksioni"
       }
@@ -251,25 +251,25 @@
     "testimonials": {
       "eyebrow": "E dashur nga shpërndarësit",
       "title": "E besuar nga",
-      "titleEmph": "shpërndarës butiket.",
+      "titleEmph": "hostët kudo në botë.",
       "subtitle": "Të ardhura reale. Komente reale. Biznese reale.",
       "items": {
         "t1": {
-          "quote": "EasyHost increased our in-room revenue by 40%. Guests love how easy it is.",
-          "name": "Julia H.",
-          "role": "5 qira villash · Sarandë",
+          "quote": "EasyHost na ndihmoi të rrisnim të ardhurat e dhomës me 40%. Mysafirët e donin se të ishte kaq e lehtë ta përdornin.",
+          "name": "Juli H.",
+          "role": "5 vila · Sarandë",
           "metric": "+40%",
           "metricLabel": "rritje e të ardhurave"
         },
         "t2": {
           "quote": "Duke menaxhuar 4 apartamente dhe 2 suite luksoze, EasyHost është automatik.",
           "name": "Marco D.",
-          "role": "Apartamente luksi · Firence",
+          "role": "Luxury apartments · Firence",
           "metric": "€350",
           "metricLabel": "në muaj për njësi"
         },
         "t3": {
-          "quote": "Paneli më jep njohuri që nuk i kisha kurrë më parë. Ndryshoi gjithçka.",
+          "quote": "Paneli më jep të dhëna që nuk i kisha kurrë më parë. Ndryshoi gjithçka.",
           "name": "Sarah L.",
           "role": "Butik bregdetar · Kretë",
           "metric": "+28%",
@@ -284,23 +284,23 @@
       "items": {
         "q1": {
           "q": "Mund të menaxhoj shumë prona?",
-          "a": "Yes. The Starter plan includes 1 property. The Pro plan covers up to 5 — each with its own offerings, branding, QR code, and analytics."
+          "a": "Po. Plani Fillestar përfshin 1 pronë. Plani Pro përfshin deri në 5 — secila me ofertat e vet, branding, kodin QR, dhe analitikë."
         },
         "q2": {
-          "q": "Can I update what I'm offering?",
-          "a": "Anytime. Edit what you offer, prices, photos, or stock levels from your dashboard. Changes go live instantly for your guests."
+          "q": "A mund të përditësoj çfarë ofroj?",
+          "a": "Gjithmonë. Përditësoni çfarë ofrojni, çmimet, fotot, ose sasinë e produkteve nga paneli juaj. Ndryshimet shfaqen në moment për mysafirët tuaj."
         },
         "q3": {
           "q": "Si funksionojnë pagesat?",
-          "a": "Pagesat e mysafirëve shkojnë direkt në llogarinë tuaj Stripe. EasyHost nuk i prek kurrë paratë. Ne vetëm faturojmë abonimin tuaj mujor."
+          "a": "Pagesat e mysafirëve shkojnë direkt në llogarinë tuaj Stripe. EasyHost nuk i prek kurrë paratë. Ne vetëm faturojmë vetëm abonimin tuaj mujor."
         },
         "q4": {
           "q": "A është e vështirë ta konfigurosh?",
-          "a": "Most hosts are live within an hour. Add what you offer, generate your QR code, print it. That's it."
+          "a": "Shumë hostë janë të aktivë në një orë. Shtoni çfarë ofrojni, gjeneroni kodin QR dhe e printoni atë. Kjo është gjithçka."
         },
         "q5": {
-          "q": "Mund të ofroj meny në shumë gjuhë?",
-          "a": "Yes. Your offerings auto-translate into English, Albanian, Italian, and German. Guests pick their language with a flag."
+          "q": "Mund të ofroj menu në shumë gjuhë?",
+          "a": "Po. Ofertat tuaja përkthehen automatikisht në anglisht, shqip, italisht, dhe gjermanisht. Mysafirët zgjedhin gjuhën e tyre me një buton."
         },
         "q6": {
           "q": "Ka tarifa transaksioni?",
@@ -310,8 +310,8 @@
     },
     "finalCta": {
       "eyebrow": "Gati kur jeni ju",
-      "title": "Ready to turn your property",
-      "titleEmph": "into a revenue stream?",
+      "title": "Gati për të bërë pronën tuaj,",
+      "titleEmph": "një burim të ardhurash?",
       "subtitle": "Regjistrohu në listë dhe ji i pari që fton mysafirët tuaj në një qëndrim më të mirë.",
       "trust": "7 ditë falas · Nuk kërkohet kartë krediti"
     }
@@ -319,7 +319,7 @@
   "waitlist": {
     "submit": "Regjistrohu në listë",
     "success": "Jeni në listë. Do t'ju kontaktojmë.",
-    "alreadyOnList": "Jeni tashmë në listë. Faleminderit për entuziazmin.",
+    "alreadyOnList": "Jeni tashmë në listë. Faleminderit për besimin.",
     "invalidEmail": "Ky nuk duket si një email i vlefshëm.",
     "serverError": "Diçka shkoi gabim. Ju lutemi provoni sërish."
   },
@@ -328,14 +328,14 @@
     "title": "Mirë se vini në EasyHost.",
     "subtitle": "Llogaria juaj është gati dhe jeni në listën e pritjes.",
     "bodyNew": "Faleminderit që u regjistruat. Do t'ju dërgojmë email në {email} sapo EasyHost të jetë gati — dhe kur të jetë, hyni me të njëjtat kredenciale për të konfiguruar pronën tuaj të parë.",
-    "bodyExisting": "Jeni tashmë në listë me {email}. Kur të hapim, hyni këtu me të njëjtat kredenciale — llogaria juaj është gati.",
-    "credentialsTitle": "Të njëjtat kredenciale, pa migrim",
-    "credentialsBody": "Emaili dhe fjalëkalimi që sapo krijuat janë ato që do të përdorni për t'u kyçur kur të hapim. Asgjë tjetër për të bërë deri atëherë.",
+    "bodyExisting": "Jeni tashmë në listë me {email}. Kur të bëjmë launch, hyni këtu me të njëjtat kredenciale dhe llogaria juaj është gati.",
+    "credentialsTitle": "Të njëjtat kredenciale.",
+    "credentialsBody": "Emaili dhe fjalëkalimi që sapo krijuat janë ato që do të përdorni për t'u kyçur kur të bëjmë launch. Asgjë tjetër për të bërë deri atëherë.",
     "cta": "Kthehu te easyhost.pro",
     "signOut": "Dil"
   },
   "pricing": {
-    "title": "Çmime të thjeshta për mikpritje që paguajnë për vete",
+    "title": "Çmime të thjeshta për mikpritje fitimprurëse",
     "subtitle": "Dy plane, zero tarifa transaksioni. Asnjë surprizë.",
     "includes": "Çfarë përfshihet në të dy planet",
     "questions": "Pyetje të zakonshme",
@@ -350,10 +350,10 @@
       },
       "moreProperties": {
         "q": "Po të kem shumë prona?",
-        "a": "The Starter plan covers 1 property at €15/month. The Pro plan covers up to 5 properties at €29/month — each with its own offerings, branding, and QR code."
+        "a": "Plani Fillestar përfshin 1 pronë në €15/muaj. Plani Pro përfshin deri në 5 pronë në €29/muaj — secila me ofertat e vet, branding, dhe kodin QR."
       },
       "cancel": {
-        "q": "Mund të anuloj kurrë herë?",
+        "q": "Mund të anuloj në cdo moment?",
         "a": "Po. Anuloni nga paneli juaj me një klik. Keni akses deri në fund të periudhës së faturimit."
       }
     }
@@ -363,21 +363,21 @@
     "subtitle": "Merrni porosinë tuaj të parë brenda një ore."
   },
   "footer": {
-    "tagline": "Everything your guests need, on demand. Beautiful by default.",
+    "tagline": "Gjithçka që mysafirët dëshirojnë, në moment. Bukur dhe thjeshtë",
     "subscribePlaceholder": "Shkruani emailin tuaj",
     "subscribeCta": "Abonohu",
     "product": "Produkti",
     "resources": "Burime",
     "company": "Kompania",
-    "legal": "Juridike",
+    "legal": "Legal",
     "links": {
       "features": "Karakteristikat",
       "pricing": "Çmimet",
-      "menu": "How it works",
+      "menu": "Si funksionon",
       "demo": "Demo",
       "blog": "Blog",
       "guides": "Udhëzues",
-      "support": "Mbështetje",
+      "support": "Suport",
       "changelog": "Regjistri i ndryshimeve",
       "about": "Rreth nesh",
       "careers": "Karrierë",
@@ -389,6 +389,6 @@
       "howItWorks": "Si funksionon"
     },
     "rights": "Të gjitha të drejtat e rezervuara.",
-    "madeIn": "Ndërtuar me kujdes në Tiranë"
+    "madeIn": "Ndërtuar me kujdes në Tiranë nga Codrix Systems Albania"
   }
 }
