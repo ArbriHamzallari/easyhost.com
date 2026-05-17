@@ -86,7 +86,7 @@ model Menu {
 model MenuItem {
   id                String   @id @default(cuid())
   menuId            String
-  name              Json     // multilingual — host sets primary lang, DeepL fills the rest
+  name              Json     // multilingual — host sets primary lang, Google Translate fills the rest
   description       Json?
   category          String   // beverages | snacks | alcohol | services | custom
   imageUrl          String?
