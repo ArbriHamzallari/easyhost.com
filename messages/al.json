@@ -389,5 +389,89 @@
     },
     "rights": "All rights reserved.",
     "madeIn": "Built with care in Tirana"
+  },
+  "guestMenu": {
+    "language": "Gjuha",
+    "menu": {
+      "subtitle": "Shfletoni dhe shtoni artikuj në shportë.",
+      "empty": "Asnjë artikull nuk është i disponueshëm për momentin.",
+      "orderingDisabled": "Porositë online nuk janë ende të disponueshme për këtë pronë.",
+      "add": "Shto",
+      "decreaseQty": "Ul sasinë",
+      "increaseQty": "Rrit sasinë",
+      "cartSummary": "{count, plural, one {# artikull} other {# artikuj}} · {total}",
+      "checkout": "Përfundo"
+    },
+    "categories": {
+      "beverages": "Pije",
+      "snacks": "Snacks",
+      "alcohol": "Alkool",
+      "services": "Shërbime",
+      "custom": "Të tjera"
+    },
+    "checkout": {
+      "title": "Pagesa",
+      "backToMenu": "← Menu",
+      "emptyCart": "Shporta juaj është bosh.",
+      "backToMenuLink": "Kthehu te menuja",
+      "yourOrder": "Porosia juaj",
+      "total": "Totali",
+      "yourDetails": "Të dhënat tuaja",
+      "name": "Emri",
+      "email": "Email (për faturë)",
+      "payment": "Pagesa",
+      "payCash": "Paguaj me para në dorë",
+      "payCashDesc": "Paguani pronarin me para në dorë kur ju përshtatet.",
+      "payBank": "Transfer bankar",
+      "payBankDesc": "Do të merrni të dhënat bankare menjëherë pas porosisë.",
+      "payCard": "Kartë, Apple Pay ose Google Pay",
+      "payCardDesc": "Paguani në mënyrë të sigurt. Paratë shkojnë direkt te pronari.",
+      "cardPayment": "Pagesa me kartë",
+      "payWithCard": "Paguaj {amount}",
+      "processingPayment": "Duke përpunuar pagesën…",
+      "placeOrder": "Porosit · {amount}",
+      "placingOrder": "Duke porositur…",
+      "disclaimer": "Duke porositur, pranoni të paguani {property} direkt. EasyHost nuk përpunon pagesat e mysafirëve.",
+      "errors": {
+        "outOfStock": "Disa artikuj nuk janë më në stok. Ju lutemi përditësoni shportën.",
+        "paymentUnavailable": "Kjo metodë pagese nuk është e disponueshme.",
+        "generic": "Porosia nuk u vendos. Ju lutemi provoni përsëri.",
+        "network": "Gabim rrjeti. Kontrolloni lidhjen dhe provoni përsëri."
+      }
+    },
+    "success": {
+      "title": "Porosia u vendos",
+      "thanksWithName": "Faleminderit, {name}! Pronari juaj në {property} është njoftuar.",
+      "thanks": "Faleminderit! Pronari juaj në {property} është njoftuar.",
+      "total": "Totali",
+      "reference": "Referenca",
+      "bankTitle": "Paguaj me transfer bankar",
+      "bankBody": "Transferoni {amount} në IBAN më poshtë. Përdorni referencën {ref} që pronari të identifikojë pagesën.",
+      "cashTitle": "Paguaj me para në dorë",
+      "cashBody": "Ju lutemi paguani pronarin me para në dorë kur ju përshtatet. Fatura u dërgua në email-in tuaj.",
+      "stripeTitle": "Pagesa u përfundua",
+      "stripeBody": "Pagesa me kartë u krye me sukses. Faleminderit për porosinë.",
+      "backToMenu": "Kthehu te menuja"
+    },
+    "itemDetail": {
+      "close": "Mbyll",
+      "addToCart": "Shto në shportë",
+      "inStock": "{count} në stok",
+      "outOfStock": "Jashtë stokut"
+    },
+    "receipt": {
+      "subject": "Porosia juaj në {property}",
+      "greeting": "Përshëndetje {name},",
+      "intro": "Faleminderit për porosinë në {property}. Ja detajet e pagesës.",
+      "total": "Totali",
+      "reference": "Referenca",
+      "bankTitle": "Paguaj me transfer bankar",
+      "bankBody": "Transferoni {amount} në IBAN më poshtë. Përdorni referencën {ref} që pronari të identifikojë pagesën.",
+      "cashTitle": "Paguaj me para në dorë",
+      "cashBody": "Ju lutemi paguani pronarin me para në dorë kur ju përshtatet. Ata janë njoftuar për porosinë tuaj.",
+      "stripeTitle": "Pagesa u mor",
+      "stripeBody": "Pagesa me kartë u krye me sukses. Faleminderit për porosinë.",
+      "footer": "EasyHost — porosi në dhomë për pronarët"
+    }
   }
 }

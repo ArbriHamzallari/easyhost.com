@@ -389,5 +389,89 @@
     },
     "rights": "All rights reserved.",
     "madeIn": "Built with care in Tirana"
+  },
+  "guestMenu": {
+    "language": "Lingua",
+    "menu": {
+      "subtitle": "Sfoglia e aggiungi articoli al carrello.",
+      "empty": "Nessun articolo disponibile al momento.",
+      "orderingDisabled": "Gli ordini online non sono ancora disponibili per questa struttura.",
+      "add": "Aggiungi",
+      "decreaseQty": "Diminuisci quantità",
+      "increaseQty": "Aumenta quantità",
+      "cartSummary": "{count, plural, one {# articolo} other {# articoli}} · {total}",
+      "checkout": "Checkout"
+    },
+    "categories": {
+      "beverages": "Bevande",
+      "snacks": "Snack",
+      "alcohol": "Alcolici",
+      "services": "Servizi",
+      "custom": "Altro"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "backToMenu": "← Menu",
+      "emptyCart": "Il carrello è vuoto.",
+      "backToMenuLink": "Torna al menu",
+      "yourOrder": "Il tuo ordine",
+      "total": "Totale",
+      "yourDetails": "I tuoi dati",
+      "name": "Nome",
+      "email": "Email (per la ricevuta)",
+      "payment": "Pagamento",
+      "payCash": "Paga in contanti",
+      "payCashDesc": "Paga il tuo host in contanti quando preferisci.",
+      "payBank": "Bonifico bancario",
+      "payBankDesc": "Riceverai i dati bancari subito dopo l'ordine.",
+      "payCard": "Carta, Apple Pay o Google Pay",
+      "payCardDesc": "Paga in sicurezza. Il denaro va direttamente all'host.",
+      "cardPayment": "Pagamento con carta",
+      "payWithCard": "Paga {amount}",
+      "processingPayment": "Elaborazione pagamento…",
+      "placeOrder": "Ordina · {amount}",
+      "placingOrder": "Ordine in corso…",
+      "disclaimer": "Confermando l'ordine accetti di pagare {property} direttamente. EasyHost non gestisce i pagamenti degli ospiti.",
+      "errors": {
+        "outOfStock": "Alcuni articoli non sono più disponibili. Aggiorna il carrello.",
+        "paymentUnavailable": "Questo metodo di pagamento non è disponibile.",
+        "generic": "Impossibile inviare l'ordine. Riprova.",
+        "network": "Errore di rete. Controlla la connessione e riprova."
+      }
+    },
+    "success": {
+      "title": "Ordine inviato",
+      "thanksWithName": "Grazie, {name}! Il tuo host presso {property} è stato avvisato.",
+      "thanks": "Grazie! Il tuo host presso {property} è stato avvisato.",
+      "total": "Totale",
+      "reference": "Riferimento",
+      "bankTitle": "Paga con bonifico",
+      "bankBody": "Trasferisci {amount} all'IBAN qui sotto. Usa il riferimento {ref} così l'host può abbinare il pagamento.",
+      "cashTitle": "Paga in contanti",
+      "cashBody": "Paga il tuo host in contanti quando preferisci. Abbiamo inviato la ricevuta alla tua email.",
+      "stripeTitle": "Pagamento completato",
+      "stripeBody": "Il pagamento con carta è andato a buon fine. Grazie per il tuo ordine.",
+      "backToMenu": "Torna al menu"
+    },
+    "itemDetail": {
+      "close": "Chiudi",
+      "addToCart": "Aggiungi al carrello",
+      "inStock": "{count} disponibili",
+      "outOfStock": "Esaurito"
+    },
+    "receipt": {
+      "subject": "Il tuo ordine da {property}",
+      "greeting": "Ciao {name},",
+      "intro": "Grazie per il tuo ordine da {property}. Ecco i dettagli per il pagamento.",
+      "total": "Totale",
+      "reference": "Riferimento",
+      "bankTitle": "Paga con bonifico",
+      "bankBody": "Trasferisci {amount} all'IBAN qui sotto. Usa il riferimento {ref} così l'host può abbinare il pagamento.",
+      "cashTitle": "Paga in contanti",
+      "cashBody": "Paga il tuo host in contanti quando preferisci. È stato informato del tuo ordine.",
+      "stripeTitle": "Pagamento ricevuto",
+      "stripeBody": "Il pagamento con carta è andato a buon fine. Grazie per il tuo ordine.",
+      "footer": "EasyHost — ordinazioni in camera per host"
+    }
   }
 }

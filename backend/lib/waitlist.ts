@@ -10,7 +10,13 @@ import { sendWaitlistNotifyEmail } from "./emails/waitlist-notify";
 const WaitlistInput = z.object({
   email: z.string().trim().toLowerCase().email("invalid_email"),
   language: z.string().optional(),
-  source: z.string().max(80).optional(),
+  // Restricted to safe characters — prevents stored XSS if source is ever rendered.
+  source: z
+    .string()
+    .max(80)
+    .regex(/^[a-zA-Z0-9_\-./]*$/)
+    .optional()
+    .catch(undefined), // silently drop invalid sources rather than rejecting the signup
 });
 
 export type WaitlistResult =

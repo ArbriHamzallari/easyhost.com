@@ -4,13 +4,18 @@ import {
   getActiveOnboardingProperty,
   updatePropertyPayment,
 } from "@/backend/lib/org";
+import { isStripeConfigured } from "@/backend/lib/stripe";
 import { WizardStep } from "@/frontend/components/dashboard/wizard-step";
 import { CashToggle } from "@/frontend/components/dashboard/cash-toggle";
 import { Button } from "@/frontend/components/ui/button";
 
-export default async function OnboardingPaymentPage() {
+type Props = { searchParams: Promise<{ stripe?: string }> };
+
+export default async function OnboardingPaymentPage({ searchParams }: Props) {
+  const { stripe: stripeParam } = await searchParams;
   const propertyId = await getActiveOnboardingProperty();
   if (!propertyId) redirect("/onboarding/property");
+  const stripeEnabled = isStripeConfigured();
 
   async function handlePayment(formData: FormData) {
     "use server";
@@ -36,7 +41,40 @@ export default async function OnboardingPaymentPage() {
         Guest payments go straight to your bank account. EasyHost never handles your money.
       </div>
 
+      {stripeParam === "connected" && (
+        <div className="mx-auto mb-6 max-w-xl rounded-[12px] border border-[var(--success)]/30 bg-[#E8F5E9] px-4 py-3 text-[13px] text-[#008A05]">
+          Stripe connected. Card, Apple Pay, and Google Pay are now available to
+          guests.
+        </div>
+      )}
+      {stripeParam === "error" && (
+        <div className="mx-auto mb-6 max-w-xl rounded-[12px] border border-[var(--error)]/30 bg-[#FFE8DE] px-4 py-3 text-[13px] text-[var(--error)]">
+          Could not connect Stripe. Please try again.
+        </div>
+      )}
+
       <form action={handlePayment} className="mx-auto max-w-xl space-y-6">
+        {stripeEnabled && (
+          <div className="rounded-[16px] border border-[var(--border)] bg-white p-5">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-[14px] font-semibold text-[var(--foreground)]">
+                  Card, Apple Pay &amp; Google Pay
+                </div>
+                <p className="mt-0.5 text-[12.5px] text-[var(--muted)]">
+                  Connect your Stripe account. Guests pay you directly — EasyHost
+                  never holds funds.
+                </p>
+              </div>
+              <Button asChild variant="outline" size="lg" className="shrink-0">
+                <a href={`/api/stripe/connect?propertyId=${propertyId}`}>
+                  Connect Stripe
+                </a>
+              </Button>
+            </div>
+          </div>
+        )}
+
         {/* IBAN */}
         <div className="rounded-[16px] border border-[var(--border)] bg-white p-5">
           <div className="flex items-start gap-3">

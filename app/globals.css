@@ -69,6 +69,51 @@
   --champagne: var(--color-champagne);
   --sage: var(--color-sage);
   --ink: var(--color-ink);
+
+  /* Card surface (white in light, dark warm in dark) */
+  --card: #ffffff;
+
+  /* Semantic — light mode */
+  --success: #2f7d3b;
+  --warning: #c98b2a;
+  --error:   #b53d27;
+
+  /* Stat icon badge backgrounds — light mode */
+  --stat-bg-revenue: #fbeee6;
+  --stat-bg-orders:  #e3f0e5;
+  --stat-bg-qr:      #eae8f5;
+  --stat-bg-stock:   #fef3e2;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────────────────
+   Applied when <html class="dark"> is present (toggled by DashboardHeader).
+   All var(--token) references in inline styles cascade automatically.
+   ─────────────────────────────────────────────────────────────────────── */
+.dark {
+  --background:   #19170f;   /* deep warm charcoal          */
+  --foreground:   #f0ebe3;   /* warm cream                  */
+  --surface:      #221f17;   /* sidebar / secondary surface */
+  --linen:        #221f17;
+  --border:       #322e25;   /* warm dark separator         */
+  --muted:        #978a7d;   /* secondary text              */
+  --muted-light:  #5c5449;   /* tertiary / placeholder      */
+  --stone:        #3b3529;   /* badge background            */
+  --ink:          #f0ebe3;
+  --card:         #1e1b13;   /* card / panel surface        */
+  --primary-soft: rgba(225, 106, 74, 0.16);
+  --clay:         rgba(244, 228, 214, 0.06);
+  --champagne:    rgba(239, 230, 219, 0.06);
+
+  /* Semantic — slightly brighter for dark backgrounds */
+  --success: #4db362;
+  --warning: #e0a83a;
+  --error:   #e05a40;
+
+  /* Stat icon badge backgrounds — dark mode */
+  --stat-bg-revenue: rgba(225, 106,  74, 0.16);
+  --stat-bg-orders:  rgba( 47, 125,  59, 0.18);
+  --stat-bg-qr:      rgba(100,  84, 185, 0.18);
+  --stat-bg-stock:   rgba(201, 139,  42, 0.18);
 }
 
 body {
@@ -179,6 +224,142 @@ h4 {
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
+    animation: none;
+  }
+}
+
+/* ===== EasyHost Auth Page Animations ===== */
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideRightIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateX(0px);
+  }
+}
+
+@keyframes testimonialIn {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.animate-element {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(4px);
+  animation: fadeSlideIn 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+  opacity: 0;
+  transform: translateX(40px);
+  filter: blur(4px);
+  animation: slideRightIn 0.8s ease-out forwards;
+}
+
+.animate-testimonial {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  filter: blur(4px);
+  animation: testimonialIn 0.6s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+.animate-delay-500 {
+  animation-delay: 500ms;
+}
+.animate-delay-600 {
+  animation-delay: 600ms;
+}
+.animate-delay-700 {
+  animation-delay: 700ms;
+}
+.animate-delay-800 {
+  animation-delay: 800ms;
+}
+.animate-delay-900 {
+  animation-delay: 900ms;
+}
+.animate-delay-1000 {
+  animation-delay: 1000ms;
+}
+.animate-delay-1200 {
+  animation-delay: 1200ms;
+}
+.animate-delay-1400 {
+  animation-delay: 1400ms;
+}
+
+.custom-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.custom-checkbox:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.custom-checkbox:checked::after {
+  content: "✓";
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-element,
+  .animate-slide-right,
+  .animate-testimonial {
+    opacity: 1;
+    transform: none;
+    filter: none;
     animation: none;
   }
 }

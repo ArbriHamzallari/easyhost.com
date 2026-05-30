@@ -4,6 +4,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Prisma } from "../../generated/prisma";
 import { prisma } from "./prisma";
+import { getOrgAccess } from "./subscription";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -260,6 +261,11 @@ export async function createProperty(input: {
 
   try {
     const user = await requireUser();
+    const access = await getOrgAccess(user.orgId);
+    if (!access.canAddProperty) {
+      return { ok: false, error: "forbidden" };
+    }
+
     const slug = await uniquePropertySlug(parsed.data.name);
 
     const property = await prisma.property.create({
@@ -283,11 +289,32 @@ export async function createProperty(input: {
 // Public: updatePropertyLocation
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Validate against the runtime's IANA timezone database — no static list to maintain.
+function isIanaTimezone(tz: string): boolean {
+  try {
+    Intl.DateTimeFormat(undefined, { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// ISO 4217 currencies accepted at launch. Expand as needed.
+const ACCEPTED_CURRENCIES = [
+  "EUR", "USD", "GBP", "ALL", "CHF", "CAD", "AUD", "JPY",
+  "SEK", "NOK", "DKK", "HRK", "MKD", "BAM", "RSD",
+] as const;
+
 const LocationSchema = z.object({
   propertyId: z.string().min(1),
   address: z.string().min(1).max(500).trim(),
-  timezone: z.string().min(1).max(100).trim(),
-  currency: z.string().length(3).toUpperCase(),
+  timezone: z
+    .string()
+    .min(1)
+    .max(100)
+    .trim()
+    .refine(isIanaTimezone, "invalid_timezone"),
+  currency: z.enum(ACCEPTED_CURRENCIES),
 });
 
 export async function updatePropertyLocation(input: {

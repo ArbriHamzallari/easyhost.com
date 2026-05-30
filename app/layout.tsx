@@ -3,7 +3,12 @@ import { Inter, Fraunces } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { THEME_INIT_SCRIPT } from "@/frontend/lib/theme";
 import "./globals.css";
+
+// Blocking inline script — runs before first paint.
+// Dark mode is scoped to dashboard routes only; marketing always stays light.
+const themeScript = THEME_INIT_SCRIPT;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -50,7 +55,10 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
         className={`${inter.variable} ${fraunces.variable} font-sans antialiased`}
       >

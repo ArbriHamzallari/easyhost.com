@@ -4,8 +4,33 @@ import { ensureOrgExists } from "@/backend/lib/org";
 import { prisma } from "@/backend/lib/prisma";
 import { daysUntil } from "@/backend/lib/dates";
 import { TrialBanner } from "@/frontend/components/dashboard/trial-banner";
-import { Check, QrCode, UtensilsCrossed, Palette, CreditCard, ArrowRight } from "lucide-react";
+import { DashboardHeader } from "@/frontend/components/dashboard/dashboard-header";
+import { SetupChecklist } from "@/frontend/components/dashboard/setup-checklist";
+import type { ChecklistKey } from "@/frontend/components/dashboard/setup-checklist";
+import {
+  DollarSign,
+  ShoppingBag,
+  QrCode,
+  Package,
+  TrendingUp,
+  Minus,
+  AlertTriangle,
+  UtensilsCrossed,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/frontend/components/ui/button";
+import {
+  RecentOrdersLive,
+  type DashboardOrderRow,
+} from "@/frontend/components/dashboard/recent-orders-live";
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
 
 export default async function DashboardPage() {
   const { orgId } = await ensureOrgExists();
@@ -37,194 +62,305 @@ export default async function DashboardPage() {
   if (!org) redirect("/onboarding");
 
   const daysLeft = daysUntil(org.trialEndsAt);
+  const firstName = owner?.name?.split(" ")[0] ?? "there";
 
-  const menu = property
-    ? await prisma.menu.findFirst({
-        where: { propertyId: property.id },
-        select: {
-          isDraft: true,
-          _count: { select: { items: true } },
-        },
-      })
-    : null;
+  // All secondary queries in parallel
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  const [menu, todayRevenue, ordersToday, recentOrders, lowStockItems] =
+    await Promise.all([
+      property
+        ? prisma.menu.findFirst({
+            where: { propertyId: property.id },
+            select: { isDraft: true, _count: { select: { items: true } } },
+          })
+        : Promise.resolve(null),
+
+      property
+        ? prisma.order.aggregate({
+            where: {
+              propertyId: property.id,
+              status: "paid",
+              createdAt: { gte: todayStart },
+            },
+            _sum: { totalAmount: true },
+          })
+        : Promise.resolve({ _sum: { totalAmount: null } }),
+
+      property
+        ? prisma.order.count({
+            where: {
+              propertyId: property.id,
+              createdAt: { gte: todayStart },
+            },
+          })
+        : Promise.resolve(0),
+
+      property
+        ? prisma.order.findMany({
+            where: { propertyId: property.id },
+            orderBy: { createdAt: "desc" },
+            take: 5,
+            select: {
+              id: true,
+              status: true,
+              totalAmount: true,
+              currency: true,
+              createdAt: true,
+              guestName: true,
+              paymentMethod: true,
+              items: {
+                select: { itemNameSnapshot: true, quantity: true },
+                take: 2,
+              },
+            },
+          })
+        : Promise.resolve([]),
+
+      property
+        ? prisma.menuItem.findMany({
+            where: { menu: { propertyId: property.id }, isAvailable: true },
+            select: { stockQuantity: true, lowStockThreshold: true },
+          })
+        : Promise.resolve([]),
+    ]);
+
   const menuItemCount = menu?._count.items ?? 0;
+  const revenueToday = Number(todayRevenue._sum.totalAmount ?? 0);
+  const lowStockCount = lowStockItems.filter(
+    (item) => item.stockQuantity <= item.lowStockThreshold
+  ).length;
 
-  const checklist = [
+  // Checklist — serialisable for the client component
+  const checklistItems: { key: ChecklistKey; done: boolean; href: string }[] = [
     {
-      icon: Palette,
+      key: "branding",
       done: !!(property?.logoUrl || property?.accentColor),
-      label: "Set up branding",
-      description: "Add your logo and brand color",
       href: "/onboarding/branding",
     },
     {
-      icon: CreditCard,
+      key: "payment",
       done: !!(property?.iban || property?.acceptCash || property?.stripeAccountId),
-      label: "Configure payment",
-      description: "Add your IBAN or enable cash",
       href: "/onboarding/payment",
     },
     {
-      icon: UtensilsCrossed,
+      key: "menu",
       done: menuItemCount > 0,
-      label: "Add your first menu item",
-      description: "Start building your menu",
       href: property ? `/properties/${property.id}/menu` : "#",
     },
     {
-      icon: QrCode,
+      key: "qr",
       done: !!(menu && !menu.isDraft),
-      label: "Generate your QR code",
-      description: "Print and place it in your rental",
       href: property ? `/properties/${property.id}/qr` : "#",
     },
   ];
+  const completedCount = checklistItems.filter((i) => i.done).length;
 
-  const completedCount = checklist.filter((i) => i.done).length;
-  const firstName = owner?.name?.split(" ")[0] ?? "there";
+  const ordersForClient: DashboardOrderRow[] = recentOrders.map((o) => ({
+    id: o.id,
+    status: o.status,
+    totalAmount: o.totalAmount.toString(),
+    currency: o.currency,
+    createdAt: o.createdAt.toISOString(),
+    guestName: o.guestName,
+    paymentMethod: o.paymentMethod,
+    items: o.items,
+  }));
+
+  // 4 stat cards — all use CSS-var icon backgrounds so dark mode works
+  const stats = [
+    {
+      label: "Today's revenue",
+      value: `€${revenueToday.toFixed(2)}`,
+      sub: revenueToday > 0 ? "From paid orders" : "No paid orders yet",
+      icon: DollarSign,
+      iconBg: "var(--stat-bg-revenue)",
+      iconColor: "var(--primary)",
+      trend: revenueToday > 0 ? "up" : "neutral",
+    },
+    {
+      label: "Orders today",
+      value: String(ordersToday),
+      sub: ordersToday > 0 ? "Across all statuses" : "Guests will appear here",
+      icon: ShoppingBag,
+      iconBg: "var(--stat-bg-orders)",
+      iconColor: "var(--success)",
+      trend: ordersToday > 0 ? "up" : "neutral",
+    },
+    {
+      // QR scan tracking ships in Phase 6 — placeholder for now
+      label: "QR scans today",
+      value: "—",
+      sub: "Tracking coming soon",
+      icon: QrCode,
+      iconBg: "var(--stat-bg-qr)",
+      iconColor: "#7c6ab8",
+      trend: "neutral",
+    },
+    {
+      label: "Low stock items",
+      value: menuItemCount > 0 ? String(lowStockCount) : "—",
+      sub:
+        menuItemCount === 0
+          ? "Add menu items first"
+          : lowStockCount > 0
+            ? "Restock soon"
+            : "All items stocked",
+      icon: Package,
+      iconBg: "var(--stat-bg-stock)",
+      iconColor: lowStockCount > 0 ? "var(--warning)" : "var(--muted)",
+      trend:
+        menuItemCount === 0 ? "neutral" : lowStockCount > 0 ? "warn" : "up",
+    },
+  ] as const;
 
   return (
-    <div className="min-h-screen bg-[var(--surface)]">
-      <header className="border-b border-[var(--border)] bg-white px-6 py-4">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link
-            href="/dashboard"
-            className="font-display text-[18px] font-semibold tracking-tight text-[var(--foreground)]"
-          >
-            Easy<span className="text-[var(--primary)]">Host</span>
-          </Link>
-          <nav className="flex items-center gap-6 text-[13.5px] text-[var(--muted)]">
-            <Link href="/dashboard" className="font-medium text-[var(--foreground)]">
-              Dashboard
-            </Link>
-            {property && (
-              <Link href={`/properties/${property.id}/menu`} className="hover:text-[var(--foreground)]">
-                Menu
-              </Link>
-            )}
-            <Link href="/settings" className="hover:text-[var(--foreground)]">
-              Settings
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <>
+      <DashboardHeader
+        title="Dashboard"
+        greeting={`Welcome back, ${firstName}`}
+        propertyName={property?.name}
+      />
 
-      <main className="mx-auto max-w-6xl space-y-6 px-6 py-8">
+      <div className="mx-auto max-w-5xl space-y-5 px-6 py-7">
+        {/* Trial banner */}
         <TrialBanner
           daysLeft={daysLeft}
           subscriptionStatus={org.subscriptionStatus}
         />
 
-        <div>
-          <h1 className="font-display text-[28px] font-semibold tracking-tight text-[var(--foreground)]">
-            Welcome back, {firstName}.
-          </h1>
-          {property && (
-            <p className="mt-1 text-[14px] text-[var(--muted)]">{property.name}</p>
-          )}
-        </div>
+        {/* ── Setup checklist (full-width, collapsible client component) ── */}
+        <SetupChecklist items={checklistItems} completedCount={completedCount} />
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-1">
-            <div className="rounded-[20px] border border-[var(--border)] bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-              <div className="flex items-center justify-between">
-                <h2 className="text-[15px] font-semibold text-[var(--foreground)]">Setup</h2>
-                <span className="text-[12px] text-[var(--muted)]">
-                  {completedCount}/{checklist.length} done
-                </span>
-              </div>
-
+        {/* ── 4-card stats row ── */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => {
+            const Icon = stat.icon;
+            return (
               <div
-                className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[var(--surface)]"
-                role="progressbar"
-                aria-valuenow={completedCount}
-                aria-valuemin={0}
-                aria-valuemax={checklist.length}
+                key={stat.label}
+                className="rounded-[16px] border p-5 transition-shadow duration-200 hover:shadow-md"
+                style={{
+                  background: "var(--card)",
+                  borderColor: "var(--border)",
+                  boxShadow:
+                    "0 1px 3px rgba(28,25,23,0.04), 0 4px 12px -4px rgba(28,25,23,0.06)",
+                }}
               >
-                <div
-                  className="h-full rounded-full bg-[var(--primary)] transition-all"
-                  style={{ width: `${(completedCount / checklist.length) * 100}%` }}
-                />
-              </div>
-
-              <ul className="mt-5 space-y-3">
-                {checklist.map((item) => (
-                  <li key={item.label}>
-                    {item.done ? (
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--success)] text-white">
-                          <Check className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden="true" />
-                        </div>
-                        <span className="text-[13px] text-[var(--muted)] line-through">
-                          {item.label}
-                        </span>
-                      </div>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className="group flex items-center gap-3 rounded-[10px] -m-1.5 p-1.5 hover:bg-[var(--surface)]"
-                      >
-                        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-[var(--border)] text-[var(--muted)]">
-                          <item.icon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="text-[13px] font-medium text-[var(--foreground)]">
-                            {item.label}
-                          </div>
-                          <div className="text-[11px] text-[var(--muted)]">
-                            {item.description}
-                          </div>
-                        </div>
-                        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[var(--muted)] opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true" />
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="space-y-5 lg:col-span-2">
-            {menuItemCount === 0 && (
-              <div className="rounded-[20px] border border-dashed border-[var(--border)] bg-white p-8 text-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--primary-soft)]">
-                  <UtensilsCrossed className="h-7 w-7 text-[var(--primary)]" strokeWidth={1.75} aria-hidden="true" />
-                </div>
-                <h3 className="mt-4 text-[17px] font-semibold text-[var(--foreground)]">
-                  Build your first menu
-                </h3>
-                <p className="mx-auto mt-2 max-w-xs text-[13.5px] leading-relaxed text-[var(--muted)]">
-                  Add snacks, drinks, and services. Guests will see your menu when they scan the QR code.
-                </p>
-                <Button asChild className="mt-6">
-                  <Link href={property ? `/properties/${property.id}/menu` : "/onboarding"}>
-                    Start building →
-                  </Link>
-                </Button>
-              </div>
-            )}
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                { label: "Today's revenue", value: "€0.00", sub: "No orders yet" },
-                { label: "Orders today", value: "0", sub: "Guests will appear here" },
-                { label: "Low stock items", value: "—", sub: "After first menu item" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-[16px] border border-[var(--border)] bg-white p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
-                >
-                  <div className="text-[12px] text-[var(--muted)]">{stat.label}</div>
-                  <div className="mt-1 font-display text-[26px] font-semibold text-[var(--foreground)]">
-                    {stat.value}
+                {/* Top: icon + trend */}
+                <div className="flex items-start justify-between">
+                  <div
+                    className="flex h-9 w-9 items-center justify-center rounded-xl"
+                    style={{ background: stat.iconBg }}
+                  >
+                    <Icon
+                      className="h-[18px] w-[18px]"
+                      strokeWidth={1.75}
+                      style={{ color: stat.iconColor }}
+                      aria-hidden="true"
+                    />
                   </div>
-                  <div className="mt-0.5 text-[11px] text-[var(--muted)]">{stat.sub}</div>
+                  <div className="mt-0.5">
+                    {stat.trend === "up" && (
+                      <TrendingUp
+                        className="h-4 w-4"
+                        style={{ color: "var(--success)" }}
+                        aria-hidden="true"
+                      />
+                    )}
+                    {stat.trend === "warn" && (
+                      <AlertTriangle
+                        className="h-4 w-4"
+                        style={{ color: "var(--warning)" }}
+                        aria-hidden="true"
+                      />
+                    )}
+                    {stat.trend === "neutral" && (
+                      <Minus
+                        className="h-4 w-4"
+                        style={{ color: "var(--muted-light)" }}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+
+                {/* Value */}
+                <div
+                  className="mt-3 font-display text-[26px] font-semibold leading-none"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {stat.value}
+                </div>
+
+                {/* Label */}
+                <div className="mt-1.5 text-[12px]" style={{ color: "var(--muted)" }}>
+                  {stat.label}
+                </div>
+
+                {/* Sub */}
+                <div className="mt-0.5 text-[11px]" style={{ color: "var(--muted-light)" }}>
+                  {stat.sub}
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </main>
-    </div>
+
+        {/* ── Empty menu CTA (only shown before first item) ── */}
+        {menuItemCount === 0 && (
+          <div
+            className="rounded-[20px] border border-dashed p-8 text-center"
+            style={{
+              background: "var(--card)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <div
+              className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl"
+              style={{ background: "var(--primary-soft)" }}
+            >
+              <UtensilsCrossed
+                className="h-7 w-7"
+                strokeWidth={1.75}
+                style={{ color: "var(--primary)" }}
+                aria-hidden="true"
+              />
+            </div>
+            <h3
+              className="mt-4 text-[17px] font-semibold"
+              style={{ color: "var(--foreground)" }}
+            >
+              Build your first menu
+            </h3>
+            <p
+              className="mx-auto mt-2 max-w-xs text-[13.5px] leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Add snacks, drinks, and services. Guests will see your menu when
+              they scan the QR code.
+            </p>
+            <Button asChild className="mt-6">
+              <Link
+                href={
+                  property ? `/properties/${property.id}/menu` : "/onboarding"
+                }
+              >
+                Start building →
+              </Link>
+            </Button>
+          </div>
+        )}
+
+        <RecentOrdersLive
+          propertyId={property?.id ?? null}
+          propertyMenuHref={
+            property ? `/properties/${property.id}/menu` : null
+          }
+          initialOrders={ordersForClient}
+        />
+      </div>
+    </>
   );
 }
