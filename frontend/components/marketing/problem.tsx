@@ -72,7 +72,7 @@ export function Problem() {
             subtext={t("landing.problem.old.subtext")}
             points={oldPoints}
             imageSrc="/images/compare-old.png"
-            imageAlt="A dim minibar with a handwritten tally sheet, spilled chips, scattered nuts and crumpled euro notes"
+            imageAlt="A dim fridge with a handwritten tally sheet, spilled chips, scattered nuts and crumpled euro notes"
           />
           <ComparePanel
             tone="new"
@@ -82,7 +82,7 @@ export function Problem() {
             subtext={t("landing.problem.new.subtext")}
             points={newPoints}
             imageSrc="/images/compare-new.png"
-            imageAlt="A warmly lit, well-stocked minibar beside a QR welcome card inviting guests to scan and order"
+            imageAlt="A warmly lit, well-stocked fridge beside a QR welcome card inviting guests to scan and see what's available"
           />
         </div>
       </div>

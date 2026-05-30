@@ -22,7 +22,7 @@ const copy: Record<Locale, Copy> = {
     whatsNextTitle: "What happens next",
     whatsNext:
       "We'll email you as soon as EasyHost is ready, likely in a few weeks. No spam in between, promise.",
-    perk: "Early waitlist members get 50% off their first year, locked in for life.",
+    perk: "Early waitlist members get 50% off for life.",
     footer: "Built with care in Tirana, Albania.",
     signoff: "Arbri & the EasyHost team",
   },

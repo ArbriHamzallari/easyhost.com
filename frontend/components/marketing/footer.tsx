@@ -12,7 +12,7 @@ export async function MarketingFooter() {
       links: [
         { label: t("footer.links.features"), href: "#features" },
         { label: t("footer.links.pricing"), href: "/pricing" },
-        { label: t("footer.links.menu"), href: "#" },
+        { label: t("footer.links.menu"), href: "/how-it-works" },
         { label: t("footer.links.demo"), href: "#" },
       ],
     },

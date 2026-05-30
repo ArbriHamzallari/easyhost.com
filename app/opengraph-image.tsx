@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "EasyHost: Turn minibar snacks into passive income";
+export const alt = "EasyHost — Everything in your rental, on demand.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -67,7 +67,7 @@ export default function OgImage() {
             maxWidth: "900px",
           }}
         >
-          Turn minibar snacks into passive income.
+          Everything in your rental, on demand.
         </div>
 
         {/* Subline */}
@@ -80,7 +80,7 @@ export default function OgImage() {
             lineHeight: "1.4",
           }}
         >
-          Beautiful in-room menus for Airbnb hosts and boutique hotels.
+          Beautiful in-room ordering for every kind of property host.
         </div>
 
         {/* Pills */}

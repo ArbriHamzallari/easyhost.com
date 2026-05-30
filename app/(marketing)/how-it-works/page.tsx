@@ -5,7 +5,7 @@ import { HowItWorks } from "@/frontend/components/marketing/how-it-works";
 export const metadata: Metadata = {
   title: "How It Works — EasyHost",
   description:
-    "Stock your rental, place the QR code, and get paid automatically. EasyHost turns your in-room minibar into a revenue stream in three simple steps.",
+    "Stock your property, place the QR code, and get paid automatically. Three steps from setup to your first payout.",
   openGraph: {
     title: "How It Works — EasyHost",
     description:

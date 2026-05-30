@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Button } from "@/frontend/components/ui/button";
 import { Logo } from "./logo";
 import { MobileNav } from "./mobile-nav";
+import { LanguageSwitcher } from "./language-switcher";
 
 export async function MarketingNav() {
-  const t = await getTranslations();
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
 
   const navLinks = [
     { label: t("nav.howItWorks"), href: "/how-it-works" },
@@ -38,8 +39,13 @@ export async function MarketingNav() {
           ))}
         </nav>
 
-        {/* Desktop CTA + mobile hamburger */}
+        {/* Desktop CTA + language switcher + mobile hamburger */}
         <div className="flex items-center gap-3">
+          {/* Language switcher — desktop only */}
+          <div className="hidden md:flex">
+            <LanguageSwitcher currentLocale={locale} variant="compact" />
+          </div>
+
           <Link
             href="/sign-in"
             className="hidden text-[14px] font-medium text-[var(--muted)] transition-colors hover:text-[var(--ink)] md:inline-flex"
@@ -50,11 +56,12 @@ export async function MarketingNav() {
             <Link href="/sign-up">{t("common.signUp")}</Link>
           </Button>
 
-          {/* Mobile hamburger — passes translated strings down */}
+          {/* Mobile hamburger — passes translated strings + locale down */}
           <MobileNav
             links={navLinks}
             signIn={t("common.signIn")}
             signUp={t("common.signUp")}
+            currentLocale={locale}
           />
         </div>
       </div>
