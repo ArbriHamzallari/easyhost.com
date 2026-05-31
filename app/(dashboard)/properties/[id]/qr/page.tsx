@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
@@ -119,9 +120,12 @@ export default async function QrPage({ params }: Params) {
             <div className="rounded-[20px] border border-[var(--border)] bg-white p-8 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
               <div className="flex flex-col items-center gap-6 sm:flex-row">
                 {/* QR image loaded via the API route */}
-                <img
+                <Image
                   src={`/api/properties/${propertyId}/qr?format=png`}
                   alt={`QR code for ${property.name}`}
+                  width={192}
+                  height={192}
+                  unoptimized
                   className="h-48 w-48 shrink-0 rounded-[12px]"
                 />
                 <div className="flex-1 space-y-4 text-center sm:text-left">

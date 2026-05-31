@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -76,9 +77,11 @@ function SortableItem({
       </button>
 
       {item.imageUrl ? (
-        <img
+        <Image
           src={item.imageUrl}
           alt=""
+          width={48}
+          height={48}
           className="h-12 w-12 shrink-0 rounded-[10px] object-cover"
         />
       ) : (

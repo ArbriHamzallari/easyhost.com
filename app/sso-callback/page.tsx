@@ -3,7 +3,7 @@
 import { useClerk, useSignIn, useSignUp } from "@clerk/nextjs";
 import type { SignInStatus, SignUpStatus } from "@clerk/shared/types";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const DASHBOARD_URL = "/dashboard";
 const ONBOARDING_URL = "/onboarding";
@@ -15,11 +15,11 @@ export default function SSOCallbackPage() {
   const router = useRouter();
   const hasRun = useRef(false);
 
-  const navigateToSignIn = () => {
+  const navigateToSignIn = useCallback(() => {
     router.push("/sign-in");
-  };
+  }, [router]);
 
-  const finalizeSignIn = async () => {
+  const finalizeSignIn = useCallback(async () => {
     await signIn.finalize({
       navigate: async ({ session, decorateUrl }) => {
         if (session?.currentTask) {
@@ -40,9 +40,9 @@ export default function SSOCallbackPage() {
         }
       },
     });
-  };
+  }, [signIn, router]);
 
-  const finalizeSignUp = async () => {
+  const finalizeSignUp = useCallback(async () => {
     await signUp.finalize({
       navigate: async ({ session, decorateUrl }) => {
         if (session?.currentTask) {
@@ -63,7 +63,7 @@ export default function SSOCallbackPage() {
         }
       },
     });
-  };
+  }, [signUp, router]);
 
   useEffect(() => {
     void (async () => {
@@ -160,7 +160,15 @@ export default function SSOCallbackPage() {
         }
       }
     })();
-  }, [clerk, signIn, signUp, router]);
+  }, [
+    clerk,
+    signIn,
+    signUp,
+    router,
+    finalizeSignIn,
+    finalizeSignUp,
+    navigateToSignIn,
+  ]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--background)] px-4 py-12">
