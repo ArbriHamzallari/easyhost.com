@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
   const signature = req.headers.get("stripe-signature");
   if (!signature) {
-    return NextResponse.json({ error: "missing_signature" }, { status: 400 });
+    return NextResponse.json({ error: "missing_signature" }, { status: 401 });
   }
 
   const body = await req.text();
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     event = getStripe().webhooks.constructEvent(body, signature, secret);
   } catch (err) {
     console.error("[stripe/webhook] signature verification failed", err);
-    return NextResponse.json({ error: "invalid_signature" }, { status: 400 });
+    return NextResponse.json({ error: "invalid_signature" }, { status: 401 });
   }
 
   try {

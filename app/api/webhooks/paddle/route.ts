@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   const signature = req.headers.get("paddle-signature");
   if (!signature) {
-    return NextResponse.json({ error: "missing_signature" }, { status: 400 });
+    return NextResponse.json({ error: "missing_signature" }, { status: 401 });
   }
 
   const rawBody = await req.text();
@@ -32,6 +32,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ received: true });
   } catch (err) {
     console.error("[paddle/webhook]", err);
-    return NextResponse.json({ error: "invalid_webhook" }, { status: 400 });
+    return NextResponse.json({ error: "invalid_webhook" }, { status: 401 });
   }
 }
