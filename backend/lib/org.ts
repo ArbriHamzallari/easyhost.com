@@ -20,6 +20,8 @@ export type ErrorCode =
   | "not_found"
   | "invalid_input"
   | "invalid_iban"
+  | "subscription_locked"
+  | "property_limit_exceeded"
   | "server_error";
 
 const TRIAL_DAYS = 7;
@@ -262,8 +264,11 @@ export async function createProperty(input: {
   try {
     const user = await requireUser();
     const access = await getOrgAccess(user.orgId);
-    if (!access.canAddProperty) {
-      return { ok: false, error: "forbidden" };
+    if (!access.canUseProduct) {
+      return { ok: false, error: "subscription_locked" };
+    }
+    if (access.propertyCount >= access.maxProperties) {
+      return { ok: false, error: "property_limit_exceeded" };
     }
 
     const slug = await uniquePropertySlug(parsed.data.name);

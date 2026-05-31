@@ -114,3 +114,8 @@ export async function assertOrgCanAcceptOrders(orgId: string): Promise<void> {
   const access = await getOrgAccess(orgId);
   if (!access.canAcceptOrders) throw new SubscriptionLockedError();
 }
+
+export async function assertOrgCanUseProduct(orgId: string): Promise<void> {
+  const access = await getOrgAccess(orgId);
+  if (!access.canUseProduct) throw new SubscriptionLockedError();
+}

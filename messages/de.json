@@ -474,5 +474,15 @@
       "stripeBody": "Ihre Kartenzahlung war erfolgreich. Vielen Dank für Ihre Bestellung.",
       "footer": "EasyHost — Bestellungen im Zimmer für Gastgeber"
     }
+  },
+  "hostApp": {
+    "propertyLimit": {
+      "title": "Objektlimit erreicht",
+      "starterMessage": "Der Starter-Plan umfasst 1 Objekt. Upgrade auf Pro für bis zu 5 Objekte.",
+      "proMessage": "Der Pro-Plan umfasst bis zu 5 Objekte. Kontaktieren Sie uns bei Bedarf für mehr.",
+      "subscriptionLocked": "Aktivieren Sie einen Plan, um weitere Objekte hinzuzufügen.",
+      "upgradeCta": "Plan upgraden",
+      "activateCta": "Plan aktivieren"
+    }
   }
 }

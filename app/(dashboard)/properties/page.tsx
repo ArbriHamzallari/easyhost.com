@@ -4,6 +4,7 @@ import { ensureOrgExists } from "@/backend/lib/org";
 import { prisma } from "@/backend/lib/prisma";
 import { getOrgAccess } from "@/backend/lib/subscription";
 import { TrialBanner } from "@/frontend/components/dashboard/trial-banner";
+import { PropertyLimitBanner } from "@/frontend/components/dashboard/property-limit-banner";
 import { Building2, QrCode, UtensilsCrossed, Plus, ArrowRight } from "lucide-react";
 
 export default async function PropertiesPage() {
@@ -44,7 +45,10 @@ export default async function PropertiesPage() {
 
   if (!org) redirect("/onboarding");
 
-  const { maxProperties, canAddProperty, propertyCount, needsUpgrade } = access;
+  const { maxProperties, canAddProperty, propertyCount, needsUpgrade, subscriptionTier } =
+    access;
+  const atPropertyLimit =
+    access.canUseProduct && propertyCount >= maxProperties;
 
   return (
     <div className="min-h-screen bg-[var(--surface)]">
@@ -75,6 +79,13 @@ export default async function PropertiesPage() {
           daysLeft={access.daysLeftInTrial}
           subscriptionStatus={org.subscriptionStatus}
         />
+
+        {atPropertyLimit && (
+          <PropertyLimitBanner
+            variant="property_limit"
+            tier={subscriptionTier}
+          />
+        )}
 
         <div className="flex items-center justify-between">
           <div>
@@ -193,7 +204,7 @@ export default async function PropertiesPage() {
                       QR Code
                     </Link>
                     <Link
-                      href={`/properties/${property.id}/menu`}
+                      href={`/properties/${property.id}`}
                       aria-label="Open property"
                       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border border-[var(--border)] text-[var(--muted)] hover:bg-[var(--surface)] transition-colors"
                     >

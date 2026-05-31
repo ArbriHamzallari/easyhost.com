@@ -474,5 +474,15 @@
       "stripeBody": "Il pagamento con carta è andato a buon fine. Grazie per il tuo ordine.",
       "footer": "EasyHost — ordinazioni in camera per host"
     }
+  },
+  "hostApp": {
+    "propertyLimit": {
+      "title": "Limite proprietà raggiunto",
+      "starterMessage": "Il piano Starter include 1 proprietà. Passa a Pro per fino a 5 proprietà.",
+      "proMessage": "Il piano Pro include fino a 5 proprietà. Contattaci se ne servono di più.",
+      "subscriptionLocked": "Attiva un piano per aggiungere altre proprietà.",
+      "upgradeCta": "Passa a Pro",
+      "activateCta": "Attiva piano"
+    }
   }
 }

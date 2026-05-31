@@ -475,5 +475,15 @@
       "stripeBody": "Your card payment was successful. Thank you for your order.",
       "footer": "EasyHost — in-room ordering for hosts"
     }
+  },
+  "hostApp": {
+    "propertyLimit": {
+      "title": "Property limit reached",
+      "starterMessage": "Your Starter plan includes 1 property. Upgrade to Pro for up to 5 properties.",
+      "proMessage": "Your Pro plan includes up to 5 properties. Contact support if you need more.",
+      "subscriptionLocked": "Activate a plan to add more properties.",
+      "upgradeCta": "Upgrade plan",
+      "activateCta": "Activate plan"
+    }
   }
 }
