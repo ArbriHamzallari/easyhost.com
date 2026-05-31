@@ -8,11 +8,11 @@ import { LanguageSwitcher } from "./language-switcher";
 interface MobileNavProps {
   links: { label: string; href: string }[];
   signIn: string;
-  joinWaitlist: string;
+  signUp: string;
   currentLocale: string;
 }
 
-export function MobileNav({ links, signIn, joinWaitlist, currentLocale }: MobileNavProps) {
+export function MobileNav({ links, signIn, signUp, currentLocale }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
   // Lock body scroll when open
@@ -90,11 +90,11 @@ export function MobileNav({ links, signIn, joinWaitlist, currentLocale }: Mobile
                   {signIn}
                 </Link>
                 <Link
-                  href="/#waitlist"
+                  href="/sign-up"
                   onClick={() => setOpen(false)}
                   className="flex h-11 w-full items-center justify-center rounded-[var(--radius-button)] bg-[var(--primary)] text-[15px] font-semibold text-white hover:bg-[var(--primary-hover)]"
                 >
-                  {joinWaitlist}
+                  {signUp}
                 </Link>
               </div>
             </nav>

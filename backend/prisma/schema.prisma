@@ -8,17 +8,20 @@ datasource db {
 }
 
 model Organization {
-  id                 String    @id @default(cuid())
-  name               String
-  slug               String    @unique
-  logoUrl            String?
-  primaryColor       String    @default("#FF5A1F")
-  defaultLanguage    String    @default("en")
-  paddleCustomerId   String?   @unique
-  subscriptionStatus String    @default("trialing")
-  trialEndsAt        DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  id                   String    @id @default(cuid())
+  name                 String
+  slug                 String    @unique
+  logoUrl              String?
+  primaryColor         String    @default("#FF5A1F")
+  defaultLanguage      String    @default("en")
+  intentType           String?   // airbnb_host | hotel_owner | vacation_rental_manager | other
+  paddleCustomerId     String?   @unique
+  paddleSubscriptionId String?   @unique
+  subscriptionStatus   String    @default("trialing") // trialing | active | past_due | cancelled
+  subscriptionTier     String    @default("starter")  // starter | pro
+  trialEndsAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
   users      User[]
   properties Property[]
@@ -29,7 +32,7 @@ model User {
   clerkUserId String   @unique
   email       String
   name        String?
-  role        String   @default("owner")
+  role        String   @default("owner") // owner | staff
   language    String   @default("en")
   orgId       String
   createdAt   DateTime @default(now())
@@ -42,23 +45,22 @@ model Property {
   orgId     String
   name      String
   slug      String  @unique
-  type      String
+  type      String  // apartment | villa | cottage | suite | hotel | hostel | beachfront | other
   address   String?
   timezone  String  @default("Europe/Tirane")
   currency  String  @default("EUR")
 
+  // Branding (skippable during onboarding, required before QR generation)
   logoUrl        String?
   accentColor    String?
   heroImageUrl   String?
-  welcomeMessage Json?
+  welcomeMessage Json?   // multilingual { en, al, it, de }
 
-  payseraAccountId String?
-  paypalEmail      String?
-  iban             String?
-  acceptCash       Boolean @default(true)
-
-  paddleSubscriptionId String? @unique
-  subscriptionStatus   String  @default("trialing")
+  // Payment connections (at least one required before QR generation)
+  stripeAccountId          String?
+  stripeOnboardingComplete Boolean @default(false)
+  iban                     String?
+  acceptCash               Boolean @default(true)
 
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
@@ -72,8 +74,9 @@ model Property {
 model Menu {
   id         String   @id @default(cuid())
   propertyId String
-  name       Json
+  name       Json     // multilingual { en, al, it, de }
   isActive   Boolean  @default(true)
+  isDraft    Boolean  @default(true) // true until >= 1 item + payment method configured
   createdAt  DateTime @default(now())
 
   property Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
@@ -83,15 +86,15 @@ model Menu {
 model MenuItem {
   id                String   @id @default(cuid())
   menuId            String
-  name              Json
+  name              Json     // multilingual — host sets primary lang, Google Translate fills the rest
   description       Json?
-  category          String
+  category          String   // beverages | snacks | alcohol | services | custom
   imageUrl          String?
   price             Decimal  @db.Decimal(10, 2)
   currency          String   @default("EUR")
   isAvailable       Boolean  @default(true)
-  stockQuantity     Int?
-  lowStockThreshold Int?
+  stockQuantity     Int      @default(0) // required — tracked for low-stock alerts
+  lowStockThreshold Int      @default(3)
   displayOrder      Int      @default(0)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
@@ -101,20 +104,21 @@ model MenuItem {
 }
 
 model Order {
-  id                   String    @id @default(cuid())
-  propertyId           String
-  guestSessionId       String
-  guestEmail           String?
-  guestName            String?
-  status               String    @default("pending")
-  paymentMethod        String?
-  totalAmount          Decimal   @db.Decimal(10, 2)
-  currency             String
-  payseraTransactionId String?
-  paidAt               DateTime?
-  language             String    @default("en")
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
+  id                    String    @id @default(cuid())
+  propertyId            String
+  guestSessionId        String
+  guestEmail            String?
+  guestName             String?
+  status                String    @default("pending") // pending | paid | bank_transfer_pending | cash_pending | cancelled
+  paymentMethod         String?   // stripe | bank_transfer | cash
+  totalAmount           Decimal   @db.Decimal(10, 2)
+  currency              String
+  stripePaymentIntentId String?
+  receiptSentAt         DateTime?
+  paidAt                DateTime?
+  language              String    @default("en")
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
   property Property    @relation(fields: [propertyId], references: [id])
   items    OrderItem[]
@@ -124,7 +128,7 @@ model OrderItem {
   id               String  @id @default(cuid())
   orderId          String
   menuItemId       String
-  itemNameSnapshot Json
+  itemNameSnapshot Json    // snapshot at time of order (all languages)
   quantity         Int
   unitPrice        Decimal @db.Decimal(10, 2)
 
@@ -136,7 +140,7 @@ model InventoryAlert {
   id         String    @id @default(cuid())
   propertyId String
   menuItemId String
-  alertType  String
+  alertType  String    // low_stock | out_of_stock
   sentAt     DateTime  @default(now())
   resolvedAt DateTime?
 }

@@ -1,9 +1,5 @@
-import { SignIn } from "@clerk/nextjs";
+import { SignInPage } from "@/components/ui/sign-in-page";
 
 export default function Page() {
-  return (
-    <div className="flex min-h-[calc(100vh-65px)] items-center justify-center">
-      <SignIn />
-    </div>
-  );
+  return <SignInPage />;
 }

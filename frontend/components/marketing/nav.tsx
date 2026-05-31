@@ -53,14 +53,14 @@ export async function MarketingNav() {
             {t("common.signIn")}
           </Link>
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link href="/#waitlist">{t("common.joinWaitlist")}</Link>
+            <Link href="/sign-up">{t("common.signUp")}</Link>
           </Button>
 
           {/* Mobile hamburger — passes translated strings + locale down */}
           <MobileNav
             links={navLinks}
             signIn={t("common.signIn")}
-            joinWaitlist={t("common.joinWaitlist")}
+            signUp={t("common.signUp")}
             currentLocale={locale}
           />
         </div>

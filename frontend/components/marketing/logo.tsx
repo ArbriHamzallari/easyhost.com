@@ -12,7 +12,7 @@ interface LogoProps {
 /** Full wordmark asset is wider than tall (~3.6:1). */
 const LOGO_ASPECT = 3.6;
 
-export function Logo({ className, wordmark: _wordmark = true, size = 22 }: LogoProps) {
+export function Logo({ className, size = 22 }: LogoProps) {
   return (
     <span className={cn("inline-flex shrink-0 items-center", className)}>
       <Image

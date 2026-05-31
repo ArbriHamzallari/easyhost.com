@@ -44,6 +44,7 @@
       "title": "Trusted by modern hosts worldwide",
       "items": {
         "stripe": "Stripe",
+        "paysera": "Paysera",
         "pci": "PCI DSS Compliant",
         "gdpr": "GDPR Compliant",
         "applePay": "Apple Pay",
@@ -390,5 +391,99 @@
     },
     "rights": "All rights reserved.",
     "madeIn": "Built with care in Tirana"
+  },
+  "guestMenu": {
+    "language": "Language",
+    "menu": {
+      "subtitle": "Browse and add items to your cart.",
+      "empty": "No items available right now.",
+      "orderingDisabled": "Online ordering is not available for this property yet.",
+      "add": "Add",
+      "decreaseQty": "Decrease quantity",
+      "increaseQty": "Increase quantity",
+      "cartSummary": "{count, plural, one {# item} other {# items}} · {total}",
+      "checkout": "Checkout"
+    },
+    "categories": {
+      "beverages": "Beverages",
+      "snacks": "Snacks",
+      "alcohol": "Alcohol",
+      "services": "Services",
+      "custom": "More"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "backToMenu": "← Menu",
+      "emptyCart": "Your cart is empty.",
+      "backToMenuLink": "Back to menu",
+      "yourOrder": "Your order",
+      "total": "Total",
+      "yourDetails": "Your details",
+      "name": "Name",
+      "email": "Email (for receipt)",
+      "payment": "Payment",
+      "payCash": "Pay in cash",
+      "payCashDesc": "Pay your host in cash when it's convenient for you.",
+      "payBank": "Bank transfer",
+      "payBankDesc": "You'll receive bank details right after you place your order.",
+      "payCard": "Card, Apple Pay, or Google Pay",
+      "payCardDesc": "Pay securely. Your host receives the money directly.",
+      "cardPayment": "Card payment",
+      "payWithCard": "Pay {amount}",
+      "processingPayment": "Processing payment…",
+      "placeOrder": "Place order · {amount}",
+      "placingOrder": "Placing order…",
+      "disclaimer": "By placing this order you agree to pay {property} directly. EasyHost does not process guest payments.",
+      "errors": {
+        "outOfStock": "Some items are no longer in stock. Please update your cart.",
+        "paymentUnavailable": "This payment method is not available.",
+        "generic": "We couldn't place your order. Please try again.",
+        "network": "Network error. Please check your connection and try again."
+      }
+    },
+    "success": {
+      "title": "Order placed",
+      "thanksWithName": "Thanks, {name}! Your host at {property} has been notified.",
+      "thanks": "Thank you! Your host at {property} has been notified.",
+      "total": "Total",
+      "reference": "Reference",
+      "bankTitle": "Pay by bank transfer",
+      "bankBody": "Transfer {amount} to the IBAN below. Use reference {ref} so your host can match your payment.",
+      "cashTitle": "Pay in cash",
+      "cashBody": "Please pay your host in cash when convenient. We've sent a receipt to your email.",
+      "stripeTitle": "Payment complete",
+      "stripeBody": "Your card payment was successful. Thank you for your order.",
+      "backToMenu": "Back to menu"
+    },
+    "itemDetail": {
+      "close": "Close",
+      "addToCart": "Add to cart",
+      "inStock": "{count} in stock",
+      "outOfStock": "Out of stock"
+    },
+    "receipt": {
+      "subject": "Your order at {property}",
+      "greeting": "Hi {name},",
+      "intro": "Thanks for your order at {property}. Here are your payment details.",
+      "total": "Total",
+      "reference": "Reference",
+      "bankTitle": "Pay by bank transfer",
+      "bankBody": "Transfer {amount} to the IBAN below. Use reference {ref} so your host can match your payment.",
+      "cashTitle": "Pay in cash",
+      "cashBody": "Please pay your host in cash when convenient. They have been notified of your order.",
+      "stripeTitle": "Payment received",
+      "stripeBody": "Your card payment was successful. Thank you for your order.",
+      "footer": "EasyHost — in-room ordering for hosts"
+    }
+  },
+  "hostApp": {
+    "propertyLimit": {
+      "title": "Property limit reached",
+      "starterMessage": "Your Starter plan includes 1 property. Upgrade to Pro for up to 5 properties.",
+      "proMessage": "Your Pro plan includes up to 5 properties. Contact support if you need more.",
+      "subscriptionLocked": "Activate a plan to add more properties.",
+      "upgradeCta": "Upgrade plan",
+      "activateCta": "Activate plan"
+    }
   }
 }

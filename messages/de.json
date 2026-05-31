@@ -390,5 +390,99 @@
     },
     "rights": "All rights reserved.",
     "madeIn": "Built with care in Tirana"
+  },
+  "guestMenu": {
+    "language": "Sprache",
+    "menu": {
+      "subtitle": "Stöbern Sie und legen Sie Artikel in den Warenkorb.",
+      "empty": "Derzeit sind keine Artikel verfügbar.",
+      "orderingDisabled": "Online-Bestellungen sind für diese Unterkunft noch nicht verfügbar.",
+      "add": "Hinzufügen",
+      "decreaseQty": "Menge verringern",
+      "increaseQty": "Menge erhöhen",
+      "cartSummary": "{count, plural, one {# Artikel} other {# Artikel}} · {total}",
+      "checkout": "Zur Kasse"
+    },
+    "categories": {
+      "beverages": "Getränke",
+      "snacks": "Snacks",
+      "alcohol": "Alkohol",
+      "services": "Services",
+      "custom": "Sonstiges"
+    },
+    "checkout": {
+      "title": "Kasse",
+      "backToMenu": "← Menü",
+      "emptyCart": "Ihr Warenkorb ist leer.",
+      "backToMenuLink": "Zurück zum Menü",
+      "yourOrder": "Ihre Bestellung",
+      "total": "Gesamt",
+      "yourDetails": "Ihre Angaben",
+      "name": "Name",
+      "email": "E-Mail (für Beleg)",
+      "payment": "Zahlung",
+      "payCash": "Bar zahlen",
+      "payCashDesc": "Zahlen Sie Ihren Gastgeber bar, wann es Ihnen passt.",
+      "payBank": "Überweisung",
+      "payBankDesc": "Bankdaten erhalten Sie direkt nach der Bestellung.",
+      "payCard": "Karte, Apple Pay oder Google Pay",
+      "payCardDesc": "Sicher bezahlen. Das Geld geht direkt an Ihren Gastgeber.",
+      "cardPayment": "Kartenzahlung",
+      "payWithCard": "Zahlen {amount}",
+      "processingPayment": "Zahlung wird verarbeitet…",
+      "placeOrder": "Bestellen · {amount}",
+      "placingOrder": "Bestellung wird aufgegeben…",
+      "disclaimer": "Mit der Bestellung stimmen Sie zu, {property} direkt zu zahlen. EasyHost verarbeitet keine Gastzahlungen.",
+      "errors": {
+        "outOfStock": "Einige Artikel sind nicht mehr auf Lager. Bitte aktualisieren Sie den Warenkorb.",
+        "paymentUnavailable": "Diese Zahlungsmethode ist nicht verfügbar.",
+        "generic": "Bestellung konnte nicht aufgegeben werden. Bitte erneut versuchen.",
+        "network": "Netzwerkfehler. Bitte Verbindung prüfen und erneut versuchen."
+      }
+    },
+    "success": {
+      "title": "Bestellung aufgegeben",
+      "thanksWithName": "Danke, {name}! Ihr Gastgeber bei {property} wurde benachrichtigt.",
+      "thanks": "Vielen Dank! Ihr Gastgeber bei {property} wurde benachrichtigt.",
+      "total": "Gesamt",
+      "reference": "Referenz",
+      "bankTitle": "Per Überweisung zahlen",
+      "bankBody": "Überweisen Sie {amount} an die IBAN unten. Nutzen Sie die Referenz {ref}, damit Ihr Gastgeber die Zahlung zuordnen kann.",
+      "cashTitle": "Bar zahlen",
+      "cashBody": "Bitte zahlen Sie Ihren Gastgeber bar, wenn es passt. Der Beleg wurde an Ihre E-Mail gesendet.",
+      "stripeTitle": "Zahlung abgeschlossen",
+      "stripeBody": "Ihre Kartenzahlung war erfolgreich. Vielen Dank für Ihre Bestellung.",
+      "backToMenu": "Zurück zum Menü"
+    },
+    "itemDetail": {
+      "close": "Schließen",
+      "addToCart": "In den Warenkorb",
+      "inStock": "{count} auf Lager",
+      "outOfStock": "Nicht vorrätig"
+    },
+    "receipt": {
+      "subject": "Ihre Bestellung bei {property}",
+      "greeting": "Hallo {name},",
+      "intro": "Danke für Ihre Bestellung bei {property}. Hier sind Ihre Zahlungsdetails.",
+      "total": "Gesamt",
+      "reference": "Referenz",
+      "bankTitle": "Per Überweisung zahlen",
+      "bankBody": "Überweisen Sie {amount} an die IBAN unten. Nutzen Sie die Referenz {ref}, damit Ihr Gastgeber die Zahlung zuordnen kann.",
+      "cashTitle": "Bar zahlen",
+      "cashBody": "Bitte zahlen Sie Ihren Gastgeber bar, wenn es passt. Er wurde über Ihre Bestellung informiert.",
+      "stripeTitle": "Zahlung erhalten",
+      "stripeBody": "Ihre Kartenzahlung war erfolgreich. Vielen Dank für Ihre Bestellung.",
+      "footer": "EasyHost — Bestellungen im Zimmer für Gastgeber"
+    }
+  },
+  "hostApp": {
+    "propertyLimit": {
+      "title": "Objektlimit erreicht",
+      "starterMessage": "Der Starter-Plan umfasst 1 Objekt. Upgrade auf Pro für bis zu 5 Objekte.",
+      "proMessage": "Der Pro-Plan umfasst bis zu 5 Objekte. Kontaktieren Sie uns bei Bedarf für mehr.",
+      "subscriptionLocked": "Aktivieren Sie einen Plan, um weitere Objekte hinzuzufügen.",
+      "upgradeCta": "Plan upgraden",
+      "activateCta": "Plan aktivieren"
+    }
   }
 }
