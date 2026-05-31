@@ -63,7 +63,7 @@ Each host signs up, answers a quick intent question, onboards their property ste
 | Subscription Billing | **Paddle** | Merchant of record, works in Albania |
 | Guest Payments | **Stripe Connect** | Card, Apple Pay, Google Pay — direct payout to host |
 | Bank Transfer | **IBAN (manual)** | Host enters IBAN; guests get bank details at checkout |
-| Auto-Translation | **DeepL API** | Host types item name once; auto-translated to all 4 languages |
+| Auto-Translation | **Google Translate** (`@google-cloud/translate`) | Host types item name once; auto-translated to all 4 languages |
 | Email | **Resend** | Receipts, waitlist, notifications |
 | Image Storage | **Cloudinary** | Menu photos, logos, host branding |
 | QR Generation | **`qrcode` npm** | Server-side PNG/SVG download |
@@ -84,7 +84,7 @@ Supported at launch: **English** (default), **Albanian** (sq), **Italian** (it),
 - All UI strings live in `/messages/{locale}.json` — never hardcoded in components
 - **Guest menu:** auto-detects browser language, switchable via flag dropdown (top right)
 - **Host dashboard:** uses the language set in the host's profile
-- **Menu item names/descriptions:** Host types in their chosen language → DeepL auto-translates to the other 3 and stores all in the same JSON field. Host can manually override any translation.
+- **Menu item names/descriptions:** Host types in their chosen language → Google Translate auto-translates to the other 3 and stores all in the same JSON field. Host can manually override any translation.
 
 Planned additions: French, Spanish, Greek, Turkish.
 
@@ -260,7 +260,7 @@ model Menu {
 model MenuItem {
   id                String   @id @default(cuid())
   menuId            String
-  // name/description: host sets primary lang; DeepL fills the rest; host can override
+  // name/description: host sets primary lang; Google Translate fills the rest; host can override
   name              Json     // { en, sq, it, de }
   description       Json?    // { en, sq, it, de }
   category          String   // beverages, snacks, alcohol, services (or custom)
@@ -379,7 +379,7 @@ model WaitlistEntry {
 
 - CRUD for menu items per property
 - Item fields: name (required, typed in host's language) / photo (optional, Cloudinary) / price (required) / stock count (required) / category / description (optional)
-- On save: DeepL auto-translates name + description to the other 3 languages, stores in JSON. Host can manually edit any translation.
+- On save: Google Translate auto-translates name + description to the other 3 languages, stores in JSON. Host can manually edit any translation.
 - Categories: Beverages / Snacks / Alcohol / Services / Custom
 - Drag-and-drop display order
 - Menu templates per property type ("Airbnb Starter Pack", "Hotel Minibar", etc.)
@@ -529,7 +529,7 @@ model WaitlistEntry {
   /auth.ts                  → Clerk helpers
   /stripe.ts                → Stripe Connect helpers
   /paddle.ts                → Paddle API wrapper
-  /deepl.ts                 → DeepL translation wrapper
+  /translate.ts             → Google Translate wrapper
   /resend.ts                → Email sending
   /realtime.ts              → Supabase Realtime helpers
 /messages
@@ -582,8 +582,8 @@ STRIPE_WEBHOOK_SECRET=
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_CONNECT_CLIENT_ID=
 
-# DeepL
-DEEPL_API_KEY=
+# Google Translate (menu item auto-translation)
+GOOGLE_TRANSLATE_API_KEY=
 
 # Resend
 RESEND_API_KEY=
