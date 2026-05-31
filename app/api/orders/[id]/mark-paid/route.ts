@@ -13,7 +13,9 @@ export async function POST(_req: Request, { params }: Params) {
         ? 404
         : result.error === "forbidden"
           ? 403
-          : 400;
+          : result.error === "subscription_locked"
+            ? 403
+            : 400;
     return NextResponse.json({ error: result.error }, { status });
   }
 

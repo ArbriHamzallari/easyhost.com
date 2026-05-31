@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Prisma } from "../../generated/prisma";
 import { prisma } from "./prisma";
 import { translateMenuText } from "./translate";
-import { getOrgAccess } from "./subscription";
+import { getOrgAccess, SubscriptionLockedError } from "./subscription";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -16,6 +16,7 @@ export type MenuErrorCode =
   | "forbidden"
   | "not_found"
   | "invalid_input"
+  | "subscription_locked"
   | "server_error";
 
 export type MenuResult =
@@ -113,8 +114,21 @@ function logError(scope: string, err: unknown): void {
 
 function toResult(scope: string, err: unknown): MenuResult {
   if (err instanceof AuthError) return { ok: false, error: "unauthenticated" };
+  if (err instanceof SubscriptionLockedError) {
+    return { ok: false, error: "subscription_locked" };
+  }
   logError(scope, err);
   return { ok: false, error: "server_error" };
+}
+
+async function menuMutationBlocked(
+  orgId: string
+): Promise<{ ok: false; error: "subscription_locked" } | null> {
+  const access = await getOrgAccess(orgId);
+  if (!access.canUseProduct) {
+    return { ok: false, error: "subscription_locked" };
+  }
+  return null;
 }
 
 function rowToItem(item: {
@@ -304,6 +318,8 @@ export async function addMenuItem(
 
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const menu = await prisma.menu.findFirst({
       where: { id: menuId, property: { orgId: user.orgId } },
@@ -362,6 +378,8 @@ export async function updateMenuItem(
 
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const item = await prisma.menuItem.findFirst({
       where: { id: itemId, menu: { property: { orgId: user.orgId } } },
@@ -416,6 +434,8 @@ export async function deleteMenuItem(itemId: string): Promise<MenuResult> {
   "use server";
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const item = await prisma.menuItem.findFirst({
       where: { id: itemId, menu: { property: { orgId: user.orgId } } },
@@ -438,6 +458,8 @@ export async function toggleItemAvailability(itemId: string): Promise<MenuResult
   "use server";
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const item = await prisma.menuItem.findFirst({
       where: { id: itemId, menu: { property: { orgId: user.orgId } } },
@@ -468,6 +490,8 @@ export async function updateItemDisplayOrder(
 
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const menu = await prisma.menu.findFirst({
       where: { id: menuId, property: { orgId: user.orgId } },
@@ -505,6 +529,8 @@ export async function updateItemStock(
 
   try {
     const user = await getOrgUser();
+    const blocked = await menuMutationBlocked(user.orgId);
+    if (blocked) return blocked;
 
     const item = await prisma.menuItem.findFirst({
       where: { id: itemId, menu: { property: { orgId: user.orgId } } },

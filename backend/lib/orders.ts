@@ -10,7 +10,11 @@ import {
   createGuestPaymentIntent,
   isStripeConfigured,
 } from "./stripe";
-import { getOrgAccessForPropertySlug } from "./subscription";
+import {
+  assertOrgCanAcceptOrders,
+  getOrgAccessForPropertySlug,
+  SubscriptionLockedError,
+} from "./subscription";
 
 export type OrderErrorCode =
   | "not_found"
@@ -19,6 +23,7 @@ export type OrderErrorCode =
   | "out_of_stock"
   | "menu_unavailable"
   | "forbidden"
+  | "subscription_locked"
   | "invalid_state"
   | "server_error";
 
@@ -493,6 +498,15 @@ export async function createGuestOrder(
 
 export async function markOrderAsPaid(orderId: string): Promise<OrderResult> {
   const { orgId } = await ensureOrgExists();
+
+  try {
+    await assertOrgCanAcceptOrders(orgId);
+  } catch (err) {
+    if (err instanceof SubscriptionLockedError) {
+      return { ok: false, error: "subscription_locked" };
+    }
+    throw err;
+  }
 
   const order = await prisma.order.findFirst({
     where: { id: orderId, property: { orgId } },
