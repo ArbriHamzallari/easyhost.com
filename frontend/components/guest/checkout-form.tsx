@@ -47,7 +47,7 @@ export function CheckoutForm({
   const menuItemLocale = toMenuItemLocale(locale);
   const router = useRouter();
 
-  const [cart, setCart] = useState(readCart(slug));
+  const [cart, setCart] = useState(() => readCart(slug));
   const [guestName, setGuestName] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
   const [paymentMethod, setPaymentMethod] = useState<GuestPaymentMethod>(
@@ -60,12 +60,8 @@ export function CheckoutForm({
   );
 
   useEffect(() => {
-    setCart(readCart(slug));
+    queueMicrotask(() => setCart(readCart(slug)));
   }, [slug]);
-
-  useEffect(() => {
-    if (paymentMethod !== "stripe") setStripeCheckout(null);
-  }, [paymentMethod]);
 
   const itemMap = useMemo(
     () => new Map(items.map((i) => [i.id, i])),
@@ -255,7 +251,10 @@ export function CheckoutForm({
                   name="paymentMethod"
                   value={method}
                   checked={paymentMethod === method}
-                  onChange={() => setPaymentMethod(method)}
+                  onChange={() => {
+                    setPaymentMethod(method);
+                    if (method !== "stripe") setStripeCheckout(null);
+                  }}
                   className="mt-1"
                 />
                 <div>

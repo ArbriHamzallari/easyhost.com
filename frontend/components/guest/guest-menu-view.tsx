@@ -47,13 +47,17 @@ export function GuestMenuView({
   const { locale } = useGuestLocale();
   const menuItemLocale = toMenuItemLocale(locale);
 
-  const [cart, setCart] = useState<GuestCartLine[]>([]);
-  const [hydrated, setHydrated] = useState(false);
+  const [cart, setCart] = useState<GuestCartLine[]>(() =>
+    typeof window !== "undefined" ? readCart(slug) : []
+  );
+  const [hydrated, setHydrated] = useState(() => typeof window !== "undefined");
   const [detailItem, setDetailItem] = useState<GuestMenuItem | null>(null);
 
   useEffect(() => {
-    setCart(readCart(slug));
-    setHydrated(true);
+    queueMicrotask(() => {
+      setCart(readCart(slug));
+      setHydrated(true);
+    });
   }, [slug]);
 
   const persist = useCallback(

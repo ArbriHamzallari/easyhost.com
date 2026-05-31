@@ -1,7 +1,7 @@
 /** @description EasyHost dashboard sticky top header — page title, property pill, notifications, dark mode, user avatar */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Bell, Moon, Sun, Building2 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { applyDarkMode } from "@/frontend/lib/theme";
@@ -17,13 +17,11 @@ export function DashboardHeader({
   greeting,
   propertyName,
 }: DashboardHeaderProps) {
-  const [isDark, setIsDark] = useState(false);
-
-  // Sync React state with whatever the blocking <script> in layout.tsx already applied
-  useEffect(() => {
-    const active = document.documentElement.classList.contains("dark");
-    setIsDark(active);
-  }, []);
+  const [isDark, setIsDark] = useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark")
+  );
 
   function toggleDark() {
     const next = !isDark;

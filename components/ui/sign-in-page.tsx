@@ -128,9 +128,17 @@ export function SignInPage() {
   const { isSignedIn, isLoaded: authLoaded } = useAuth();
   const { signIn, errors, fetchStatus } = useSignIn();
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(() =>
+    typeof window !== "undefined"
+      ? (localStorage.getItem(REMEMBER_KEY) ?? "")
+      : ""
+  );
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const [remember, setRemember] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      Boolean(localStorage.getItem(REMEMBER_KEY))
+  );
   const [showPw, setShowPw] = useState(false);
   const [mode, setMode] = useState<AuthMode>("sign-in");
   const [resetCode, setResetCode] = useState("");
@@ -138,15 +146,6 @@ export function SignInPage() {
   const [showNewPw, setShowNewPw] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
   const [apiError, setApiError] = useState<ClerkAPIError | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = localStorage.getItem(REMEMBER_KEY);
-    if (saved) {
-      setEmail(saved);
-      setRemember(true);
-    }
-  }, []);
 
   useEffect(() => {
     if (!authLoaded || !isSignedIn) return;

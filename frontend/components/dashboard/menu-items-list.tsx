@@ -18,7 +18,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical, Trash2, Eye, EyeOff, Package } from "lucide-react";
-import type { MenuItemRow, MenuErrorCode, MenuResult } from "@/backend/lib/menu";
+import type { MenuItemRow, MenuResult } from "@/backend/lib/menu";
 
 type Props = {
   menuId: string;

@@ -9,8 +9,9 @@ function guestMenuUrl(propertySlug: string, baseUrl: string): string {
 export async function generateQrPng(
   propertySlug: string,
   baseUrl: string,
-  accentColor = "#FF5A1F"
+  _accentColor?: string
 ): Promise<Buffer> {
+  void _accentColor;
   const url = guestMenuUrl(propertySlug, baseUrl);
   const buffer = await QRCode.toBuffer(url, {
     type: "png",

@@ -16,7 +16,6 @@ import {
   Minus,
   AlertTriangle,
   UtensilsCrossed,
-  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/frontend/components/ui/button";
 import {

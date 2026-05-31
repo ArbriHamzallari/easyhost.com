@@ -67,7 +67,7 @@ export function RecentOrdersLive({
   const [orders, setOrders] = useState(initialOrders);
 
   useEffect(() => {
-    setOrders(initialOrders);
+    queueMicrotask(() => setOrders(initialOrders));
   }, [initialOrders]);
 
   const refresh = useCallback(() => {

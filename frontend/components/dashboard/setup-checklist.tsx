@@ -1,7 +1,7 @@
 /** @description EasyHost collapsible setup checklist — client component receiving serialisable data from the server page */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   Palette,
@@ -70,15 +70,17 @@ export function SetupChecklist({ items, completedCount }: SetupChecklistProps) {
   const total = items.length;
   const allDone = completedCount === total;
 
-  const [open, setOpen] = useState(true);
-  const [dismissed, setDismissed] = useState(false);
-
-  // Persist dismissed state and default collapse when all done
-  useEffect(() => {
-    const wasDismissed = localStorage.getItem("easyhost-setup-dismissed") === "true";
-    setDismissed(wasDismissed);
-    if (allDone && !wasDismissed) setOpen(false); // collapsed by default when complete
-  }, [allDone]);
+  const [dismissed, setDismissed] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      localStorage.getItem("easyhost-setup-dismissed") === "true"
+  );
+  const [open, setOpen] = useState(() => {
+    const wasDismissed =
+      typeof window !== "undefined" &&
+      localStorage.getItem("easyhost-setup-dismissed") === "true";
+    return !(allDone && !wasDismissed);
+  });
 
   function dismiss() {
     setDismissed(true);
