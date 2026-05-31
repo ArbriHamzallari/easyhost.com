@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -109,11 +110,14 @@ export function GuestMenuView({
   return (
     <div className="min-h-screen bg-[#FAFAF7] pb-28">
       {heroImageUrl ? (
-        <div className="relative">
-          <img
+        <div className="relative h-44 w-full sm:h-52">
+          <Image
             src={heroImageUrl}
             alt=""
-            className="h-44 w-full object-cover sm:h-52"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent"
@@ -123,9 +127,11 @@ export function GuestMenuView({
             <div className="flex items-end justify-between gap-3">
               <div className="flex items-center gap-3">
                 {logoUrl && (
-                  <img
+                  <Image
                     src={logoUrl}
                     alt=""
+                    width={44}
+                    height={44}
                     className="h-11 w-11 rounded-[10px] border-2 border-white/30 object-cover shadow-md"
                   />
                 )}
@@ -150,9 +156,11 @@ export function GuestMenuView({
           <div className="mx-auto flex max-w-lg items-start justify-between gap-4">
             <div>
               {logoUrl && (
-                <img
+                <Image
                   src={logoUrl}
                   alt=""
+                  width={48}
+                  height={48}
                   className="mb-4 h-12 w-12 rounded-[10px] object-cover"
                 />
               )}
@@ -198,9 +206,11 @@ export function GuestMenuView({
                         className="flex min-w-0 flex-1 items-center gap-3 text-left"
                       >
                       {item.imageUrl && (
-                        <img
+                        <Image
                           src={item.imageUrl}
                           alt=""
+                          width={64}
+                          height={64}
                           className="h-16 w-16 shrink-0 rounded-[12px] object-cover"
                         />
                       )}

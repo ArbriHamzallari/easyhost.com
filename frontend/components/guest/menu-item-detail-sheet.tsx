@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { X, Minus, Plus } from "lucide-react";
@@ -57,11 +58,15 @@ export function MenuItemDetailSheet({
 
       <div className="flex-1 overflow-y-auto">
         {item.imageUrl ? (
-          <img
-            src={item.imageUrl}
-            alt=""
-            className="aspect-[4/3] w-full object-cover"
-          />
+          <div className="relative aspect-[4/3] w-full">
+            <Image
+              src={item.imageUrl}
+              alt=""
+              fill
+              sizes="(max-width: 768px) 100vw, 480px"
+              className="object-cover"
+            />
+          </div>
         ) : (
           <div
             className="aspect-[4/3] w-full"

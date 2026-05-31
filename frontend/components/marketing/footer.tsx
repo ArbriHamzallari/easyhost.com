@@ -38,7 +38,8 @@ export async function MarketingFooter() {
       title: t("footer.legal"),
       links: [
         { label: t("footer.links.privacy"), href: "/privacy" },
-        { label: t("footer.links.terms"), href: "#" },
+        { label: t("footer.links.terms"), href: "/terms" },
+        { label: t("footer.links.refund"), href: "/refund" },
         { label: t("footer.links.cookies"), href: "#" },
       ],
     },

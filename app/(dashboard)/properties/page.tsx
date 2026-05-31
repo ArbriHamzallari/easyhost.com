@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ensureOrgExists } from "@/backend/lib/org";
@@ -149,9 +150,11 @@ export default async function PropertiesPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       {property.logoUrl ? (
-                        <img
+                        <Image
                           src={property.logoUrl}
                           alt=""
+                          width={40}
+                          height={40}
                           className="h-10 w-10 rounded-[10px] object-cover"
                         />
                       ) : (
