@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import confetti from "canvas-confetti";
 import { Home, Loader2 } from "lucide-react";
 import { cn } from "@/frontend/lib/utils";
+import { AuthLoadingGate } from "@/frontend/components/ui/auth-loading-gate";
 
 const EMAIL_REGEX = /\S+@\S+\.\S+/;
 const MIN_PASSWORD = 6;
@@ -322,14 +323,7 @@ export function SignUpPage() {
   };
 
   if (!authLoaded) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[var(--background)]">
-        <Loader2
-          className="h-8 w-8 animate-spin"
-          style={{ color: "var(--color-primary)" }}
-        />
-      </div>
-    );
+    return <AuthLoadingGate isLoaded={false} label="Sign-up" />;
   }
 
   if (isSignedIn) return null;

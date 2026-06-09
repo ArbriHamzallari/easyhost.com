@@ -1,11 +1,11 @@
 import "server-only";
 
-import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { Prisma } from "../../generated/prisma";
 import { prisma } from "./prisma";
 import { translateMenuText } from "./translate";
 import { getOrgAccess, SubscriptionLockedError } from "./subscription";
+import { getOrgUser, UnauthenticatedError } from "./auth";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -77,30 +77,6 @@ const MenuItemInputSchema = z.object({
 export type MenuItemInput = z.infer<typeof MenuItemInputSchema>;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Auth helper — minimal, self-contained
-// ─────────────────────────────────────────────────────────────────────────────
-
-class AuthError extends Error {
-  constructor() {
-    super("unauthenticated");
-    this.name = "AuthError";
-  }
-}
-
-async function getOrgUser(): Promise<{ orgId: string; userId: string }> {
-  const { userId: clerkUserId } = await auth();
-  if (!clerkUserId) throw new AuthError();
-
-  const user = await prisma.user.findUnique({
-    where: { clerkUserId },
-    select: { id: true, orgId: true },
-  });
-  if (!user) throw new AuthError();
-
-  return { orgId: user.orgId, userId: user.id };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Internal helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -113,7 +89,7 @@ function logError(scope: string, err: unknown): void {
 }
 
 function toResult(scope: string, err: unknown): MenuResult {
-  if (err instanceof AuthError) return { ok: false, error: "unauthenticated" };
+  if (err instanceof UnauthenticatedError) return { ok: false, error: "unauthenticated" };
   if (err instanceof SubscriptionLockedError) {
     return { ok: false, error: "subscription_locked" };
   }

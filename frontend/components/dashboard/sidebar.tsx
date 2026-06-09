@@ -29,6 +29,19 @@ interface NavItem {
   icon: React.ElementType;
   matchStrategy: "exact" | "startsWith";
   soon?: boolean;
+  propertyScoped?: "analytics" | "inventory";
+}
+
+function propertyIdFromPath(pathname: string): string | null {
+  const match = pathname.match(/^\/properties\/([^/]+)/);
+  return match?.[1] ?? null;
+}
+
+function resolveNavHref(item: NavItem, pathname: string): string {
+  if (!item.propertyScoped) return item.href;
+  const propertyId = propertyIdFromPath(pathname);
+  if (!propertyId) return "/properties";
+  return `/properties/${propertyId}/${item.propertyScoped}`;
 }
 
 interface SidebarProps {
@@ -66,17 +79,17 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Analytics",
-    href: "/analytics",
+    href: "/properties",
     icon: BarChart3,
     matchStrategy: "startsWith",
-    soon: true,
+    propertyScoped: "analytics",
   },
   {
     label: "Inventory",
-    href: "/inventory",
+    href: "/properties",
     icon: Package,
     matchStrategy: "startsWith",
-    soon: true,
+    propertyScoped: "inventory",
   },
 ];
 
@@ -139,10 +152,12 @@ function NavOption({
   item,
   open,
   active,
+  href,
 }: {
   item: NavItem;
   open: boolean;
   active: boolean;
+  href: string;
 }) {
   const Icon = item.icon;
 
@@ -214,7 +229,7 @@ function NavOption({
   }
 
   return (
-    <Link href={item.href} className="block">
+    <Link href={href} className="block">
       {inner}
     </Link>
   );
@@ -275,8 +290,12 @@ export function Sidebar({ className }: SidebarProps) {
   }, []);
 
   function isActive(item: NavItem): boolean {
-    if (item.matchStrategy === "exact") return pathname === item.href;
-    return pathname.startsWith(item.href);
+    const href = resolveNavHref(item, pathname);
+    if (item.propertyScoped) {
+      return pathname.includes(`/${item.propertyScoped}`);
+    }
+    if (item.matchStrategy === "exact") return pathname === href;
+    return pathname.startsWith(href);
   }
 
   return (
@@ -309,6 +328,7 @@ export function Sidebar({ className }: SidebarProps) {
               item={item}
               open={open}
               active={isActive(item)}
+              href={resolveNavHref(item, pathname)}
             />
           </React.Fragment>
         ))}
@@ -326,6 +346,7 @@ export function Sidebar({ className }: SidebarProps) {
             item={item}
             open={open}
             active={isActive(item)}
+            href={resolveNavHref(item, pathname)}
           />
         ))}
 

@@ -61,7 +61,7 @@ export async function GET(req: NextRequest, { params }: Params) {
   }
 
   // Use the request's own origin so the QR encodes the correct URL in all environments
-  // (localhost:3000 in dev, app.easyhost.pro in production).
+  // (localhost:3000 in dev, easyhost.pro in production).
   const baseUrl = req.nextUrl.origin;
 
   if (format === "svg") {

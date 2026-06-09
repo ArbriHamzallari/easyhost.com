@@ -9,7 +9,8 @@
     "lint": "eslint",
     "postinstall": "cross-env NODE_OPTIONS=--use-system-ca prisma generate",
     "verify:prisma": "cross-env NODE_OPTIONS=--use-system-ca tsx scripts/verify-prisma.ts",
-    "verify:db-env": "cross-env NODE_OPTIONS=--use-system-ca tsx scripts/verify-db-env.ts"
+    "verify:db-env": "cross-env NODE_OPTIONS=--use-system-ca tsx scripts/verify-db-env.ts",
+    "verify:clerk-infra": "cross-env NODE_OPTIONS=--use-system-ca tsx scripts/verify-clerk-infra.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.3.3",
@@ -43,6 +44,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.75.0",
+    "recharts": "^3.8.1",
     "resend": "^6.12.3",
     "stripe": "^22.2.0",
     "tailwind-merge": "^3.6.0",
