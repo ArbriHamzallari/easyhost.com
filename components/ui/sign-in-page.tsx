@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth, useSignIn } from "@clerk/nextjs";
+import { AuthLoadingGate } from "@/frontend/components/ui/auth-loading-gate";
+import { safeRedirectPath } from "@/frontend/lib/safe-redirect";
 import type { ClerkAPIError } from "@clerk/shared/types";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { cn } from "@/frontend/lib/utils";
@@ -125,8 +127,14 @@ function TestimonialCard({
 
 export function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { isSignedIn, isLoaded: authLoaded } = useAuth();
   const { signIn, errors, fetchStatus } = useSignIn();
+
+  const postAuthDestination = safeRedirectPath(
+    searchParams.get("redirect_url"),
+    DASHBOARD_URL
+  );
 
   const [email, setEmail] = useState(() =>
     typeof window !== "undefined"
@@ -149,8 +157,8 @@ export function SignInPage() {
 
   useEffect(() => {
     if (!authLoaded || !isSignedIn) return;
-    router.replace(DASHBOARD_URL);
-  }, [authLoaded, isSignedIn, router]);
+    router.replace(postAuthDestination);
+  }, [authLoaded, isSignedIn, router, postAuthDestination]);
 
   const navigateAfterSignIn = useCallback(
     async (destination: string) => {
@@ -189,7 +197,7 @@ export function SignInPage() {
     }
 
     if (signIn.status === "complete") {
-      await navigateAfterSignIn(DASHBOARD_URL);
+      await navigateAfterSignIn(postAuthDestination);
     } else if (signIn.status === "needs_second_factor") {
       setApiError({
         code: "second_factor_required",
@@ -216,7 +224,7 @@ export function SignInPage() {
     const { error } = await signIn.sso({
       strategy,
       redirectCallbackUrl: SSO_CALLBACK,
-      redirectUrl: DASHBOARD_URL,
+      redirectUrl: postAuthDestination,
     });
     if (error) setApiError(error as ClerkAPIError);
   };
@@ -282,7 +290,7 @@ export function SignInPage() {
       return;
     }
     if (signIn.status === "complete") {
-      await navigateAfterSignIn(DASHBOARD_URL);
+      await navigateAfterSignIn(postAuthDestination);
     } else if (signIn.status === "needs_second_factor") {
       setApiError({
         code: "second_factor_required",
@@ -305,11 +313,7 @@ export function SignInPage() {
   }, [apiError, errors]);
 
   if (!authLoaded) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[var(--background)]">
-        <Loader2 className="h-8 w-8 animate-spin text-orange-500" style={{ color: "var(--color-primary)" }} />
-      </div>
-    );
+    return <AuthLoadingGate isLoaded={false} label="Sign-in" />;
   }
 
   if (isSignedIn) return null;

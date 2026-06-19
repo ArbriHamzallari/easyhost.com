@@ -34,9 +34,9 @@ export default async function QrPage({ params }: Params) {
   const isLive = menu && !menu.isDraft;
 
   // Derive origin from the incoming request so the URL matches what's in the QR code
-  // (http://localhost:3000 in dev, https://app.easyhost.pro in production).
+  // (http://localhost:3000 in dev, https://easyhost.pro in production).
   const headersList = await headers();
-  const host = headersList.get("host") ?? "app.easyhost.pro";
+  const host = headersList.get("host") ?? "easyhost.pro";
   const proto = headersList.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
   const guestUrl = `${proto}://${host}/m/${property.slug}`;
 

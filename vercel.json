@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "easyhost.pro" }],
+      "destination": "https://www.easyhost.pro/:path*",
+      "permanent": true
+    }
+  ]
+}

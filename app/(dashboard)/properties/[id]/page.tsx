@@ -142,6 +142,19 @@ export default async function PropertyDetailPage({ params }: Params) {
             </Link>
           </Button>
         </div>
+
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+          <Button asChild variant="secondary" className="flex-1">
+            <Link href={`/properties/${property.id}/analytics`}>
+              Analytics
+            </Link>
+          </Button>
+          <Button asChild variant="secondary" className="flex-1">
+            <Link href={`/properties/${property.id}/inventory`}>
+              Inventory
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

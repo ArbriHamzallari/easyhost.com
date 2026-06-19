@@ -137,7 +137,7 @@ EasyHost looks and feels like a refined cousin of Airbnb — warm, hospitable, p
 
 ## 6. Multi-Tenant Architecture
 
-- An **Organization** = one customer (mapped to one Clerk org)
+- An **Organization** = one customer (custom Prisma model — one Clerk user maps to one app org on first login)
 - An Organization has a **subscription tier** (starter / pro) that controls property limits
 - Starter: max 1 property. Pro: max 5 properties.
 - Each **Property** has its own menu, branding, payment config, and QR code
@@ -146,32 +146,26 @@ EasyHost looks and feels like a refined cousin of Airbnb — warm, hospitable, p
 ### URL Structure
 
 ```
-easyhost.pro                             → Marketing site (LIVE)
+easyhost.pro                             → Marketing + host dashboard + guest menu (LIVE)
 easyhost.pro/pricing
 easyhost.pro/how-it-works
 easyhost.pro/privacy
+easyhost.pro/sign-in
+easyhost.pro/sign-up
+easyhost.pro/onboarding                  → Step-by-step wizard (post sign-up)
+easyhost.pro/dashboard                 → Home: orders, revenue, alerts
+easyhost.pro/properties                → Property list
+easyhost.pro/properties/[id]
+easyhost.pro/properties/[id]/menu      → Menu builder
+easyhost.pro/properties/[id]/qr        → QR code download
+easyhost.pro/properties/[id]/analytics → Revenue charts + top items
+easyhost.pro/properties/[id]/inventory → Stock management
+easyhost.pro/settings
+easyhost.pro/settings/billing          → Paddle subscription + plan management
 
-app.easyhost.pro                         → Host dashboard (auth required)
-app.easyhost.pro/sign-in
-app.easyhost.pro/sign-up
-app.easyhost.pro/onboarding              → Step-by-step wizard (post sign-up)
-app.easyhost.pro/dashboard               → Home: orders, revenue, alerts
-app.easyhost.pro/properties              → Property list
-app.easyhost.pro/properties/[id]
-app.easyhost.pro/properties/[id]/menu    → Menu builder
-app.easyhost.pro/properties/[id]/qr      → QR code download
-app.easyhost.pro/properties/[id]/analytics
-app.easyhost.pro/properties/[id]/inventory
-app.easyhost.pro/settings
-app.easyhost.pro/settings/billing        → Paddle subscription + plan management
-
-app.easyhost.pro/m/[property-slug]       → Guest menu (no auth)
-app.easyhost.pro/m/[slug]/cart
-app.easyhost.pro/m/[slug]/checkout
-app.easyhost.pro/m/[slug]/pay/stripe
-app.easyhost.pro/m/[slug]/pay/bank-transfer
-app.easyhost.pro/m/[slug]/pay/cash
-app.easyhost.pro/m/[slug]/success
+easyhost.pro/m/[property-slug]         → Guest menu (no auth)
+easyhost.pro/m/[slug]/checkout
+easyhost.pro/m/[slug]/success
 
 admin.easyhost.pro                       → Platform admin (your eyes only)
 ```
@@ -336,20 +330,25 @@ model WaitlistEntry {
 ### DONE ✅
 - **Phase 0:** Next.js 16, Supabase/Prisma, Clerk, next-intl (4 langs), shadcn/ui, Tailwind, env setup
 - **Phase 1:** Full marketing site live at easyhost.pro — Hero, How it Works, Features, Pricing, Testimonials, FAQ, Footer. Waitlist saves to DB + sends welcome + admin notify emails. Admin waitlist view with CSV export.
+- **Phase 2:** Host onboarding wizard (intent → property → address → branding → payment → complete) + dashboard home with trial banner, checklist, realtime orders
+- **Phase 3:** Menu builder with CRUD, drag-and-drop, Google Translate, QR generation
+- **Phase 4:** Guest menu, checkout (Stripe / IBAN / cash), receipts, stock decrement
+- **Phase 5:** Paddle billing, trial lockout, property limits, webhooks
+- **Phase 6:** Supabase Realtime order feed in dashboard
+- **Phase 7 (partial):** Analytics page (Recharts revenue, top items, recent orders) + inventory management page
 
 ---
 
-### Phase 1.5 — Marketing Polish (quick wins before Phase 2)
+### Phase 1.5 — Marketing Polish (NEXT)
 
 - [ ] Update all pricing copy to two-tier model (Starter €15 / Pro €29)
-- [ ] Fix any hardcoded `easyhost.com` references → `easyhost.pro`
-- [ ] SEO: `<title>`, `<meta description>`, `og:image` per page
-- [ ] `sitemap.xml` + `robots.txt`
+- [x] Fix hardcoded `app.easyhost.pro` references → `easyhost.pro` apex
+- [x] SEO: sitemap + robots.txt (per-page metadata audit still open)
 - [ ] Fix i18n routing (locale in URL path, not just cookie)
 
 ---
 
-### Phase 2 — Host Onboarding (NEXT)
+### Phase 2 — Host Onboarding (DONE ✅)
 
 **2a. Post sign-up intent screen**
 - Single question: "What best describes you?" with 4 options (Airbnb host / Hotel owner / Vacation rental manager / Other)
@@ -375,7 +374,7 @@ model WaitlistEntry {
 
 ---
 
-### Phase 3 — Menu Builder
+### Phase 3 — Menu Builder (DONE ✅)
 
 - CRUD for menu items per property
 - Item fields: name (required, typed in host's language) / photo (optional, Cloudinary) / price (required) / stock count (required) / category / description (optional)
@@ -390,7 +389,7 @@ model WaitlistEntry {
 
 ---
 
-### Phase 4 — Guest Menu Experience
+### Phase 4 — Guest Menu Experience (DONE ✅)
 
 **`/m/[property-slug]`**
 - Branded with property logo, accent color, hero image
@@ -413,7 +412,7 @@ model WaitlistEntry {
 
 ---
 
-### Phase 5 — Paddle Billing
+### Phase 5 — Paddle Billing (DONE ✅)
 
 - Two Paddle products: Starter (€15/month) and Pro (€29/month)
 - 7-day trial starts automatically at account creation — no card required
@@ -425,7 +424,7 @@ model WaitlistEntry {
 
 ---
 
-### Phase 6 — Notifications & Real-time
+### Phase 6 — Notifications & Real-time (DONE ✅ — web; email alerts for low stock still open)
 
 **Web (build now):**
 - Supabase Realtime subscriptions in host dashboard
@@ -439,14 +438,14 @@ model WaitlistEntry {
 
 ---
 
-### Phase 7 — Analytics & Inventory
+### Phase 7 — Analytics & Inventory (PARTIAL — NEXT)
 
-- Revenue charts (Recharts): daily / weekly / monthly
-- Top-selling items
-- Order history with filters (date, status, payment method)
-- Inventory management: stock levels per item, bulk update
-- Low-stock threshold settings per item
-- Automated email when item hits threshold
+- [x] Revenue charts (Recharts): daily / weekly / monthly summary
+- [x] Top-selling items + recent orders list
+- [ ] Order history with filters (date, status, payment method)
+- [x] Inventory management: stock levels per item, per-item update
+- [x] Low-stock threshold settings per item
+- [ ] Automated email when item hits threshold
 
 ---
 
@@ -526,7 +525,7 @@ model WaitlistEntry {
   /guest                    → Guest menu components
 /lib
   /prisma.ts
-  /auth.ts                  → Clerk helpers
+  /backend/lib/auth.ts      → Clerk helpers (requireUser, getOrgUser, checkAdmin)
   /stripe.ts                → Stripe Connect helpers
   /paddle.ts                → Paddle API wrapper
   /translate.ts             → Google Translate wrapper
@@ -567,6 +566,9 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/dashboard
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/onboarding
+CLERK_WEBHOOK_SECRET=
 
 # Paddle
 PADDLE_API_KEY=
@@ -595,8 +597,8 @@ CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=
 
-# App
-NEXT_PUBLIC_APP_URL=https://app.easyhost.pro
+# App (canonical apex domain)
+NEXT_PUBLIC_APP_URL=https://easyhost.pro
 NEXT_PUBLIC_MARKETING_URL=https://easyhost.pro
 ADMIN_USER_IDS=
 ```

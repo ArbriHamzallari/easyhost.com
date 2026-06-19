@@ -1,10 +1,9 @@
 import "server-only";
 
-import { auth, currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
-import { Prisma } from "../../generated/prisma";
 import { prisma } from "./prisma";
 import { getOrgAccess } from "./subscription";
+import { requireUser, UnauthenticatedError, type AuthedUser } from "./auth";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -24,8 +23,6 @@ export type ErrorCode =
   | "property_limit_exceeded"
   | "server_error";
 
-const TRIAL_DAYS = 7;
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Slugify (Unicode-aware)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -41,16 +38,6 @@ function slugify(text: string): string {
     .slice(0, 50) || "property";
 }
 
-// Tries the base slug; on collision appends a base36 timestamp for uniqueness.
-async function uniqueOrgSlug(base: string): Promise<string> {
-  const slug = slugify(base);
-  const existing = await prisma.organization.findUnique({
-    where: { slug },
-    select: { id: true },
-  });
-  return existing ? `${slug}-${Date.now().toString(36)}` : slug;
-}
-
 async function uniquePropertySlug(base: string): Promise<string> {
   const slug = slugify(base);
   const existing = await prisma.property.findUnique({
@@ -58,85 +45,6 @@ async function uniquePropertySlug(base: string): Promise<string> {
     select: { id: true },
   });
   return existing ? `${slug}-${Date.now().toString(36)}` : slug;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// requireUser — single source of truth for authenticated user + org
-// ─────────────────────────────────────────────────────────────────────────────
-//
-// Returns the DB user + their org, creating them on first login.
-// Idempotent and concurrency-safe.
-
-type AuthedUser = {
-  clerkUserId: string;
-  userId: string;
-  orgId: string;
-};
-
-async function requireUser(): Promise<AuthedUser> {
-  const { userId: clerkUserId } = await auth();
-  if (!clerkUserId) throw new UnauthenticatedError();
-
-  // Fast path
-  const existing = await prisma.user.findUnique({
-    where: { clerkUserId },
-    select: { id: true, orgId: true },
-  });
-  if (existing) {
-    return { clerkUserId, userId: existing.id, orgId: existing.orgId };
-  }
-
-  // First-login path — atomic create with race protection
-  return await createUserAndOrg(clerkUserId);
-}
-
-async function createUserAndOrg(clerkUserId: string): Promise<AuthedUser> {
-  const clerkUser = await currentUser();
-  const email =
-    clerkUser?.primaryEmailAddress?.emailAddress ??
-    clerkUser?.emailAddresses?.[0]?.emailAddress ??
-    "";
-  const name =
-    clerkUser?.fullName ??
-    clerkUser?.firstName ??
-    email.split("@")[0] ??
-    "Host";
-
-  const orgSlug = await uniqueOrgSlug(name);
-  const trialEndsAt = new Date(Date.now() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
-
-  try {
-    const org = await prisma.organization.create({
-      data: {
-        name,
-        slug: orgSlug,
-        trialEndsAt,
-        users: { create: { clerkUserId, email, name, role: "owner" } },
-      },
-      select: { id: true, users: { select: { id: true }, take: 1 } },
-    });
-    return { clerkUserId, userId: org.users[0]!.id, orgId: org.id };
-  } catch (err) {
-    // Concurrent first-login: another request just created the user record.
-    // Fall back to fetching it.
-    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2002") {
-      const fallback = await prisma.user.findUnique({
-        where: { clerkUserId },
-        select: { id: true, orgId: true },
-      });
-      if (fallback) {
-        return { clerkUserId, userId: fallback.id, orgId: fallback.orgId };
-      }
-    }
-    throw err;
-  }
-}
-
-class UnauthenticatedError extends Error {
-  constructor() {
-    super("unauthenticated");
-    this.name = "UnauthenticatedError";
-  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
